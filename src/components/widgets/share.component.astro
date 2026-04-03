@@ -1,0 +1,69 @@
+---
+const data = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://ubaestatus.mospit.al";
+const shareText = encodeURIComponent(data.shareText ?? "Mira el estado de la UBA en tiempo real");
+const encodedUrl = encodeURIComponent(siteUrl);
+
+const whatsappShareUrl = `https://wa.me/?text=${shareText}%20${encodedUrl}`;
+const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+const twitterShareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodedUrl}`;
+---
+
+<aside id="share-modal" class="fixed inset-0 z-50 hidden pointer-events-none" aria-label="Modal para compartir">
+	<a href="#" class="absolute inset-0 bg-dark/70 backdrop-blur-sm" aria-label="Cerrar modal"></a>
+
+	<div class="relative pointer-events-auto mx-auto mt-28 w-[92%] max-w-lg rounded-md border border-rule bg-navy p-5 md:p-6">
+		<div class="flex items-center justify-between gap-4">
+			<h2 class="text-h3 text-offwhite uppercase">Compartir sitio</h2>
+			<a href="#" class="badge badge-outline" aria-label="Cerrar modal">Cerrar</a>
+		</div>
+
+		<p class="text-body mt-3">Elegi una red para compartir o copia el enlace para enviarlo donde quieras.</p>
+
+		<div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+			<a href={whatsappShareUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-teal text-dark rounded font-bold uppercase text-sm text-center hover:bg-teal-dark hover:text-offwhite transition-colors">WhatsApp</a>
+			<a href={facebookShareUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-offwhite text-dark rounded font-bold uppercase text-sm text-center hover:bg-white transition-colors">Facebook</a>
+			<a href={twitterShareUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-coral text-offwhite rounded font-bold uppercase text-sm text-center hover:opacity-90 transition-opacity sm:col-span-2">Twitter / X</a>
+		</div>
+
+		<div class="mt-5 border border-rule rounded p-3 bg-dark/30">
+			<p class="text-label">Enlace para copiar</p>
+			<div class="mt-2 flex flex-col gap-2 sm:flex-row">
+				<input id="share-url" type="text" readonly value={siteUrl} class="w-full rounded border border-rule bg-dark px-3 py-2 text-mono-ui text-offwhite/90 focus:outline-none focus:ring-2 focus:ring-teal" />
+				<button type="button" id="copy-share-url" class="px-4 py-2 rounded bg-teal text-dark font-bold uppercase text-sm hover:bg-teal-dark hover:text-offwhite transition-colors">Copiar</button>
+			</div>
+			<p id="copy-feedback" class="text-body mt-2">Copia el enlace para compartirlo donde quieras.</p>
+		</div>
+	</div>
+</aside>
+
+<style>
+	#share-modal:target {
+		display: block;
+		pointer-events: auto;
+	}
+</style>
+
+<script is:inline>
+	const copyButton = document.getElementById("copy-share-url");
+	const shareInput = document.getElementById("share-url");
+	const copyFeedback = document.getElementById("copy-feedback");
+
+	if (copyButton instanceof HTMLButtonElement && shareInput instanceof HTMLInputElement && copyFeedback) {
+		copyButton.addEventListener("click", async () => {
+			const url = shareInput.value;
+
+			try {
+				await navigator.clipboard.writeText(url);
+				copyFeedback.textContent = "Enlace copiado al portapapeles.";
+			} catch {
+				shareInput.select();
+				const copied = document.execCommand("copy");
+				copyFeedback.textContent = copied
+					? "Enlace copiado al portapapeles."
+					: "No se pudo copiar automaticamente. Usa Cmd+C.";
+			}
+		});
+	}
+</script>
