@@ -1,5 +1,6 @@
 ---
 import ShareComponent from "./share.component.astro";
+import { Icon } from "astro-icon/components";
 
 const data = Astro.props;
 ---
@@ -17,7 +18,7 @@ const data = Astro.props;
                 <li><a href="#contact" class="text-gray-600 hover:text-teal hover:underline active:text-teal active:underline">Contacto</a></li>
             </ul>
         </nav>
-        <a href="#share-modal" class="px-4 py-2 bg-teal text-white rounded hover:bg-teal-dark active:bg-teal-dark uppercase hover:cursor-pointer" id="share">Compartir</a>
+        <a href="#share-modal" class="px-4 py-2 bg-teal text-white rounded hover:bg-teal-dark active:bg-teal-dark uppercase hover:cursor-pointer inline-flex items-center gap-1 whitespace-nowrap" id="share"><Icon name="mdi:share" />Compartir</a>
     </div>
 </header>
 
