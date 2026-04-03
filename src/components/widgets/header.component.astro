@@ -1,0 +1,24 @@
+---
+import ShareComponent from "./share.component.astro";
+
+const data = Astro.props;
+---
+
+<header class="bg-dark border-b border-rule fixed w-full z-10 top-0 left-0">
+    <div class="progress bg-teal"></div>
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between uppercase">
+        <h1 class="text-2xl font-bold text-offwhite">{data.title}</h1>
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="#hero" class="text-gray-600 hover:text-teal hover:underline active:text-teal active:underline">Inicio</a></li>
+                <li><a href="#accordion" class="text-gray-600 hover:text-teal hover:underline active:text-teal active:underline">Situacion</a></li>
+                <li><a href="#calendar" class="text-gray-600 hover:text-teal hover:underline active:text-teal active:underline">Agenda</a></li>
+                <li><a href="#action" class="text-gray-600 hover:text-teal hover:underline active:text-teal active:underline">Accion</a></li>
+                <li><a href="#contact" class="text-gray-600 hover:text-teal hover:underline active:text-teal active:underline">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="#share-modal" class="px-4 py-2 bg-teal text-white rounded hover:bg-teal-dark active:bg-teal-dark uppercase hover:cursor-pointer" id="share">Compartir</a>
+    </div>
+</header>
+
+<ShareComponent shareText={data.shareText} />

@@ -1,16 +1,42 @@
 ---
+// Importamos el layout, y los componentes para construir la pagina.
+import BaseLayout from "../layouts/base.layout.astro";
+import Section from "../components/templates/section.component.astro";
+import HeaderComponent from "../components/widgets/header.component.astro";
+import HeroComponent from "../components/sections/hero.component.astro";
+import AccordionComponent from "../components/sections/accordion.component.astro";
+import CalendarComponent from "../components/sections/calendar.component.astro";
+import ActionComponent from "../components/sections/action.component.astro";
+import ContactComponent from "../components/sections/contact.component.astro";
 
+// Importamos getEntry y cargamos el contenido del archivo markdown para la pagina de inicio.
+import { getEntry } from "astro:content";
+
+const landing = await getEntry("content", "landing");
+if (!landing) throw new Error("No se pudo cargar el contenido de la pagina.");
+
+const data = landing.data;
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>UBA en Lucha</title>
-    </head>
-    <body>
-        <h1>Astro</h1>
-    </body>
-</html>
+<BaseLayout {...data.meta}>
+    <header>
+        <HeaderComponent {...data.header}/>
+    </header>
+    <main>
+        <Section>
+            <HeroComponent {...data.hero}/>
+        </Section>
+        <Section>
+            <AccordionComponent {...data.accordion}/>
+        </Section>
+        <Section>
+            <CalendarComponent {...data.calendar}/>
+        </Section>
+        <Section>
+            <ActionComponent {...data.action}/>
+        </Section>
+        <Section>
+            <ContactComponent {...data.contact}/>
+        </Section>
+    </main>
+</BaseLayout>
