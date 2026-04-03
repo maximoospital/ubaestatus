@@ -14,5 +14,10 @@
     "astro": "^6.1.2",
     "astro-icon": "^1.1.5",
     "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify/json": "^2.2.458",
+    "@iconify/utils": "^3.1.0"
   }
 }
