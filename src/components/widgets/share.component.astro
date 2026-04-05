@@ -1,49 +1,167 @@
 ---
 const data = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://ubaestatus.mospit.al";
-const shareText = encodeURIComponent(data.shareText ?? "Mira el estado de la UBA en tiempo real");
+const siteUrl = data.shareUrl ?? Astro.site?.toString().replace(/\/$/, "") ?? "https://ubaestatus.mospit.al";
+const shareText = encodeURIComponent( data.shareText ?? "UBA Exactas esta de paro. Enterate porque en este sitio." );
 const encodedUrl = encodeURIComponent(siteUrl);
 
 const whatsappShareUrl = `https://wa.me/?text=${shareText}%20${encodedUrl}`;
 const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
 const twitterShareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodedUrl}`;
+const emailShareUrl = `mailto:?subject=${shareText}&body=${encodedUrl}`;
 
 import { Icon } from "astro-icon/components";
 ---
 
-<aside id="share-modal" class="fixed inset-0 z-50 hidden pointer-events-none" aria-label="Modal para compartir">
-	<a href="#" class="absolute inset-0 bg-dark/70 backdrop-blur-sm" aria-label="Cerrar modal"></a>
+<aside
+	id="share-modal"
+	class="share-modal fixed inset-0 z-50 invisible flex items-start justify-center p-4 pt-24 opacity-0 pointer-events-none transition-[opacity,visibility] duration-200 ease-out lg:justify-end lg:px-6 lg:pb-6 lg:pt-19 lg:pr-[8.7rem] motion-reduce:transition-none"
+	aria-label="Modal para compartir"
+	aria-hidden="true"
+>
+	<a
+		href="#"
+		class="share-backdrop absolute inset-0 bg-dark/70 backdrop-blur-sm transition-[background-color,backdrop-filter] duration-200 ease-out lg:bg-transparent lg:backdrop-blur-none motion-reduce:transition-none"
+		aria-label="Cerrar modal"></a>
 
-	<div class="relative pointer-events-auto mx-auto mt-28 w-[92%] max-w-lg rounded-md border border-rule bg-navy p-5 md:p-6">
+	<div
+		class="share-panel relative w-full max-w-lg rounded-md border border-rule bg-navy p-5 opacity-0 translate-y-5 scale-[0.98] transition-[opacity,transform,filter] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:p-6 lg:ml-0 lg:max-w-104 lg:-translate-y-2.5 lg:origin-top-right lg:border-rule-dark lg:shadow-[0_14px_40px_rgba(0,0,0,0.35)] motion-reduce:transition-none"
+	>
+		<span
+			aria-hidden="true"
+			class="pointer-events-none absolute -top-[0.53rem] right-9 hidden h-4 w-4 rotate-45 border-l border-t border-rule-dark bg-navy lg:block"
+		></span>
 		<div class="flex items-center justify-between gap-4">
-			<h2 class="text-h3 text-offwhite uppercase">Compartir</h2>
-			<a href="#" class="badge badge-outline" aria-label="Cerrar modal">Cerrar</a>
+			<h2 class="text-h3 text-offwhite">Compartir</h2>
+			<a
+				href="#"
+				class="close-share inline-flex h-10 w-10 items-center justify-center rounded-full text-offwhite/80 transition-colors hover:bg-offwhite/10 hover:text-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+				aria-label="Cerrar modal"
+			>
+				<Icon name="mdi:close" />
+			</a>
 		</div>
 
-		<p class="text-body mt-3">Elegi una red para compartir o copia el enlace para enviarlo donde quieras.</p>
+		<p class="text-body mt-1">Compartí este sitio a través de:</p>
 
-		<div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-			<a href={whatsappShareUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-teal text-white rounded font-bold uppercase text-sm text-center hover:bg-teal-dark hover:text-offwhite transition-colors inline-flex items-center justify-center gap-2"><Icon name="mdi:whatsapp" /> WhatsApp</a>
-			<a href={facebookShareUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-dark text-white rounded font-bold uppercase text-sm text-center hover:bg-navy-800 transition-colors inline-flex items-center justify-center gap-2"><Icon name="mdi:facebook" /> Facebook</a>
-			<a href={twitterShareUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-3 bg-black text-offwhite rounded font-bold uppercase text-sm text-center hover:bg-gray-800 transition-colors sm:col-span-2 inline-flex items-center justify-center gap-2"><Icon name="mdi:twitter" /> Twitter / X</a>
+		<div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+			<a
+				href={twitterShareUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group inline-flex flex-col items-center gap-3 no-underline transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none motion-reduce:transition-none"
+				aria-label="Compartir en X (Twitter)"
+			>
+				<span
+					class="inline-flex h-15.5 w-15.5 items-center justify-center rounded-full bg-offwhite/10 text-[1.75rem] text-offwhite transition-colors duration-200 ease-out group-hover:bg-[#1DA1F2] group-hover:text-white group-focus-visible:bg-[#1DA1F2] group-focus-visible:text-white motion-reduce:transition-none"
+					><Icon name="mdi:twitter" /></span
+				>
+				<span class="text-xs leading-[1.3] text-offwhite/90"
+					>X (Twitter)</span
+				>
+			</a>
+			<a
+				href={facebookShareUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group inline-flex flex-col items-center gap-3 no-underline transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none motion-reduce:transition-none"
+				aria-label="Compartir en Facebook"
+			>
+				<span
+					class="inline-flex h-15.5 w-15.5 items-center justify-center rounded-full bg-offwhite/10 text-[1.75rem] text-offwhite transition-colors duration-200 ease-out group-hover:bg-[#1877F2] group-hover:text-white group-focus-visible:bg-[#1877F2] group-focus-visible:text-white motion-reduce:transition-none"
+					><Icon name="mdi:facebook" /></span
+				>
+				<span class="text-xs leading-[1.3] text-offwhite/90"
+					>Facebook</span
+				>
+			</a>
+			<a
+				href={whatsappShareUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group inline-flex flex-col items-center gap-3 no-underline transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none motion-reduce:transition-none"
+				aria-label="Compartir en WhatsApp"
+			>
+				<span
+					class="inline-flex h-15.5 w-15.5 items-center justify-center rounded-full bg-offwhite/10 text-[1.75rem] text-offwhite transition-colors duration-200 ease-out group-hover:bg-[#25D366] group-hover:text-white group-focus-visible:bg-[#25D366] group-focus-visible:text-white motion-reduce:transition-none"
+					><Icon name="mdi:whatsapp" /></span
+				>
+				<span class="text-xs leading-[1.3] text-offwhite/90"
+					>WhatsApp</span
+				>
+			</a>
+			<a
+				href={emailShareUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group inline-flex flex-col items-center gap-3 no-underline transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none motion-reduce:transition-none"
+				aria-label="Compartir por email"
+			>
+				<span
+					class="inline-flex h-15.5 w-15.5 items-center justify-center rounded-full bg-offwhite/10 text-[1.75rem] text-offwhite transition-colors duration-200 ease-out group-hover:bg-teal group-hover:text-navy group-focus-visible:bg-teal group-focus-visible:text-navy motion-reduce:transition-none"
+					><Icon name="mdi:email-outline" /></span
+				>
+				<span class="text-xs leading-[1.3] text-offwhite/90">Email</span
+				>
+			</a>
 		</div>
-
-		<div class="mt-5 border border-rule rounded p-3 bg-dark/30">
-			<p class="text-label">Enlace para copiar</p>
-			<div class="mt-2 flex flex-col gap-2 sm:flex-row">
-				<input id="share-url" type="text" readonly value={siteUrl} class="w-full rounded border border-rule bg-dark px-3 py-2 text-mono-ui text-offwhite/90 focus:outline-none focus:ring-2 focus:ring-teal" />
-				<button type="button" id="copy-share-url" class="px-4 py-2 rounded bg-teal text-dark font-bold uppercase text-sm hover:bg-teal-dark hover:text-offwhite transition-colors">Copiar</button>
-			</div>
-			<p id="copy-feedback" class="text-body mt-2">Copia el enlace para compartirlo donde quieras.</p>
+		<div
+			class="mt-3 flex items-center gap-3 rounded-md border border-rule bg-black/20 pl-3 pr-2 py-2"
+		>
+			<input
+				id="share-url"
+				type="text"
+				readonly
+				value={siteUrl}
+				class="w-full bg-transparent text-mono-ui text-offwhite/90 focus:outline-none"
+			/>
+			<div class="h-5 w-px bg-rule shrink-0"></div>
+			<button
+				type="button"
+				id="copy-share-url"
+				class="relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-offwhite/80 transition-colors hover:bg-offwhite/10 hover:text-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+				aria-label="Copiar enlace"
+			>
+				<span
+					id="copy-icon-default"
+					class="absolute inset-0 flex items-center justify-center transition-opacity duration-200"
+				>
+					<Icon name="mdi:content-copy" />
+				</span>
+				<span
+					id="copy-icon-success"
+					class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 text-teal"
+				>
+					<Icon name="mdi:check" />
+				</span>
+			</button>
 		</div>
+		<p id="copy-feedback" class="text-label mt-2" aria-live="polite"></p>
 	</div>
 </aside>
 
 <style>
 	#share-modal:target {
-		display: block;
+		opacity: 1;
+		visibility: visible;
 		pointer-events: auto;
+	}
+
+	#share-modal:target .share-panel {
+		opacity: 1;
+		filter: blur(0);
+		transform: translateY(0) scale(1);
+	}
+
+	@media (min-width: 1024px) {
+		#share-modal .share-panel {
+			filter: blur(6px);
+			transform: translate3d(10px, -8px, 0) scale(0.965);
+		}
+
+		#share-modal:target .share-panel {
+			transform: translate3d(0, 0, 0) scale(1);
+		}
 	}
 </style>
 
@@ -51,21 +169,48 @@ import { Icon } from "astro-icon/components";
 	const copyButton = document.getElementById("copy-share-url");
 	const shareInput = document.getElementById("share-url");
 	const copyFeedback = document.getElementById("copy-feedback");
+	const defaultIcon = document.getElementById("copy-icon-default");
+	const successIcon = document.getElementById("copy-icon-success");
+	let resetFeedbackTimeout = null;
 
-	if (copyButton instanceof HTMLButtonElement && shareInput instanceof HTMLInputElement && copyFeedback) {
+	if (
+		copyButton instanceof HTMLButtonElement &&
+		shareInput instanceof HTMLInputElement &&
+		copyFeedback
+	) {
 		copyButton.addEventListener("click", async () => {
 			const url = shareInput.value;
 
 			try {
 				await navigator.clipboard.writeText(url);
-				copyFeedback.textContent = "Enlace copiado al portapapeles.";
+				copyFeedback.textContent = "¡Copiado!";
+				if (defaultIcon && successIcon) {
+					defaultIcon.classList.add("opacity-0");
+					successIcon.classList.remove("opacity-0");
+				}
 			} catch {
 				shareInput.select();
 				const copied = document.execCommand("copy");
 				copyFeedback.textContent = copied
-					? "Enlace copiado al portapapeles."
-					: "No se pudo copiar automaticamente. Usa Cmd+C.";
+					? "¡Copiado!"
+					: "Fallo al copiar. Por favor, intenta copiar manualmente.";
+				if (copied && defaultIcon && successIcon) {
+					defaultIcon.classList.add("opacity-0");
+					successIcon.classList.remove("opacity-0");
+				}
 			}
+
+			if (typeof resetFeedbackTimeout === "number") {
+				window.clearTimeout(resetFeedbackTimeout);
+			}
+
+			resetFeedbackTimeout = window.setTimeout(() => {
+				copyFeedback.textContent = "";
+				if (defaultIcon && successIcon) {
+					defaultIcon.classList.remove("opacity-0");
+					successIcon.classList.add("opacity-0");
+				}
+			}, 2500);
 		});
 	}
 </script>

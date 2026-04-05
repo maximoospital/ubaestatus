@@ -17,8 +17,18 @@ const content = defineCollection({
       image: z.string().optional(),
     }),
     header: z.object({
-      title: z.string()
-    })
+      title: z.string(),
+      shareUrl: z.string(),
+      shareText: z.string(),
+    }),
+    hero: z.object({
+      title: z.string(),
+      subtitle: z.string(),
+    }),
+    accordion: z.any().optional(),
+    calendar: z.any().optional(),
+    action: z.any().optional(),
+    contact: z.any().optional(),
   }),
 });
 

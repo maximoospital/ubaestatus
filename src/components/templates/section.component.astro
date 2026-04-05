@@ -1,0 +1,21 @@
+---
+export interface Props {
+    id?: string;
+    class?: string;
+    fullWidth?: boolean;
+    [key: string]: any;
+}
+
+const { id, class: className, fullWidth = false, ...rest } = Astro.props;
+---
+
+<section id={id} class:list={["w-full py-16 md:py-24", className]} {...rest}>
+    <div
+        class:list={[
+            "mx-auto w-full h-full",
+            fullWidth ? "" : "max-w-7xl px-4 sm:px-6 lg:px-8",
+        ]}
+    >
+        <slot />
+    </div>
+</section>
