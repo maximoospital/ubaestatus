@@ -20,23 +20,23 @@ const data = landing.data;
 
 <BaseLayout {...data.meta}>
     <header>
-        <HeaderComponent {...data.header}/>
+        <HeaderComponent {...data.header} />
     </header>
     <main>
-        <Section>
-            <HeroComponent {...data.hero}/>
+        <Section id="hero" fullWidth key="hero">
+            <HeroComponent {...data.hero} />
         </Section>
-        <Section>
-            <AccordionComponent {...data.accordion}/>
+        <Section id="accordion" class="bg-offwhite" key="accordion">
+            <AccordionComponent {...data.accordion} />
         </Section>
-        <Section>
-            <CalendarComponent {...data.calendar}/>
+        <Section id="calendar" class="bg-offwhite" key="calendar">
+            <CalendarComponent {...data.calendar} />
         </Section>
-        <Section>
-            <ActionComponent {...data.action}/>
+        <Section id="action" class="bg-coral" key="action">
+            <ActionComponent {...data.action} />
         </Section>
-        <Section>
-            <ContactComponent {...data.contact}/>
+        <Section id="contact" class="bg-dark" key="contact">
+            <ContactComponent {...data.contact} />
         </Section>
     </main>
 </BaseLayout>

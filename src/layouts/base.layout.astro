@@ -4,21 +4,21 @@ import "../styles/globals.css";
 const meta = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es" class="!scroll-smooth scroll-pt-20 overscroll-none">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <meta http-equiv="cache-control" content="3600" />
-        
+
         <title>{meta.title}</title>
-        
+
         <!-- Primary Meta Tags -->
-        <meta name="description" content={meta.description}>
-        <meta name="author" content={meta.author}>
+        <meta name="description" content={meta.description} />
+        <meta name="author" content={meta.author} />
         <meta name="copyright" content={meta.copyright} />
-        <meta name="robots" content="index, follow">
+        <meta name="robots" content="index, follow" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
@@ -35,7 +35,7 @@ const meta = Astro.props;
         <meta property="twitter:image" content={meta.image} />
 
         <!-- Favicon -->
-        <link rel="icon" href="/favicon.ico" type="image/x-icon">    
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     </head>
     <body class="min-h-screen flex flex-col">
         <slot />

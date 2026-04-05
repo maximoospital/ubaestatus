@@ -8,7 +8,13 @@ meta:
     image: "https://ubaestatus.mospit.al/assets/meta.png"
 header:
     title: "EXACTAS en LUCHA"
-hero: "TEST"
+    shareUrl: "https://ubaestatus.mospit.al"
+    shareText: "UBA Exactas esta de paro. Enterate porque en este sitio."
+hero:
+    title: "EXACTAS EN LUCHA"
+    subtitle: "Paro por tiempo indeterminado en defensa de la ciencia y la universidad pública."
 accordion: "TEST"
 calendar: "TEST"
+action: "TEST"
+contact: "TEST"
 ---

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Sora:wght@600;700;800;900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -15,8 +16,8 @@
   --color-rule-dark:  rgba(26, 38, 54, 0.12);
 
   /* Fuentes */
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "Courier New", monospace;
+  --font-display: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
 
   /* Hero */
   --font-size-display:         4.5rem;    /* 72px */
@@ -56,16 +57,19 @@
   }
 
   body {
-    font-family: var(--font-sans);
-    background-color: var(--color-dark);
+    font-family: var(--font-body);
+    background-color: var(--color-navy);
     color: var(--color-offwhite);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; /* Firefox */
+    font-smoothing: antialiased; /* Standard property */
   }
 }
 
 @layer components {
   /* Display / Hero */
   .text-display {
+    font-family:   var(--font-display);
     font-size:      var(--font-size-display);
     font-weight:    var(--font-weight-display);
     letter-spacing: var(--letter-spacing-display);
@@ -75,6 +79,7 @@
 
   /* header */
   .text-h2 {
+    font-family:   var(--font-display);
     font-size:      var(--font-size-h2);
     font-weight:    var(--font-weight-h2);
     letter-spacing: var(--letter-spacing-h2);
@@ -83,6 +88,7 @@
 
   /* Subheader */
   .text-h3 {
+    font-family: var(--font-display);
     font-size:   var(--font-size-h3);
     font-weight: var(--font-weight-h3);
   }
@@ -95,9 +101,9 @@
     color:          var(--color-mid);
   }
 
-  /* Monospace */
+  /* Compact UI text (non-monospace) */
   .text-mono-ui {
-    font-family:    var(--font-mono);
+    font-family:    var(--font-body);
     font-size:      var(--font-size-mono-ui);
     letter-spacing: var(--letter-spacing-mono-ui);
     color:          var(--color-mid);
@@ -164,5 +170,9 @@
     to {
       width: 100%;
     }
+  }
+
+  #header-bar {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
 }
