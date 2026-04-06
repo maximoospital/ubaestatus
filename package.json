@@ -19,6 +19,9 @@
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/json": "^2.2.458",
-    "@iconify/utils": "^3.1.0"
+    "@iconify/utils": "^3.1.0",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "0.7.2"
   }
 }

@@ -1,0 +1,83 @@
+---
+import { Icon } from "astro-icon/components";
+
+const {
+  leftText = "PROYECTO OPEN SOURCE",
+  github = {
+    url: "https://github.com/maximoospital/ubaestatus",
+    text: "Código Fuente",
+  },
+  oficial = {
+    url: "https://exactas.uba.ar/",
+    text: "SITIO OFICIAL EXACTAS",
+  },
+  topText = "SUBIR",
+} = Astro.props as {
+  leftText?: string;
+  github?: { url: string; text: string };
+  oficial?: { url: string; text: string };
+  topText?: string;
+};
+---
+
+<footer
+  class="bg-navy border-rule flex w-full flex-col items-center justify-between gap-6 border-t px-6 py-6 sm:flex-row lg:px-12"
+>
+  <div
+    class="text-offwhite/80 flex flex-wrap items-center justify-center gap-4 font-sans text-sm sm:justify-start"
+  >
+    <span class="tracking-wide">{leftText}</span>
+    <span class="hidden text-[rgba(255,255,255,0.2)] sm:inline">|</span>
+    <a
+      href={github.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-teal group flex items-center gap-1.5 font-medium transition-colors"
+    >
+      <Icon
+        name="mdi:github"
+        class="group-hover:text-teal h-5 w-5 transition-colors"
+      />
+      <span
+        class="group-hover:decoration-teal underline decoration-transparent underline-offset-4 transition-colors"
+      >
+        {github.text}
+      </span>
+    </a>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-center gap-6">
+    <a
+      href={oficial.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-offwhite/80 hover:text-teal hover:decoration-teal font-sans text-sm font-medium tracking-wide underline decoration-transparent underline-offset-4 transition-colors"
+    >
+      {oficial.text}
+    </a>
+
+    <button
+      id="back-to-top"
+      aria-label="Volver arriba"
+      class="text-offwhite/80 hover:text-coral group flex items-center gap-1 font-sans text-sm font-medium tracking-wide transition-colors"
+    >
+      <span>{topText}</span>
+      <Icon
+        name="mdi:arrow-up"
+        class="h-5 w-5 transition-transform group-hover:-translate-y-1"
+      />
+    </button>
+  </div>
+</footer>
+
+<script>
+  const backToTopBtn = document.getElementById("back-to-top");
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+</script>

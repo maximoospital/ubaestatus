@@ -1,26 +1,23 @@
 ---
 export interface Props {
-    title?: string;
-    subtitle?: string;
+  subtitle?: string;
 }
 
-const {
-    title = "EXACTAS EN LUCHA",
-    subtitle = "Paro por tiempo indeterminado en defensa de la ciencia y la universidad pública.",
-} = Astro.props;
+const { subtitle = "Subtitulo." } = Astro.props;
 ---
 
 <div
-    class="w-full h-full flex items-end min-h-[calc(100vh-8rem)] md:min-h-[calc(100vh-12rem)]"
+  class="relative flex h-full min-h-[calc(100vh)] w-full items-end bg-[url('/assets/bg.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat md:min-h-[calc(100vh)]"
 >
-    <div class="max-w-5xl mb-4 md:mb-8 ml-6">
-        <h1 class="text-display text-offwhite">EXACTAS</h1>
-        <h1 class="text-display text-offwhite">EN</h1>
-        <h1 class="text-display text-teal">LUCHA</h1>
-        <p
-            class="text-h4 ml-1 text-offwhite mt-4 md:mt-8 max-w-2xl font-body opacity-80"
-        >
-            {subtitle}
-        </p>
-    </div>
+  <div class="bg-dark absolute inset-0 opacity-80"></div>
+  <div class="relative z-10 mb-4 ml-6 max-w-5xl md:mb-8">
+    <h1 class="text-display text-offwhite">EXACTAS</h1>
+    <h1 class="text-display text-offwhite">EN</h1>
+    <h1 class="text-display text-teal">LUCHA</h1>
+    <p
+      class="text-h4 text-offwhite font-body mt-4 ml-1 max-w-2xl opacity-80 md:mt-8"
+    >
+      {subtitle}
+    </p>
+  </div>
 </div>

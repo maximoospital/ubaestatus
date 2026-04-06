@@ -6,132 +6,150 @@ const data = Astro.props;
 ---
 
 <header
-    id="header-bar"
-    class="bg-transparent border-b border-transparent fixed w-full z-40 top-0 left-0 transition-colors duration-300"
+  id="header-bar"
+  class="fixed top-0 left-0 z-40 w-full border-b border-transparent bg-transparent transition-colors duration-300"
 >
-    <div class="progress bg-teal"></div>
-    <div
-        id="header-inner"
-        class="container mx-auto px-4 py-8 flex items-center justify-between transition-all duration-300"
+  <div class="progress bg-teal"></div>
+  <div
+    id="header-inner"
+    class="container mx-auto flex flex-col items-center gap-4 px-4 py-8 transition-all duration-300 md:flex-row md:justify-between md:gap-0"
+  >
+    <h1
+      id="header-logo"
+      class="text-h3 md:text-h2 text-offwhite opacity-0 transition-opacity duration-300"
     >
-        <h1 id="header-logo" class="text-h3 md:text-h2 text-offwhite opacity-0 transition-opacity duration-300">{data.title}</h1>
-        <nav class="flex items-center gap-6">
-            <ul class="flex space-x-4">
-                <li>
-                    <a
-                        href="#hero"
-                        class="text-sm font-medium tracking-[0.01em] text-offwhite/70 decoration-transparent underline-offset-6 transition-colors duration-200 hover:text-teal hover:decoration-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-dark active:text-teal active:decoration-teal hover:underline active:underline"
-                        >Inicio</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="#accordion"
-                        class="text-sm font-medium tracking-[0.01em] text-offwhite/70 decoration-transparent underline-offset-6 transition-colors duration-200 hover:text-teal hover:decoration-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-dark active:text-teal active:decoration-teal hover:underline active:underline"
-                        >Situación</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="#calendar"
-                        class="text-sm font-medium tracking-[0.01em] text-offwhite/70 decoration-transparent underline-offset-6 transition-colors duration-200 hover:text-teal hover:decoration-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-dark active:text-teal active:decoration-teal hover:underline active:underline"
-                        >Agenda</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="#action"
-                        class="text-sm font-medium tracking-[0.01em] text-offwhite/70 decoration-transparent underline-offset-6 transition-colors duration-200 hover:text-teal hover:decoration-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-dark active:text-teal active:decoration-teal hover:underline active:underline"
-                        >Acción</a
-                    >
-                </li>
-                <li>
-                    <a
-                        href="#contact"
-                        class="text-sm font-medium tracking-[0.01em] text-offwhite/70 decoration-transparent underline-offset-6 transition-colors duration-200 hover:text-teal hover:decoration-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-dark active:text-teal active:decoration-teal hover:underline active:underline"
-                        >Contacto</a
-                    >
-                </li>
-            </ul>
-            <a
-                href="#share-modal"
-                class="inline-flex items-center gap-1 whitespace-nowrap rounded bg-teal px-4 py-2 text-sm font-semibold tracking-[0.01em] text-white transition-colors duration-200 hover:cursor-pointer hover:bg-teal-dark active:bg-teal-dark"
-                id="share"><Icon name="mdi:share" />Compartir</a
-            >
-        </nav>
-    </div>
+      {data.title}
+    </h1>
+    <nav class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+      <ul class="flex flex-wrap items-center justify-center gap-4">
+        <li>
+          <a
+            href="#hero"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            >Inicio</a
+          >
+        </li>
+        <li>
+          <a
+            href="#bento"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            >Situación</a
+          >
+        </li>
+        <li>
+          <a
+            href="#calendar"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            >Agenda</a
+          >
+        </li>
+        <li>
+          <a
+            href="#action"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            >Acción</a
+          >
+        </li>
+        <li>
+          <a
+            href="#contact"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            >Contacto</a
+          >
+        </li>
+      </ul>
+      <a
+        href="#share-modal"
+        class="bg-teal hover:bg-teal-dark active:bg-teal-dark inline-flex items-center gap-1 rounded p-2 text-sm font-semibold tracking-[0.01em] whitespace-nowrap text-white transition-colors duration-200 hover:cursor-pointer md:px-4 md:py-2"
+        id="share"
+        ><Icon name="mdi:share" class="text-lg md:text-sm" /><span
+          class="hidden md:inline">Compartir</span
+        ></a
+      >
+    </nav>
+  </div>
 </header>
 
 <ShareComponent shareText={data.shareText} shareUrl={data.shareUrl} />
 
 <script>
-    const header = document.getElementById("header-bar");
-    const inner = document.getElementById("header-inner");
-    const logo = document.getElementById("header-logo");
-    const links = document.querySelectorAll("nav ul li a");
-    
-    function handleScroll() {
-        const hero = document.getElementById("hero");
-        // Trigger right before the hero section is out of screen (80px buffer)
-        const threshold = hero ? hero.offsetHeight - 80 : 100;
-        
-        if (window.scrollY > threshold) {
-            header?.classList.replace("bg-transparent", "bg-dark");
-            header?.classList.replace("border-transparent", "border-rule");
-            inner?.classList.replace("py-8", "py-4");
-            logo?.classList.replace("opacity-0", "opacity-100");
+  const header = document.getElementById("header-bar");
+  const inner = document.getElementById("header-inner");
+  const logo = document.getElementById("header-logo");
+  const links = document.querySelectorAll("nav ul li a");
+
+  function handleScroll() {
+    const hero = document.getElementById("hero");
+    // Trigger right before the hero section is out of screen (80px buffer)
+    const threshold = hero ? hero.offsetHeight - 80 : 100;
+
+    if (window.scrollY > threshold) {
+      header?.classList.replace("bg-transparent", "bg-dark");
+      header?.classList.replace("border-transparent", "border-rule");
+      inner?.classList.replace("py-8", "py-4");
+      logo?.classList.replace("opacity-0", "opacity-100");
+    } else {
+      header?.classList.replace("bg-dark", "bg-transparent");
+      header?.classList.replace("border-rule", "border-transparent");
+      inner?.classList.replace("py-4", "py-8");
+      logo?.classList.replace("opacity-100", "opacity-0");
+    }
+  }
+
+  function updateActiveState() {
+    let currentId: string | null = null;
+    // The trigger line is roughly the center/upper-center of the screen
+    const scrollPos = window.scrollY + Math.min(250, window.innerHeight / 3);
+
+    links.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (!href?.startsWith("#")) return;
+      const section = document.querySelector(href) as HTMLElement | null;
+      if (!section) return;
+
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+
+      if (scrollPos >= sectionTop && scrollPos <= sectionBottom) {
+        currentId = href.substring(1);
+      }
+    });
+
+    // Edge case: when user reaches the absolute bottom of the document
+    if (
+      window.scrollY + window.innerHeight >=
+      document.body.offsetHeight - 50
+    ) {
+      const lastLink = Array.from(links)
+        .reverse()
+        .find((l) => l.getAttribute("href")?.startsWith("#"));
+      if (lastLink)
+        currentId = lastLink.getAttribute("href")?.substring(1) ?? null;
+    }
+
+    if (currentId) {
+      links.forEach((link) => {
+        if (link.getAttribute("href") === `#${currentId}`) {
+          link.classList.remove("text-offwhite/70", "decoration-transparent");
+          link.classList.add("text-teal", "decoration-teal", "underline");
         } else {
-            header?.classList.replace("bg-dark", "bg-transparent");
-            header?.classList.replace("border-rule", "border-transparent");
-            inner?.classList.replace("py-4", "py-8");
-            logo?.classList.replace("opacity-100", "opacity-0");
+          link.classList.add("text-offwhite/70", "decoration-transparent");
+          link.classList.remove("text-teal", "decoration-teal", "underline");
         }
+      });
     }
+  }
 
-    function updateActiveState() {
-        let currentId = null;
-        // The trigger line is roughly the center/upper-center of the screen
-        const scrollPos = window.scrollY + Math.min(250, window.innerHeight / 3);
-
-        links.forEach(link => {
-            const href = link.getAttribute("href");
-            if (!href?.startsWith("#")) return;
-            const section = document.querySelector(href) as HTMLElement | null;
-            if (!section) return;
-
-            const sectionTop = section.offsetTop;
-            const sectionBottom = sectionTop + section.offsetHeight;
-
-            if (scrollPos >= sectionTop && scrollPos <= sectionBottom) {
-                currentId = href.substring(1);
-            }
-        });
-
-        // Edge case: when user reaches the absolute bottom of the document
-        if (window.scrollY + window.innerHeight >= document.body.offsetHeight - 50) {
-            const lastLink = Array.from(links).reverse().find(l => l.getAttribute("href")?.startsWith("#"));
-            if (lastLink) currentId = lastLink.getAttribute("href")?.substring(1);
-        }
-
-        if (currentId) {
-            links.forEach(link => {
-                if (link.getAttribute("href") === `#${currentId}`) {
-                    link.classList.remove("text-offwhite/70", "decoration-transparent");
-                    link.classList.add("text-teal", "decoration-teal", "underline");
-                } else {
-                    link.classList.add("text-offwhite/70", "decoration-transparent");
-                    link.classList.remove("text-teal", "decoration-teal", "underline");
-                }
-            });
-        }
-    }
-
-    if (header) {
-        window.addEventListener("scroll", () => {
-            handleScroll();
-            updateActiveState();
-        }, { passive: true });
+  if (header) {
+    window.addEventListener(
+      "scroll",
+      () => {
         handleScroll();
         updateActiveState();
-    }
+      },
+      { passive: true },
+    );
+    handleScroll();
+    updateActiveState();
+  }
 </script>
