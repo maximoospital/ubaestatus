@@ -45,7 +45,7 @@
   --line-height-body: 1.7;
 
   /* overline */
-  --font-size-label: 0.5625rem; /* 9px */
+  --font-size-label: 0.625rem; /* 9px */
   --letter-spacing-label: 0.2em;
 
   /* Badge */

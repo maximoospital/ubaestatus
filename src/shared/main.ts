@@ -1,6 +1,6 @@
 import Lenis from "lenis";
 import Toastify from 'toastify-js';
-import { scroll, inView } from "motion";
+import { scroll } from "motion";
 
 // Initialize Lenis
 const lenis = new Lenis({
@@ -14,7 +14,29 @@ const logo = document.getElementById("header-logo");
 const links = document.querySelectorAll("nav ul li a");
 
 if (header && inner && logo) {
-    // Header styling on scroll
+    function updateNavLinks(targetId: string) {
+        links.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href === `#${targetId}`) {
+                link.classList.remove("text-offwhite/70", "decoration-transparent");
+                link.classList.add("text-teal", "decoration-teal", "underline");
+            } else if (href?.startsWith("#") && link.getAttribute("id") !== "share") {
+                link.classList.add("text-offwhite/70", "decoration-transparent");
+                link.classList.remove("text-teal", "decoration-teal", "underline");
+            }
+        });
+    }
+
+    const sectionElements = Array.from(links)
+        .map((link) => {
+            const href = link.getAttribute("href");
+            if (!href?.startsWith("#") || link.getAttribute("id") === "share" || href === "#share-modal") return null;
+            return document.getElementById(href.substring(1));
+        })
+        .filter((el): el is HTMLElement => el !== null);
+
+    let currentActiveId = "";
+
     scroll((progress, { y }) => {
         const hero = document.getElementById("hero");
         const threshold = hero ? hero.offsetHeight - 80 : 100;
@@ -31,22 +53,25 @@ if (header && inner && logo) {
             logo.classList.replace("opacity-100", "opacity-0");
         }
 
-        // Edge case: Force "Contacto" active when reaching absolute bottom
-        if (Math.round(y.current + window.innerHeight) >= document.body.offsetHeight - 50) {
-            links.forEach((link) => {
-                const href = link.getAttribute("href");
-                if (href === "#contact") {
-                    link.classList.remove("text-offwhite/70", "decoration-transparent");
-                    link.classList.add("text-teal", "decoration-teal", "underline");
-                } else if (href?.startsWith("#") && link.getAttribute("id") !== "share") {
-                    link.classList.add("text-offwhite/70", "decoration-transparent");
-                    link.classList.remove("text-teal", "decoration-teal", "underline");
-                }
-            });
+        // Active link tracking
+        const center = y.current + window.innerHeight * 0.4;
+        let activeSectionId = "";
+
+        for (const section of sectionElements) {
+            const top = section.offsetTop;
+            const bottom = top + section.offsetHeight;
+            if (top <= center && bottom > center) {
+                activeSectionId = section.id;
+            }
+        }
+
+        if (activeSectionId && activeSectionId !== currentActiveId) {
+            currentActiveId = activeSectionId;
+            updateNavLinks(activeSectionId);
         }
     });
 
-    // Active link tracking using inView
+    // Smooth scroll for anchor links using Lenis
     links.forEach((link) => {
         const href = link.getAttribute("href");
         if (!href?.startsWith("#")) return;
@@ -54,24 +79,6 @@ if (header && inner && logo) {
         const section = document.getElementById(sectionId);
 
         if (section) {
-            inView(
-                section,
-                () => {
-                    links.forEach((l) => {
-                        if (l === link) {
-                            l.classList.remove("text-offwhite/70", "decoration-transparent");
-                            l.classList.add("text-teal", "decoration-teal", "underline");
-                        } else {
-                            l.classList.add("text-offwhite/70", "decoration-transparent");
-                            l.classList.remove("text-teal", "decoration-teal", "underline");
-                        }
-                    });
-                },
-                // Trigger when section hits the vertical center of the viewport
-                { margin: sectionId === "contact" ? "0px 0px -10% 0px" : "-40% 0px -40% 0px" },
-            );
-
-            // Smooth scroll for anchor links using Lenis
             link.addEventListener("click", (e) => {
                 const isShareButton = link.getAttribute('id') === 'share' || link.getAttribute('href') === '#share-modal';
                 if (!isShareButton) {
