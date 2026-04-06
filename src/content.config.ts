@@ -1,6 +1,6 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
-import { z } from 'astro/zod' 
+import { z } from "astro/zod";
 
 const content = defineCollection({
   loader: glob({
@@ -22,7 +22,6 @@ const content = defineCollection({
       shareText: z.string(),
     }),
     hero: z.object({
-      title: z.string(),
       subtitle: z.string(),
     }),
     accordion: z.any().optional(),

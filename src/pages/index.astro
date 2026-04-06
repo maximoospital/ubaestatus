@@ -4,10 +4,11 @@ import BaseLayout from "../layouts/base.layout.astro";
 import Section from "../components/templates/section.component.astro";
 import HeaderComponent from "../components/widgets/header.component.astro";
 import HeroComponent from "../components/sections/hero.component.astro";
-import AccordionComponent from "../components/sections/accordion.component.astro";
+import BentoComponent from "../components/sections/bento.component.astro";
 import CalendarComponent from "../components/sections/calendar.component.astro";
 import ActionComponent from "../components/sections/action.component.astro";
 import ContactComponent from "../components/sections/contact.component.astro";
+import FooterComponent from "../components/widgets/footer.component.astro";
 
 // Importamos getEntry y cargamos el contenido del archivo markdown para la pagina de inicio.
 import { getEntry } from "astro:content";
@@ -19,24 +20,25 @@ const data = landing.data;
 ---
 
 <BaseLayout {...data.meta}>
-    <header>
-        <HeaderComponent {...data.header} />
-    </header>
-    <main>
-        <Section id="hero" fullWidth key="hero">
-            <HeroComponent {...data.hero} />
-        </Section>
-        <Section id="accordion" class="bg-offwhite" key="accordion">
-            <AccordionComponent {...data.accordion} />
-        </Section>
-        <Section id="calendar" class="bg-offwhite" key="calendar">
-            <CalendarComponent {...data.calendar} />
-        </Section>
-        <Section id="action" class="bg-coral" key="action">
-            <ActionComponent {...data.action} />
-        </Section>
-        <Section id="contact" class="bg-dark" key="contact">
-            <ContactComponent {...data.contact} />
-        </Section>
-    </main>
+  <header>
+    <HeaderComponent {...data.header} />
+  </header>
+  <main>
+    <Section id="hero" fullWidth noPadding key="hero">
+      <HeroComponent {...data.hero} />
+    </Section>
+    <Section id="bento" class="bg-offwhite" key="bento">
+      <BentoComponent {...data.bento} />
+    </Section>
+    <Section id="calendar" class="bg-offwhite" key="calendar">
+      <CalendarComponent {...data.calendar} />
+    </Section>
+    <Section id="action" class="bg-coral" key="action">
+      <ActionComponent {...data.action} />
+    </Section>
+    <Section id="contact" fullWidth noPadding class="bg-navy" key="contact">
+      <ContactComponent {...data.contact} />
+    </Section>
+  </main>
+  <FooterComponent {...data.contact?.footer || {}} />
 </BaseLayout>
