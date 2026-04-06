@@ -18,30 +18,52 @@ import { Icon } from "astro-icon/components";
 
 <aside
   id="share-modal"
-  class="share-modal pointer-events-none invisible fixed inset-0 z-50 opacity-0 transition-[opacity,visibility] duration-200 ease-out motion-reduce:transition-none"
+  x-data="{ open: false }"
+  x-show="open"
+  @open-share.window="open = true"
+  @keydown.escape.window="open = false"
+  x-init="$watch('open')"
+  class="share-modal fixed inset-0 z-50 pt-24 lg:pt-19"
   aria-label="Modal para compartir"
   aria-hidden="true"
+  style="display: none;"
 >
-  <a
-    href="#"
-    class="share-backdrop bg-dark/70 absolute inset-0 backdrop-blur-sm transition-[background-color,backdrop-filter] duration-200 ease-out motion-reduce:transition-none lg:bg-transparent lg:backdrop-blur-none"
-    aria-label="Cerrar modal"></a>
+  <div
+    @click="open = false"
+    x-show="open"
+    x-transition:enter="transition-opacity duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition-opacity duration-200 ease-in"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="share-backdrop bg-dark/70 absolute inset-0 cursor-default backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none"
+    aria-label="Cerrar modal"
+  >
+  </div>
 
   <div
-    class="pointer-events-none relative z-10 container mx-auto mt-3 flex h-full w-full items-start justify-center px-4 pt-24 lg:justify-end lg:pt-19"
+    class="pointer-events-none relative z-10 container mx-auto mt-3 flex h-full w-full items-start justify-center px-4 lg:justify-end"
   >
     <div
-      class="share-panel border-rule bg-navy lg:border-rule-dark pointer-events-auto relative w-full max-w-lg translate-y-5 scale-[0.98] rounded-md border p-5 opacity-0 transition-[opacity,transform,filter] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none md:p-6 lg:ml-0 lg:max-w-104 lg:origin-top-right lg:-translate-y-2.5 lg:shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
+      class="share-panel border-rule bg-navy lg:border-rule-dark pointer-events-auto relative w-full max-w-lg rounded-md border p-5 md:p-6 lg:ml-0 lg:max-w-104 lg:origin-top-right lg:shadow-[0_14px_40px_rgba(0,0,0,0.35)]"
+      x-show="open"
+      x-transition:enter="transition-[opacity,filter] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      x-transition:enter-start="opacity-0 blur-[2px] lg:blur-[6px]"
+      x-transition:enter-end="opacity-100 blur-0"
+      x-transition:leave="transition-[opacity,filter] duration-200 ease-in"
+      x-transition:leave-start="opacity-100 blur-0"
+      x-transition:leave-end="opacity-0 blur-[2px] lg:blur-[6px]"
     >
       <div class="flex items-center justify-between gap-4">
         <h2 class="text-h3 text-offwhite">Compartir</h2>
-        <a
-          href="#"
+        <button
+          @click="open = false"
           class="close-share text-offwhite/80 hover:bg-offwhite/10 hover:text-offwhite focus-visible:ring-teal focus-visible:ring-offset-navy inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           aria-label="Cerrar modal"
         >
           <Icon name="mdi:close" />
-        </a>
+        </button>
       </div>
 
       <p class="text-body mt-1">Compartí este sitio a través de:</p>
@@ -118,96 +140,9 @@ import { Icon } from "astro-icon/components";
           class="text-offwhite/80 hover:bg-offwhite/10 hover:text-offwhite focus-visible:ring-teal relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md transition-colors focus-visible:ring-2 focus-visible:outline-none"
           aria-label="Copiar enlace"
         >
-          <span
-            id="copy-icon-default"
-            class="absolute inset-0 flex items-center justify-center transition-opacity duration-200"
-          >
-            <Icon name="mdi:content-copy" />
-          </span>
-          <span
-            id="copy-icon-success"
-            class="text-teal absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200"
-          >
-            <Icon name="mdi:check" />
-          </span>
+          <Icon name="mdi:content-copy" />
         </button>
       </div>
-      <p id="copy-feedback" class="text-label mt-2" aria-live="polite"></p>
     </div>
   </div>
 </aside>
-
-<style>
-  #share-modal:target {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  #share-modal:target .share-panel {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0) scale(1);
-  }
-
-  @media (min-width: 1024px) {
-    #share-modal .share-panel {
-      filter: blur(6px);
-      transform: translate3d(10px, -8px, 0) scale(0.965);
-    }
-
-    #share-modal:target .share-panel {
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-  }
-</style>
-
-<script is:inline>
-  const copyButton = document.getElementById("copy-share-url");
-  const shareInput = document.getElementById("share-url");
-  const copyFeedback = document.getElementById("copy-feedback");
-  const defaultIcon = document.getElementById("copy-icon-default");
-  const successIcon = document.getElementById("copy-icon-success");
-  let resetFeedbackTimeout = null;
-
-  if (
-    copyButton instanceof HTMLButtonElement &&
-    shareInput instanceof HTMLInputElement &&
-    copyFeedback
-  ) {
-    copyButton.addEventListener("click", async () => {
-      const url = shareInput.value;
-
-      try {
-        await navigator.clipboard.writeText(url);
-        copyFeedback.textContent = "¡Copiado!";
-        if (defaultIcon && successIcon) {
-          defaultIcon.classList.add("opacity-0");
-          successIcon.classList.remove("opacity-0");
-        }
-      } catch {
-        shareInput.select();
-        const copied = document.execCommand("copy");
-        copyFeedback.textContent = copied
-          ? "¡Copiado!"
-          : "Fallo al copiar. Por favor, intenta copiar manualmente.";
-        if (copied && defaultIcon && successIcon) {
-          defaultIcon.classList.add("opacity-0");
-          successIcon.classList.remove("opacity-0");
-        }
-      }
-
-      if (typeof resetFeedbackTimeout === "number") {
-        window.clearTimeout(resetFeedbackTimeout);
-      }
-
-      resetFeedbackTimeout = window.setTimeout(() => {
-        copyFeedback.textContent = "";
-        if (defaultIcon && successIcon) {
-          defaultIcon.classList.remove("opacity-0");
-          successIcon.classList.add("opacity-0");
-        }
-      }, 2500);
-    });
-  }
-</script>

@@ -4,6 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 import icon from "astro-icon";
 
+import alpinejs from "@astrojs/alpinejs";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://ubaestatus.mospit.al",
@@ -12,5 +14,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [icon()],
+  integrations: [icon(), alpinejs()],
 });

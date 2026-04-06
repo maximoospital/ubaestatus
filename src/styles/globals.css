@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Sora:wght@600;700;800;900&display=swap");
 @import "tailwindcss";
+@import "toastify-js/src/toastify.css";
+
 
 @theme {
   /* Paleta basada en el sitio de DC */
@@ -243,5 +245,15 @@
       transform: rotate(45deg) translate(-70%, -70%);
       opacity: 1;
     }
+  }
+  
+  .instagram-card {
+    border-color: var(--color-rule-dark);
+  }
+  .instagram-card:hover {
+    border-color: var(--hover-color) !important;
+  }
+  .instagram-card:hover .hover-target {
+    color: var(--hover-color) !important;
   }
 }
