@@ -5,7 +5,7 @@ const meta = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-pt-20 overscroll-none !scroll-smooth">
+<html lang="es" class="scroll-pt-20 overscroll-none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,5 +39,6 @@ const meta = Astro.props;
   </head>
   <body class="flex min-h-screen flex-col">
     <slot />
+    <script src="../shared/main.ts"></script>
   </body>
 </html>
