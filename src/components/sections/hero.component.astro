@@ -7,17 +7,20 @@ const { subtitle = "Subtitulo." } = Astro.props;
 ---
 
 <div
-  class="relative flex h-full min-h-[calc(100vh)] w-full items-end bg-[url('/assets/bg.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat md:min-h-[calc(100vh)]"
+  class="relative flex h-full min-h-[calc(90vh)] w-full items-end bg-[url('/assets/bg.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat md:min-h-[calc(90vh)]"
 >
   <div class="bg-dark absolute inset-0 opacity-80"></div>
-  <div class="relative z-10 mb-4 ml-6 max-w-5xl md:mb-8">
-    <h1 class="text-display text-offwhite">EXACTAS</h1>
-    <h1 class="text-display text-offwhite">EN</h1>
-    <h1 class="text-display text-teal">LUCHA</h1>
+  <div class="relative z-10 mb-4 ml-6 md:mb-8">
+    <h1 class="text-display text-offwhite text-9xl">EXACTAS</h1>
+    <h1 class="text-display text-offwhite text-9xl">EN</h1>
+    <h1 class="text-display text-teal text-9xl">LUCHA</h1>
     <p
       class="text-h4 text-offwhite font-body mt-4 ml-1 max-w-2xl opacity-80 md:mt-8"
     >
       {subtitle}
     </p>
+  </div>
+  <!-- scroll down indicator de https://codepen.io/mikewagz/pen/PGXqOg -->
+  <div class="scroll-down-dude absolute bottom-8 left-1/2 -translate-x-1/2">
   </div>
 </div>
