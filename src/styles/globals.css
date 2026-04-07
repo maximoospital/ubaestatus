@@ -267,6 +267,14 @@
         position: relative;
         --swiper-navigation-color: var(--color-teal);
         --swiper-pagination-color: var(--color-teal);
+        /* Shrink arrows on mobile so they don't eat into card space */
+        --swiper-navigation-size: 24px;
+    }
+
+    @media (min-width: 640px) {
+        .swiper-area {
+            --swiper-navigation-size: 44px;
+        }
     }
 
     /* Fade overlays on the inner edges of the clip margins */
@@ -275,15 +283,29 @@
         content: "";
         position: absolute;
         top: 0;
-        bottom: 2.75rem; /* don't cover the pagination bar */
-        width: 4rem;
+        bottom: 2.75rem;
+        width: 2rem;
         z-index: 2;
         pointer-events: none;
     }
 
+    @media (min-width: 640px) {
+        .swiper-area::before,
+        .swiper-area::after {
+            width: 4rem;
+        }
+    }
+
     .swiper-clip {
         overflow: hidden;
-        margin: 0 3.25rem;
+        /* Tight on mobile — just enough room for the small arrow */
+        margin: 0 1.75rem;
+    }
+
+    @media (min-width: 640px) {
+        .swiper-clip {
+            margin: 0 3.25rem;
+        }
     }
 
     .swiper {
@@ -311,9 +333,7 @@
     .swiper-button-prev,
     .swiper-button-next {
         position: absolute;
-        top: calc(
-            50% - 1.375rem
-        ); /* half of swiper height minus half of pagination bar */
+        top: calc(50% - 1.375rem);
         transform: translateY(-50%);
         z-index: 10;
     }

@@ -12,51 +12,51 @@ const data = Astro.props;
   <div class="progress bg-teal"></div>
   <div
     id="header-inner"
-    class="container mx-auto flex flex-col items-center gap-4 px-4 py-8 transition-all duration-300 md:flex-row md:justify-between md:gap-0"
+    class="container mx-auto flex flex-row items-center justify-between gap-2 px-3 py-3 transition-all duration-300 md:px-4 md:py-8"
   >
     <h1
       id="header-logo"
-      class="text-h3 md:text-h2 text-offwhite flex flex-row items-center gap-2 leading-none opacity-0 transition-opacity duration-300"
+      class="text-h3 md:text-h2 text-offwhite hidden sm:flex flex-row items-center gap-2 leading-none opacity-0 transition-opacity duration-300"
     >
       <span
         class="bg-teal block h-[0.8em] w-1 shrink-0 translate-y-[-0.05em] rounded-full"
       ></span>
       {data.title}
     </h1>
-    <nav class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-      <ul class="flex flex-wrap items-center justify-center gap-4">
+    <nav class="flex items-center gap-2 md:gap-6">
+      <ul class="flex flex-wrap items-center justify-end gap-x-2 gap-y-1 sm:gap-x-3 md:gap-4">
         <li>
           <a
             href="#hero"
-            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-xs sm:text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
             >Inicio</a
           >
         </li>
         <li>
           <a
             href="#bento"
-            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-xs sm:text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
             >Situación</a
           >
         </li>
         <li>
           <a
             href="#calendar"
-            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-xs sm:text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
             >Agenda</a
           >
         </li>
         <li>
           <a
             href="#action"
-            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-xs sm:text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
             >Acción</a
           >
         </li>
         <li>
           <a
             href="#contact"
-            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
+            class="text-offwhite/70 hover:text-teal hover:decoration-teal focus-visible:ring-teal focus-visible:ring-offset-dark active:text-teal active:decoration-teal text-xs sm:text-sm font-medium tracking-[0.01em] decoration-transparent underline-offset-6 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:underline"
             >Contacto</a
           >
         </li>
