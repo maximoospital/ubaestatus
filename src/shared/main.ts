@@ -194,7 +194,7 @@ if (parent) {
     theme: theme({
       dividers: ":",
       css: css({
-        fontSize: "clamp(2.75rem, 4.2vw, 4.25rem)",
+        fontSize: "clamp(1.25rem, 5.5vw, 4.25rem)",
       }),
     }),
   });
