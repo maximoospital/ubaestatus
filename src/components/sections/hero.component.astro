@@ -4,26 +4,31 @@ export interface Props {
 }
 
 const { subtitle = "Subtitulo." } = Astro.props;
+
+import FlipClock from "../widgets/flip-clock.component.astro";
 ---
 
 <div
-  class="relative flex h-full min-h-[calc(90vh)] w-full items-center bg-[url('/assets/bg.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat md:min-h-[calc(90vh)]"
+  class="relative flex h-full min-h-svh w-full items-center bg-[url('/assets/bg.jpeg')] bg-cover bg-fixed bg-center bg-no-repeat"
 >
   <div class="bg-dark absolute inset-0 opacity-80"></div>
-  <div class="relative z-10 mb-4 ml-6 md:mb-8">
-    <h1 class="text-display text-offwhite text-8xl">EXACTAS</h1>
-    <h1 class="text-display text-offwhite text-8xl">EN</h1>
-    <h1 class="text-display text-teal text-8xl">LUCHA.</h1>
+  <div class="relative z-10 w-full max-w-7xl px-6 py-16 md:px-12 md:py-20">
+    <h1 class="text-display text-offwhite text-5xl sm:text-6xl md:text-7xl lg:text-8xl">EXACTAS</h1>
+    <h1 class="text-display text-offwhite text-5xl sm:text-6xl md:text-7xl lg:text-8xl">EN</h1>
+    <h1 class="text-display text-teal text-5xl sm:text-6xl md:text-7xl lg:text-8xl">LUCHA.</h1>
     <p
-      class="text-h3 text-offwhite font-body mt-2 ml-2 text-shadow-black/50 text-shadow-lg md:mt-2"
+      class="text-offwhite font-body mt-3 text-base sm:text-lg md:text-xl text-shadow-black/50 text-shadow-lg"
     >
       {subtitle}
     </p>
-    <div class="mt-6 ml-2">
+    <div class="mt-6 overflow-x-auto">
+      <FlipClock />
+    </div>
+    <div class="mt-6">
       <a
         id="hero-cta"
         href="#bento"
-        class="bg-teal text-dark font-body hover:bg-offwhite text-md inline-block rounded-sm px-6 py-3 font-bold tracking-[0.2em] uppercase transition-colors"
+        class="bg-teal text-dark font-body hover:bg-offwhite inline-block rounded-sm px-5 py-2.5 text-sm sm:px-6 sm:py-3 sm:text-base font-bold tracking-[0.2em] uppercase transition-colors"
       >
         Conoce la situación
       </a>
