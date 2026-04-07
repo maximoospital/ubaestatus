@@ -169,7 +169,7 @@ flipClock({
     theme: theme({
         dividers: ":",
         css: css({
-            fontSize: "clamp(3.25rem, 5vw, 5rem)",
+            fontSize: "clamp(2.75rem, 4.2vw, 4.25rem)",
         }),
     }),
 });
