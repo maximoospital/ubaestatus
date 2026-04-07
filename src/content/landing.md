@@ -69,10 +69,10 @@ bento:
         source: "Departamento de Computación, FCEyN UBA"
 
     - id: por-que
-      type: category-pills
+      type: text-block
       color: teal
-      categoryName: "¿Por qué te afecta?"
-      categoryFocus: "Materias clave del mercado, enseñadas por expertos reales."
+      textBig: "¿Por qué te afecta?"
+      textSub: "Materias clave del mercado, enseñadas por expertos reales."
       modal:
         category: "Contexto"
         title: "¿Por qué te afecta?"
