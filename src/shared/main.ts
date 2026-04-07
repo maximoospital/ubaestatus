@@ -154,3 +154,22 @@ if (backToTopBtn) {
     });
 }
 
+// Reloj flipclock.js
+
+import { elapsedTime, css, flipClock, theme } from "flipclock";
+
+const parent = document.querySelector("#flip")!;
+
+flipClock({
+    parent,
+    face: elapsedTime({
+        from: new Date("2026-03-16T00:00:00"),
+        format: "[DD]:[hh]:[mm]:[ss]",
+    }),
+    theme: theme({
+        dividers: ":",
+        css: css({
+            fontSize: "clamp(3.25rem, 5vw, 5rem)",
+        }),
+    }),
+});
