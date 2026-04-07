@@ -73,10 +73,6 @@ bento:
       color: teal
       categoryName: "¿Por qué te afecta?"
       categoryFocus: "Materias clave del mercado, enseñadas por expertos reales."
-      pills:
-        - text: "Redes Neuronales"
-        - text: "Verificación"
-        - text: "Prog. Cuántica"
       modal:
         category: "Contexto"
         title: "¿Por qué te afecta?"
