@@ -11,7 +11,7 @@ header:
   shareUrl: "https://ubaestatus.mospit.al"
   shareText: "UBA Exactas esta de paro. Enterate porque en este sitio."
 hero:
-  subtitle: "Paro por tiempo indeterminado en defensa de la ciencia y la universidad pública."
+  subtitle: "La Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires está de paro para luchar por su futuro."
 bento: "TEST"
 calendar: "TEST"
 action: "TEST"
