@@ -194,12 +194,24 @@ if (parent) {
     theme: theme({
       dividers: ":",
       css: css({
-        fontSize: "clamp(0.875rem, 4vw, 4.25rem)",
+        fontSize: "clamp(1.5rem, 5.5vw, 4.25rem)",
       }),
     }),
   });
 
   if (timerStatus !== "active") {
     fc.stop();
+  }
+
+  // Scale clock down if it overflows its container (Chrome mobile)
+  const wrapper = parent.parentElement;
+  if (wrapper) {
+    const scaleToFit = () => {
+      parent.style.zoom = "1";
+      const ratio = wrapper.clientWidth / parent.scrollWidth;
+      if (ratio < 1) parent.style.zoom = String(ratio.toFixed(4));
+    };
+    requestAnimationFrame(scaleToFit);
+    window.addEventListener("resize", scaleToFit, { passive: true });
   }
 }
