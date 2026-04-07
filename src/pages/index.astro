@@ -27,8 +27,8 @@ const data = landing.data;
     <Section id="hero" noPadding key="hero">
       <HeroComponent {...data.hero} />
     </Section>
-    <Section id="bento" noPadding class="bg-teal-dim" key="bento">
-      <BentoComponent {...data.bento} />
+    <Section id="bento" noPadding class="bg-mid" key="bento">
+      <BentoComponent cards={data.bento?.cards ?? []} />
     </Section>
     <Section id="calendar" class="bg-offwhite" key="calendar">
       <CalendarComponent {...data.calendar} />

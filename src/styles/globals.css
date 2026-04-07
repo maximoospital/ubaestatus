@@ -229,6 +229,7 @@
     animation: down-arrow-after 2.6s cubic-bezier(0.77, 0, 0.175, 1) infinite;
   }
 
+
   @keyframes down-arrow-before {
     50% {
       transform: rotate(45deg) translate(70%, 70%);
@@ -345,4 +346,780 @@
     .swiper-button-next {
         right: 0;
     }
+    
+    /* SECCION BENTO */
+  .bento-grid {
+    display: grid;
+    width: 100%;
+    padding: 12px;
+    gap: 8px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      "situacion    situacion    situacion    situacion    situacion    situacion"
+      "actividades  actividades  materias     materias     por-que      que-podemos"
+      "actividades  actividades  materias     materias     y-estudio    habia-plata"
+      "agencia      agencia      ley          ley          conicet      extension"
+      "agencia      agencia      ley          ley          salarios     recibo"
+      "presupuesto  presupuesto  presupuesto  presupuesto  salarios     recibo";
+  }
+
+  @media (max-width: 1023px) {
+    .bento-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-areas:
+        "situacion    situacion    situacion    situacion"
+        "actividades  actividades  materias     materias"
+        "actividades  actividades  materias     materias"
+        "por-que      que-podemos  y-estudio    habia-plata"
+        "agencia      agencia      ley          ley"
+        "agencia      agencia      ley          ley"
+        "conicet      extension    salarios     recibo"
+        "presupuesto  presupuesto  presupuesto  presupuesto";
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "situacion    situacion"
+        "actividades  actividades"
+        "materias     materias"
+        "por-que      que-podemos"
+        "y-estudio    habia-plata"
+        "agencia      agencia"
+        "ley          ley"
+        "conicet      extension"
+        "salarios     recibo"
+        "presupuesto  presupuesto";
+      padding: 8px;
+    }
+  }
+
+  /* ===== BASE CARD ===== */
+  .card {
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy);
+    border: 1px solid var(--color-rule);
+    cursor: pointer;
+    transition:
+      transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px) scale(1.008);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
+  }
+  .card:active {
+    transform: translateY(-1px) scale(0.998);
+    transition-duration: 0.08s;
+  }
+
+  /* Teal-accent cards */
+  .card--teal:hover {
+    border-color: rgba(42, 188, 180, 0.35);
+    box-shadow:
+      0 6px 28px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(42, 188, 180, 0.12),
+      0 0 24px rgba(42, 188, 180, 0.08);
+  }
+
+  /* Coral-accent cards */
+  .card--coral:hover {
+    border-color: rgba(232, 98, 74, 0.35);
+    box-shadow:
+      0 6px 28px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(232, 98, 74, 0.12),
+      0 0 24px rgba(232, 98, 74, 0.08);
+  }
+
+  /* ===== LEER MÁS chip ===== */
+  .card-read-more {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    margin-top: 12px;
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: capitalize;
+    color: var(--color-teal);
+    background: rgba(42, 188, 180, 0.08);
+    border: 1px solid rgba(42, 188, 180, 0.2);
+    border-radius: 3px;
+    padding: 3px 9px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      background 0.15s ease;
+    pointer-events: none;
+  }
+  .card-read-more--coral {
+    color: var(--color-coral);
+    background: rgba(232, 98, 74, 0.08);
+    border-color: rgba(232, 98, 74, 0.2);
+  }
+  .card:hover .card-read-more {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Situacion card: chip always visible since it's big */
+  .card-situacion .card-read-more {
+    opacity: 0.55;
+    transform: translateY(0);
+  }
+  .card-situacion:hover .card-read-more {
+    opacity: 1;
+  }
+
+  .num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--color-mid);
+    line-height: 1.35;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-offwhite);
+    margin-bottom: 10px;
+  }
+
+  /* ===== PILLS ===== */
+  .pills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    padding: 3px 8px;
+    white-space: nowrap;
+  }
+  .pill-teal {
+    color: var(--color-teal);
+    background: rgba(42, 188, 180, 0.1);
+    border-color: rgba(42, 188, 180, 0.25);
+  }
+  .pill-coral {
+    color: var(--color-coral);
+    background: rgba(232, 98, 74, 0.1);
+    border-color: rgba(232, 98, 74, 0.25);
+  }
+
+  /* ===== 1. SITUACIÓN — coral hero ===== */
+  .card-situacion {
+    grid-area: situacion;
+    background: linear-gradient(
+      140deg,
+      var(--color-navy) 0%,
+      #8c2818 45%,
+      var(--color-coral) 100%
+    );
+    border-color: transparent;
+    padding: 28px 36px;
+    justify-content: flex-end;
+    min-height: 180px;
+  }
+  .card-situacion::after {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(232, 98, 74, 0.18) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .card-situacion .eyebrow {
+    color: rgba(240, 237, 230, 0.6);
+    margin-bottom: 12px;
+  }
+  .card-situacion .num {
+    font-size: clamp(56px, 8vw, 96px);
+    color: white;
+    margin-bottom: 10px;
+  }
+  .card-situacion .label {
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 600;
+    color: rgba(240, 237, 230, 0.88);
+    max-width: 680px;
+    line-height: 1.3;
+  }
+
+  /* ===== 2. ACTIVIDADES ===== */
+  .card-actividades {
+    grid-area: actividades;
+    background: var(--color-dark);
+    min-height: 180px;
+    justify-content: space-between;
+  }
+  .card-actividades::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(42, 188, 180, 0.07) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .date-big {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 5vw, 72px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--color-teal);
+    line-height: 1;
+  }
+  .date-label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-offwhite);
+    margin-top: 8px;
+  }
+  .date-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mid);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ===== 3. MATERIAS ===== */
+  .card-materias {
+    grid-area: materias;
+    background: var(--color-navy);
+    min-height: 180px;
+    justify-content: space-between;
+  }
+  .card-materias::after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(42, 188, 180, 0.06) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .card-materias .num {
+    font-size: clamp(44px, 4.5vw, 64px);
+    color: var(--color-teal);
+    margin-bottom: 4px;
+  }
+  .card-materias .label {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  /* ===== 4. POR QUÉ ===== */
+  .card-por-que {
+    grid-area: por-que;
+    background: var(--color-dark);
+    justify-content: space-between;
+  }
+  .category-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-teal);
+    margin-bottom: 5px;
+    letter-spacing: -0.01em;
+  }
+  .category-focus {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mid);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  /* ===== 5. QUÉ PODEMOS HACER ===== */
+  .card-que-podemos {
+    grid-area: que-podemos;
+    background: var(--color-navy);
+    justify-content: space-between;
+  }
+  .action-heading {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-teal);
+    margin-bottom: 10px;
+  }
+  .icon-row {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .icon-item {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-offwhite);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .action-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mid);
+    margin-top: 8px;
+  }
+
+  /* ===== 6. Y EL ESTUDIO ===== */
+  .card-y-estudio {
+    grid-area: y-estudio;
+    background: var(--color-dark);
+  }
+  .text-big {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-offwhite);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .text-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mid);
+    line-height: 1.4;
+  }
+
+  /* ===== 7. HABÍA PLATA ===== */
+  .card-habia-plata {
+    grid-area: habia-plata;
+    background: var(--color-navy);
+  }
+  .card-habia-plata .text-big {
+    color: var(--color-coral);
+  }
+  .money-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-coral);
+    background: rgba(232, 98, 74, 0.1);
+    border: 1px solid rgba(232, 98, 74, 0.25);
+    border-radius: 3px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+
+  /* ===== 8. AGENCIA ===== */
+  .card-agencia {
+    grid-area: agencia;
+    background: var(--color-dark);
+    min-height: 160px;
+    justify-content: space-between;
+  }
+  .card-agencia::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(232, 98, 74, 0.07) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .card-agencia .num {
+    font-size: clamp(48px, 5vw, 72px);
+    color: var(--color-coral);
+    margin-bottom: 4px;
+  }
+  .card-agencia .label {
+    font-size: 13px;
+    max-width: 300px;
+    line-height: 1.4;
+  }
+  .red-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-coral);
+    background: rgba(232, 98, 74, 0.1);
+    border: 1px solid rgba(232, 98, 74, 0.25);
+    border-radius: 3px;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+    width: fit-content;
+  }
+
+  /* ===== 9. LEY ===== */
+  .card-ley {
+    grid-area: ley;
+    background: var(--color-navy);
+    min-height: 160px;
+    justify-content: space-between;
+    padding: 24px 28px;
+  }
+  .quote-big {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 700;
+    color: var(--color-offwhite);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .quote-big em {
+    background: linear-gradient(
+      90deg,
+      var(--color-coral) 0%,
+      rgba(240, 237, 230, 0.75) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: normal;
+  }
+  .quote-sub {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-mid);
+    line-height: 1.5;
+    max-width: 320px;
+  }
+
+  /* ===== 10. CONICET ===== */
+  .card-conicet {
+    grid-area: conicet;
+    background: var(--color-dark);
+  }
+  .card-conicet .num {
+    font-size: 44px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-conicet .label {
+    font-size: 12px;
+  }
+
+  /* ===== 11. EXTENSIÓN ===== */
+  .card-extension {
+    grid-area: extension;
+    background: var(--color-navy);
+  }
+  .card-extension .num {
+    font-size: 52px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-extension .label {
+    font-size: 12px;
+  }
+
+  /* ===== 12. PRESUPUESTO ===== */
+  .card-presupuesto {
+    grid-area: presupuesto;
+    background: var(--color-dark);
+    min-height: 160px;
+    justify-content: space-between;
+    padding: 20px 22px;
+  }
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .chart-title {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-mid);
+    line-height: 1.3;
+    max-width: 200px;
+  }
+  .chart-badge-val {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-coral);
+    letter-spacing: -0.02em;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    flex: 1;
+  }
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+  .bar-val {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-mid);
+  }
+  .bar {
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+  }
+  .bar-lbl {
+    font-family: var(--font-body);
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    opacity: 0.5;
+  }
+
+  /* ===== 13. SALARIOS ===== */
+  .card-salarios {
+    grid-area: salarios;
+    background: var(--color-navy);
+  }
+  .card-salarios .num {
+    font-size: 44px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-salarios .label {
+    font-size: 12px;
+  }
+
+  /* ===== 14. RECIBO ===== */
+  .card-recibo {
+    grid-area: recibo;
+    background: var(--color-dark);
+  }
+  .card-recibo .num {
+    font-size: 40px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-recibo .label {
+    font-size: 12px;
+  }
+  .detail-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-mid);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    padding: 3px 9px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 38, 54, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+  }
+
+  .modal {
+    background: var(--color-navy);
+    border-radius: 8px;
+    max-width: 620px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    position: relative;
+    padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      0 16px 48px rgba(0, 0, 0, 0.5);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-rule) transparent;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-rule);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-mid);
+    font-size: 16px;
+    line-height: 1;
+    transition: background 0.15s;
+  }
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--color-offwhite);
+  }
+
+  .modal-category {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-mid);
+    margin-bottom: 10px;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-offwhite);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    padding-right: 40px;
+  }
+
+  .modal-media {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: block;
+    background: var(--color-dark);
+  }
+
+  .modal-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: rgba(240, 237, 230, 0.88);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .modal-footer {
+    border-top: 1px solid var(--color-rule);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .modal-source {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-mid);
+    opacity: 0.6;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .modal-source strong {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  .modal-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-teal);
+    background: rgba(42, 188, 180, 0.1);
+    border: 1px solid rgba(42, 188, 180, 0.25);
+    border-radius: 3px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .modal-cta:hover {
+    background: rgba(42, 188, 180, 0.18);
+  }
 }
+
+  
