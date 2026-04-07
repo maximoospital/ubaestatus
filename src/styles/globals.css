@@ -60,6 +60,10 @@
     box-sizing: border-box;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     font-family: var(--font-body);
     background-color: var(--color-navy);
@@ -67,7 +71,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; /* Firefox */
     font-smoothing: antialiased; /* Standard property */
-    overflow-x: clip; /* prevent stray elements from causing horizontal scroll */
+    overflow-x: hidden;
   }
 }
 
