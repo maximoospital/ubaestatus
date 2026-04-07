@@ -9,7 +9,6 @@ const { timer = "active", date } = Astro.props;
 <div id="flip" data-timer={timer} data-date={date}></div>
 
 <style>
-  /* Flip board backgrounds → teal */
   #flip :global(.flip-clock__piece),
   #flip :global(.flip-clock__card),
   #flip :global(.flip-clock-card .flip-clock-card-item-inner .top),
@@ -21,7 +20,6 @@ const { timer = "active", date } = Astro.props;
     background-color: #f0ede6 !important;
   }
 
-  /* All text → offwhite */
   #flip :global(*) {
     color: black;
   }
@@ -30,17 +28,14 @@ const { timer = "active", date } = Astro.props;
     color: #f0ede6 !important;
   }
 
-  /* Dividers (the colon separators) */
   #flip :global(.flip-clock__divider .flip-clock__dot) {
     background-color: #f0ede6 !important;
   }
 
-  /* Align group row to top so dividers don't drift down with label text */
   #flip :global(.flip-clock-group-items) {
     align-items: flex-start !important;
   }
 
-  /* Re-center the divider dots relative to the card face only */
   #flip :global(.flip-clock__divider) {
     display: flex !important;
     align-items: center !important;
@@ -48,8 +43,6 @@ const { timer = "active", date } = Astro.props;
     padding-bottom: 2.25rem !important; /* roughly matches label height */
   }
 
-  /* ── Responsive card sizing ── */
-  /* Divider text – shared label styles */
   #flip
     :global(
       .flip-clock-group

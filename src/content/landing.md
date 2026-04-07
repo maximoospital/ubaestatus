@@ -19,13 +19,12 @@ bento:
     - id: situacion
       type: hero-stat
       color: coral
-      eyebrow: "El presupuesto de investigacion cayo un"
-      num: "↓95%"
+      num: "UNA CRISIS DE PRESUPUESTO."
       label: "La ley existe. No se cumple."
       modal:
         category: "Contexto"
         title: "La Situación"
-        body: "El presupuesto anual real está demasiado bajo y no se cumple la ley de financiamiento universitario. El presupuesto para investigación cayó un 95%. Los docentes están al límite — algunos consideraron irse al sector privado. Los fondos no son solo para sueldos: financian carreras y materiales. El Departamento de Computación es el más afectado."
+        body: "El presupuesto anual real está demasiado bajo y no se cumple la ley de financiamiento universitario. El presupuesto para investigación cayó casi un 95%. Los docentes están al límite — algunos consideran irse al sector privado. Los fondos no son solo para sueldos: financian carreras y materiales. El Departamento de Computación es el más afectado."
         source: "Reunión estudiantil FCEyN/DC."
 
     - id: actividades
@@ -106,15 +105,15 @@ bento:
     - id: y-estudio
       type: text-block
       color: none
-      textBig: "Sin parciales.<br />Sin apuro."
-      textSub: "El paro es un paro. Material en Campus Virtual y CubaWiki."
+      textBig: "¿Y como<br />estudiamos?"
+      textSub: "Ni clases virtuales ni parciales sorpresa. Un paro es un paro."
       modal:
         category: "Info"
         title: "¿Y el estudio?"
-        body: "Podés aprovechar para repasar materias de cuatrimestres anteriores, pero no esperés ser evaluado por todo eso. No hay consenso todavía sobre cómo prepararse. Los temas no se van a recuperar a las corridas. El material estará disponible en Campus Virtual y CubaWiki. No hay fecha de vuelta hasta que se resuelva."
+        body: "Podés aprovechar para repasar materias de cuatrimestres anteriores, pero no esperés ser evaluado por todo eso. No hay consenso todavía sobre cómo prepararse. Los temas no se van a recuperar a las corridas. No habran clases virtuales y todavia no se espera que hayan fechas de parciales ni de clases. Podes vos prepararte con el material de cursadas pasadas y conectando con otros alumnos."
         source: "Reunión estudiantil FCEyN/DC"
         cta:
-          label: "CubaWiki"
+          label: "CubaWiki, aca podes encontrar material"
           url: "https://cubawiki.com.ar"
 
     - id: habia-plata
@@ -279,7 +278,38 @@ calendar:
 action:
   title: "NO TODO ES PALABRAS,"
   subtitle: "AYUDANOS."
-  description: "Terminar esta descripcion."
+  description: "Escribile a quienes tienen el poder de cambiar esto. Insistamos hasta que algo cambie."
+  responsableProfile:
+    - name: "Sandra Pettovello"
+      description: "Ministra de Capital Humano"
+      party: "La Libertad Avanza"
+      role: "Ministra"
+      email: "https://www.argentina.gob.ar/capital-humano/contacto"
+    - name: "Danya Tavela"
+      description: "Diputada Nacional · UCR Pro · Ex-Sec. de Políticas Universitarias"
+      party: "UCR"
+      role: "Diputada"
+      email: "mailto:dtavela@hcdn.gob.ar"
+    - name: "Emiliano Yacobitti"
+      description: "Diputado Nacional · UCR · Vicerector UBA"
+      party: "UCR"
+      role: "Diputado"
+      email: "mailto:eyacobitti@hcdn.gob.ar"
+    - name: "Silvia Lospenatto"
+      description: "Diputada Nacional · PRO · Comisión de Educación"
+      party: "PRO"
+      role: "Diputada"
+      email: "mailto:slospenatto@hcdn.gob.ar"
+    - name: "Alejandro Finocchiaro"
+      description: "Diputado Nacional · PRO · Ex-Ministro de Educación"
+      party: "PRO"
+      role: "Diputado"
+      email: "mailto:afinocchiaro@hcdn.gob.ar"
+    - name: "Victor Zimmermann"
+      description: "Diputado Nacional · UCR · Comisión de Presupuesto"
+      party: "UCR"
+      role: "Diputado"
+      email: "mailto:vzimmermann@hcdn.gob.ar"
 contact:
   title: "SUMATE,"
   subtitle: "SOMOS COMUNIDAD."
