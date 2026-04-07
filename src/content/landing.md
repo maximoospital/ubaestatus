@@ -11,10 +11,18 @@ header:
   shareUrl: "https://ubaestatus.mospit.al"
   shareText: "UBA Exactas esta de paro. Enterate porque en este sitio."
 hero:
+  timer: active
+  date: "2026-03-16T00:00:00"
   subtitle: "La Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires está de paro para luchar por su futuro."
 bento: "TEST"
-calendar: "TEST"
-action: "TEST"
+calendar:
+  title: "Agenda de Eventos"
+  subtitle: "Que haya un paro no significa que no haya movilizacion. Enterate y participa."
+  url: "https://cartelera.inexactas.ar"
+action:
+  title: "NO TODO ES PALABRAS,"
+  subtitle: "AYUDANOS."
+  description: "Terminar esta descripcion."
 contact:
   title: "SUMATE,"
   subtitle: "SOMOS COMUNIDAD."

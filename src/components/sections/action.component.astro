@@ -1,0 +1,59 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface responsableProfile {
+    name: string;
+    description: string;
+    party: string;
+    role: string;
+    email: string;
+}
+
+const {
+    title = "TITULO",
+    subtitle = "SUBTITULO",
+    description = "Descripcion.",
+    responsableProfile = [],
+} = Astro.props as {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    responsableProfile?: responsableProfile[];
+};
+---
+
+<div class="relative flex w-full flex-col items-start px-6 py-32 lg:px-8">
+    <div class="mb-12 text-left">
+        <h2 class="text-display text-h2 text-offwhite">{title}</h2>
+        <h2 class="text-display text-h1 mt-1 text-black">{subtitle}</h2>
+        <p class="text-h3 text-offwhite mt-2 font-normal">
+            {description}
+        </p>
+    </div>
+
+    <div class="grid w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {
+            responsableProfile.map((profile) => (
+                <a
+                    href={profile.email}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="instagram-card bg-offwhite group flex items-center justify-between border px-8 py-6 transition-colors"
+                >
+                    <div class="flex flex-col items-start text-left">
+                        <span class="text-label mb-1 tracking-widest text-black">
+                            {profile.name}
+                        </span>
+                        <span class="hover-target text-h3 text-navy transition-colors">
+                            {profile.description}
+                        </span>
+                    </div>
+                    <Icon
+                        name="mdi:email"
+                        class="hover-target text-mid h-6 w-6 transition-colors"
+                    />
+                </a>
+            ))
+        }
+    </div>
+</div>

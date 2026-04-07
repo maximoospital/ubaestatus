@@ -24,19 +24,19 @@ const data = landing.data;
     <HeaderComponent {...data.header} />
   </header>
   <main>
-    <Section id="hero" fullWidth noPadding key="hero">
+    <Section id="hero" noPadding key="hero">
       <HeroComponent {...data.hero} />
     </Section>
-    <Section id="bento" fullWidth noPadding class="bg-offwhite" key="bento">
+    <Section id="bento" noPadding class="bg-teal-dim" key="bento">
       <BentoComponent {...data.bento} />
     </Section>
     <Section id="calendar" class="bg-offwhite" key="calendar">
       <CalendarComponent {...data.calendar} />
     </Section>
-    <Section id="action" class="bg-coral" key="action">
+    <Section id="action" noPadding class="bg-coral" key="action">
       <ActionComponent {...data.action} />
     </Section>
-    <Section id="contact" fullWidth noPadding class="bg-navy" key="contact">
+    <Section id="contact" noPadding class="bg-navy" key="contact">
       <ContactComponent {...data.contact} />
     </Section>
   </main>

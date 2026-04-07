@@ -1,9 +1,11 @@
 ---
 export interface Props {
   subtitle?: string;
+  timer?: "active" | "paused";
+  date?: string;
 }
 
-const { subtitle = "Subtitulo." } = Astro.props;
+const { subtitle = "Subtitulo.", timer = "active", date } = Astro.props;
 
 import FlipClock from "../widgets/flip-clock.component.astro";
 ---
@@ -39,7 +41,7 @@ import FlipClock from "../widgets/flip-clock.component.astro";
       >
         El paro ya lleva:
       </p>
-      <FlipClock />
+      <FlipClock timer={timer} date={date} />
     </div>
     <div class="mt-10">
       <a

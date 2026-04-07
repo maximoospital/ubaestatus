@@ -23,6 +23,8 @@ const content = defineCollection({
     }),
     hero: z.object({
       subtitle: z.string(),
+      timer: z.enum(["active", "paused"]).default("active"),
+      date: z.string().optional(),
     }),
     accordion: z.any().optional(),
     calendar: z.any().optional(),
