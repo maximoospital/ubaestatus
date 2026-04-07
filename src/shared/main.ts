@@ -126,6 +126,7 @@ function showToast(text: string) {
       background: "#2abcb4", // Teal
       color: "#063330", // Navy contrast
       borderRadius: "6px",
+      textAlign: "center",
       fontWeight: "600",
       padding: "12px 24px",
       boxShadow:
