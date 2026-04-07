@@ -1,0 +1,1188 @@
+---
+// No props — content is self-contained
+---
+
+<div x-data="bentoModal()" @keydown.escape.window="closeModal()">
+  <div class="bento-grid">
+    <!-- 1. SITUACIÓN — xl hero -->
+    <div class="card card-situacion" @click="openModal('situacion')">
+      <div class="eyebrow">FCEyN · DC · UBA · 2025</div>
+      <div class="num">↓95%</div>
+      <div class="label">
+        El presupuesto de investigación cayó un 95%. La ley existe. No se
+        cumple.
+      </div>
+    </div>
+
+    <!-- 2. ACTIVIDADES — lg date -->
+    <div class="card card-actividades" @click="openModal('actividades')">
+      <div>
+        <div class="eyebrow">Próxima actividad</div>
+        <div class="date-big">10/4</div>
+        <div class="date-label">Jornada de Lucha por la Ciencia</div>
+      </div>
+      <div class="date-sub">
+        Stand en Pabellón 2 · Clases públicas frente a empresas tech · Sala
+        Noriega disponible
+      </div>
+    </div>
+
+    <!-- 3. MATERIAS ADHERIDAS — lg stat+pills -->
+    <div class="card card-materias" @click="openModal('materias')">
+      <div>
+        <div class="eyebrow">Depto. de Computación</div>
+        <div class="num">+25</div>
+        <div class="label">
+          materias adheridas. Áreas completas. Paro total.
+        </div>
+      </div>
+      <div class="pills-wrap">
+        <span class="pill pill-teal">Algoritmos</span>
+        <span class="pill pill-teal">Teoría</span>
+        <span class="pill pill-teal">Datos</span>
+        <span class="pill pill-teal">Ingeniería</span>
+        <span class="pill pill-teal">Sistemas</span>
+        <span class="pill pill-teal">Optativas</span>
+      </div>
+    </div>
+
+    <!-- 4. POR QUÉ TE AFECTA — md tags -->
+    <div class="card card-por-que" @click="openModal('por-que')">
+      <div class="category-name">¿Por qué te afecta?</div>
+      <div class="category-focus">
+        Materias clave del mercado, enseñadas por expertos reales.
+      </div>
+      <div class="pills-wrap">
+        <span class="pill">Redes Neuronales</span>
+        <span class="pill">Verificación</span>
+        <span class="pill">Prog. Cuántica</span>
+      </div>
+    </div>
+
+    <!-- 5. QUÉ PODEMOS HACER — md icons -->
+    <div class="card card-que-podemos" @click="openModal('que-podemos')">
+      <div class="action-heading">¿Qué podemos hacer?</div>
+      <div class="icon-row">
+        <div class="icon-item">
+          <span>🔗</span> Conectarse con docentes y compañeros
+        </div>
+        <div class="icon-item">
+          <span>📢</span> Compartir información válida
+        </div>
+      </div>
+      <div class="action-sub">Nadie enfrenta esto solo.</div>
+    </div>
+
+    <!-- 6. Y EL ESTUDIO — md text -->
+    <div class="card card-y-estudio" @click="openModal('y-estudio')">
+      <div class="text-big">Sin parciales.<br />Sin apuro.</div>
+      <div class="text-sub">
+        El paro es un paro. Material en Campus Virtual y CubaWiki.
+      </div>
+    </div>
+
+    <!-- 7. HABÍA PLATA — md text -->
+    <div class="card card-habia-plata" @click="openModal('habia-plata')">
+      <div class="money-tag">$9.246M sin ejecutar</div>
+      <div class="text-big">Había plata.<br />No la usaron.</div>
+      <div class="text-sub">
+        Presupuesto disponible. Decisión política de no gastarlo.
+      </div>
+    </div>
+
+    <!-- 8. AGENCIA I+D+i — lg stat -->
+    <div class="card card-agencia" @click="openModal('agencia')">
+      <div>
+        <div class="red-tag">Agencia I+D+i</div>
+        <div class="num">↓79%</div>
+        <div class="label">
+          Solo ~$4M USD para financiar grupos de investigación en todo el país.
+          Mínimo histórico desde 2023.
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. LEY 2026 — lg quote -->
+    <div class="card card-ley" @click="openModal('ley')">
+      <div class="quote-big">
+        <em>Aprobada.</em><br /><em>Vetada.</em><br /><em>Ignorada.</em>
+      </div>
+      <div class="quote-sub">
+        La Ley de Financiamiento Universitario exige recuperar los niveles de
+        2023. El gobierno propone un presupuesto 18% por debajo. La brecha es de
+        1,3 billones de pesos.
+      </div>
+    </div>
+
+    <!-- 10. CONICET — md stat -->
+    <div class="card card-conicet" @click="openModal('conicet')">
+      <div class="eyebrow">CONICET · 2 años</div>
+      <div class="num">−1.369</div>
+      <div class="label">
+        becarios. De 11.079 a 9.710 investigadores en formación (−12,4%).
+      </div>
+    </div>
+
+    <!-- 11. EXTENSIÓN — md stat -->
+    <div class="card card-extension" @click="openModal('extension')">
+      <div class="eyebrow">Extensión universitaria</div>
+      <div class="num">$0</div>
+      <div class="label">
+        asignados en 2024 y 2026. Una función constitutiva borrada del
+        presupuesto.
+      </div>
+    </div>
+
+    <!-- 12. PRESUPUESTO POR ESTUDIANTE — lg bar chart -->
+    <div class="card card-presupuesto" @click="openModal('presupuesto')">
+      <div class="chart-header">
+        <div class="chart-title">
+          Presupuesto por estudiante<br />(base 100 = 2017)
+        </div>
+        <div class="chart-badge-val">↓54%</div>
+      </div>
+      <div class="chart-bars">
+        <div class="bar-group">
+          <div class="bar-val">100</div>
+          <div
+            class="bar"
+            style="height:120px; background:linear-gradient(180deg,#2abcb4,#1a8c86)"
+          >
+          </div>
+          <div class="bar-lbl">2017</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">95</div>
+          <div
+            class="bar"
+            style="height:114px; background:linear-gradient(180deg,#2abcb4,#1a8c86); opacity:0.8"
+          >
+          </div>
+          <div class="bar-lbl">2018</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">78</div>
+          <div
+            class="bar"
+            style="height:93px; background:linear-gradient(180deg,#768090,#5a6472)"
+          >
+          </div>
+          <div class="bar-lbl">2019</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">66</div>
+          <div
+            class="bar"
+            style="height:79px; background:linear-gradient(180deg,#d4624a,#a84836)"
+          >
+          </div>
+          <div class="bar-lbl">2020</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">62</div>
+          <div
+            class="bar"
+            style="height:74px; background:linear-gradient(180deg,#e8624a,#c04a36)"
+          >
+          </div>
+          <div class="bar-lbl">2021</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">58</div>
+          <div
+            class="bar"
+            style="height:70px; background:linear-gradient(180deg,#e8624a,#c04a36)"
+          >
+          </div>
+          <div class="bar-lbl">2022</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">55</div>
+          <div
+            class="bar"
+            style="height:66px; background:linear-gradient(180deg,#e8624a,#b03a28)"
+          >
+          </div>
+          <div class="bar-lbl">2023</div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-val">46</div>
+          <div
+            class="bar"
+            style="height:55px; background:linear-gradient(180deg,#e8624a,#7f2a1a)"
+          >
+          </div>
+          <div class="bar-lbl">2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. SALARIOS — md stat -->
+    <div class="card card-salarios" @click="openModal('salarios')">
+      <div class="eyebrow">Salarios docentes · desde 2023</div>
+      <div class="num">−26%</div>
+      <div class="label">
+        en términos reales. Destrucción salarial que atraviesa tres gobiernos.
+      </div>
+    </div>
+
+    <!-- 14. RECIBO — md stat -->
+    <div class="card card-recibo" @click="openModal('recibo')">
+      <div class="detail-tag">Recibo real · mayo 2025 · UNC · cat. 115</div>
+      <div class="num">$196k</div>
+      <div class="label">
+        netos de bolsillo. Docente universitario. 8 años de antigüedad.
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL OVERLAY -->
+  <div
+    x-show="open"
+    @click.self="closeModal()"
+    x-transition:enter="transition-opacity duration-200 ease-out"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition-opacity duration-150 ease-in"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="modal-overlay"
+    style="display:none"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div
+      class="modal"
+      @click.stop
+      data-lenis-prevent
+      x-show="open"
+      x-transition:enter="transition-[opacity,transform] duration-250 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      x-transition:enter-start="opacity-0 scale-95 translate-y-2"
+      x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+      x-transition:leave="transition-[opacity,transform] duration-150 ease-in"
+      x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+      x-transition:leave-end="opacity-0 scale-95 translate-y-2"
+    >
+      <button class="modal-close" @click="closeModal()" aria-label="Cerrar">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
+        >
+          <line
+            x1="1"
+            y1="1"
+            x2="11"
+            y2="11"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"></line>
+          <line
+            x1="11"
+            y1="1"
+            x2="1"
+            y2="11"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"></line>
+        </svg>
+      </button>
+      <div class="modal-category" x-text="item.category"></div>
+      <div class="modal-title" x-text="item.title"></div>
+      <img
+        class="modal-media"
+        :src="item.media || ''"
+        :alt="item.title"
+        x-show="item.media"
+        style="display:none"
+      />
+      <div class="modal-body" x-text="item.body"></div>
+      <div class="modal-footer">
+        <div
+          class="modal-source"
+          x-html="'<strong>Fuente:</strong> ' + (item.source || '')"
+        >
+        </div>
+        <a
+          class="modal-cta"
+          :href="item.cta?.url || '#'"
+          target="_blank"
+          rel="noopener"
+          x-text="(item.cta?.label || '') + ' →'"
+          x-show="item.cta"
+          style="display:none"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ===== GRID ===== */
+  .bento-grid {
+    display: grid;
+    width: 100%;
+    padding: 12px;
+    gap: 8px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      "situacion    situacion    situacion    situacion    situacion    situacion"
+      "actividades  actividades  materias     materias     por-que      que-podemos"
+      "actividades  actividades  materias     materias     y-estudio    habia-plata"
+      "agencia      agencia      ley          ley          conicet      extension"
+      "agencia      agencia      ley          ley          salarios     recibo"
+      "presupuesto  presupuesto  presupuesto  presupuesto  salarios     recibo";
+  }
+
+  @media (max-width: 1023px) {
+    .bento-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-areas:
+        "situacion    situacion    situacion    situacion"
+        "actividades  actividades  materias     materias"
+        "actividades  actividades  materias     materias"
+        "por-que      que-podemos  y-estudio    habia-plata"
+        "agencia      agencia      ley          ley"
+        "agencia      agencia      ley          ley"
+        "conicet      extension    salarios     recibo"
+        "presupuesto  presupuesto  presupuesto  presupuesto";
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "situacion    situacion"
+        "actividades  actividades"
+        "materias     materias"
+        "por-que      que-podemos"
+        "y-estudio    habia-plata"
+        "agencia      agencia"
+        "ley          ley"
+        "conicet      extension"
+        "salarios     recibo"
+        "presupuesto  presupuesto";
+      padding: 8px;
+    }
+  }
+
+  /* ===== BASE CARD ===== */
+  .card {
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy);
+    border: 1px solid var(--color-rule);
+    cursor: pointer;
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px) scale(1.005);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .label {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--color-mid);
+    line-height: 1.35;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-offwhite);
+    margin-bottom: 10px;
+  }
+
+  /* ===== PILLS ===== */
+  .pills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    padding: 3px 8px;
+    white-space: nowrap;
+  }
+  .pill-teal {
+    color: var(--color-teal);
+    background: rgba(42, 188, 180, 0.1);
+    border-color: rgba(42, 188, 180, 0.25);
+  }
+  .pill-coral {
+    color: var(--color-coral);
+    background: rgba(232, 98, 74, 0.1);
+    border-color: rgba(232, 98, 74, 0.25);
+  }
+
+  /* ===== 1. SITUACIÓN — coral hero ===== */
+  .card-situacion {
+    grid-area: situacion;
+    background: linear-gradient(
+      140deg,
+      var(--color-navy) 0%,
+      #8c2818 45%,
+      var(--color-coral) 100%
+    );
+    border-color: transparent;
+    padding: 28px 36px;
+    justify-content: flex-end;
+    min-height: 180px;
+  }
+  .card-situacion::after {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(232, 98, 74, 0.18) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .card-situacion .eyebrow {
+    color: rgba(240, 237, 230, 0.6);
+    margin-bottom: 12px;
+  }
+  .card-situacion .num {
+    font-size: clamp(56px, 8vw, 96px);
+    color: white;
+    margin-bottom: 10px;
+  }
+  .card-situacion .label {
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 600;
+    color: rgba(240, 237, 230, 0.88);
+    max-width: 680px;
+    line-height: 1.3;
+  }
+
+  /* ===== 2. ACTIVIDADES ===== */
+  .card-actividades {
+    grid-area: actividades;
+    background: var(--color-dark);
+    min-height: 180px;
+    justify-content: space-between;
+  }
+  .card-actividades::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(42, 188, 180, 0.07) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .date-big {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 5vw, 72px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--color-teal);
+    line-height: 1;
+  }
+  .date-label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-offwhite);
+    margin-top: 8px;
+  }
+  .date-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mid);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ===== 3. MATERIAS ===== */
+  .card-materias {
+    grid-area: materias;
+    background: var(--color-navy);
+    min-height: 180px;
+    justify-content: space-between;
+  }
+  .card-materias::after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(42, 188, 180, 0.06) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .card-materias .num {
+    font-size: clamp(44px, 4.5vw, 64px);
+    color: var(--color-teal);
+    margin-bottom: 4px;
+  }
+  .card-materias .label {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  /* ===== 4. POR QUÉ ===== */
+  .card-por-que {
+    grid-area: por-que;
+    background: var(--color-dark);
+    justify-content: space-between;
+  }
+  .category-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-teal);
+    margin-bottom: 5px;
+    letter-spacing: -0.01em;
+  }
+  .category-focus {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-mid);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  /* ===== 5. QUÉ PODEMOS HACER ===== */
+  .card-que-podemos {
+    grid-area: que-podemos;
+    background: var(--color-navy);
+    justify-content: space-between;
+  }
+  .action-heading {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-teal);
+    margin-bottom: 10px;
+  }
+  .icon-row {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .icon-item {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-offwhite);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .action-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mid);
+    margin-top: 8px;
+  }
+
+  /* ===== 6. Y EL ESTUDIO ===== */
+  .card-y-estudio {
+    grid-area: y-estudio;
+    background: var(--color-dark);
+  }
+  .text-big {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-offwhite);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .text-sub {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mid);
+    line-height: 1.4;
+  }
+
+  /* ===== 7. HABÍA PLATA ===== */
+  .card-habia-plata {
+    grid-area: habia-plata;
+    background: var(--color-navy);
+  }
+  .card-habia-plata .text-big {
+    color: var(--color-coral);
+  }
+  .money-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-coral);
+    background: rgba(232, 98, 74, 0.1);
+    border: 1px solid rgba(232, 98, 74, 0.25);
+    border-radius: 3px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+
+  /* ===== 8. AGENCIA ===== */
+  .card-agencia {
+    grid-area: agencia;
+    background: var(--color-dark);
+    min-height: 160px;
+    justify-content: space-between;
+  }
+  .card-agencia::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(232, 98, 74, 0.07) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .card-agencia .num {
+    font-size: clamp(48px, 5vw, 72px);
+    color: var(--color-coral);
+    margin-bottom: 4px;
+  }
+  .card-agencia .label {
+    font-size: 13px;
+    max-width: 300px;
+    line-height: 1.4;
+  }
+  .red-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-coral);
+    background: rgba(232, 98, 74, 0.1);
+    border: 1px solid rgba(232, 98, 74, 0.25);
+    border-radius: 3px;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+    width: fit-content;
+  }
+
+  /* ===== 9. LEY ===== */
+  .card-ley {
+    grid-area: ley;
+    background: var(--color-navy);
+    min-height: 160px;
+    justify-content: space-between;
+    padding: 24px 28px;
+  }
+  .quote-big {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 700;
+    color: var(--color-offwhite);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .quote-big em {
+    background: linear-gradient(
+      90deg,
+      var(--color-coral) 0%,
+      rgba(240, 237, 230, 0.75) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: normal;
+  }
+  .quote-sub {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-mid);
+    line-height: 1.5;
+    max-width: 320px;
+  }
+
+  /* ===== 10. CONICET ===== */
+  .card-conicet {
+    grid-area: conicet;
+    background: var(--color-dark);
+  }
+  .card-conicet .num {
+    font-size: 44px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-conicet .label {
+    font-size: 12px;
+  }
+
+  /* ===== 11. EXTENSIÓN ===== */
+  .card-extension {
+    grid-area: extension;
+    background: var(--color-navy);
+  }
+  .card-extension .num {
+    font-size: 52px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-extension .label {
+    font-size: 12px;
+  }
+
+  /* ===== 12. PRESUPUESTO ===== */
+  .card-presupuesto {
+    grid-area: presupuesto;
+    background: var(--color-dark);
+    min-height: 160px;
+    justify-content: space-between;
+    padding: 20px 22px;
+  }
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .chart-title {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-mid);
+    line-height: 1.3;
+    max-width: 200px;
+  }
+  .chart-badge-val {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-coral);
+    letter-spacing: -0.02em;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    flex: 1;
+  }
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+  .bar-val {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-mid);
+  }
+  .bar {
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+  }
+  .bar-lbl {
+    font-family: var(--font-body);
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    opacity: 0.5;
+  }
+
+  /* ===== 13. SALARIOS ===== */
+  .card-salarios {
+    grid-area: salarios;
+    background: var(--color-navy);
+  }
+  .card-salarios .num {
+    font-size: 44px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-salarios .label {
+    font-size: 12px;
+  }
+
+  /* ===== 14. RECIBO ===== */
+  .card-recibo {
+    grid-area: recibo;
+    background: var(--color-dark);
+  }
+  .card-recibo .num {
+    font-size: 40px;
+    color: var(--color-coral);
+    margin-bottom: 5px;
+  }
+  .card-recibo .label {
+    font-size: 12px;
+  }
+  .detail-tag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-mid);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-rule);
+    border-radius: 3px;
+    padding: 3px 9px;
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 38, 54, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+  }
+
+  .modal {
+    background: var(--color-navy);
+    border-radius: 8px;
+    max-width: 620px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    position: relative;
+    padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      0 16px 48px rgba(0, 0, 0, 0.5);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-rule) transparent;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-rule);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-mid);
+    font-size: 16px;
+    line-height: 1;
+    transition: background 0.15s;
+  }
+  .modal-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--color-offwhite);
+  }
+
+  .modal-category {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-mid);
+    margin-bottom: 10px;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-offwhite);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    padding-right: 40px;
+  }
+
+  .modal-media {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: block;
+    background: var(--color-dark);
+  }
+
+  .modal-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: rgba(240, 237, 230, 0.88);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .modal-footer {
+    border-top: 1px solid var(--color-rule);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .modal-source {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-mid);
+    opacity: 0.6;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .modal-source strong {
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  .modal-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-teal);
+    background: rgba(42, 188, 180, 0.1);
+    border: 1px solid rgba(42, 188, 180, 0.25);
+    border-radius: 3px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .modal-cta:hover {
+    background: rgba(42, 188, 180, 0.18);
+  }
+</style>
+
+<script>
+  const ITEMS: Record<
+    string,
+    {
+      category: string;
+      title: string;
+      body: string;
+      media: string | null;
+      source: string;
+      cta: { label: string; url: string } | null;
+    }
+  > = {
+    situacion: {
+      category: "Contexto",
+      title: "La Situación",
+      body: "El presupuesto anual real está demasiado bajo y no se cumple la ley de financiamiento universitario. El presupuesto para investigación cayó un 95%. Los docentes están al límite — algunos consideraron irse al sector privado. Los fondos no son solo para sueldos: financian carreras y materiales. El Departamento de Computación es el más afectado.",
+      media: null,
+      source: "Reunión estudiantil FCEyN/DC",
+      cta: null,
+    },
+    actividades: {
+      category: "Acción",
+      title: "Actividades",
+      body: "Stand de ciencias en Pabellón 2 con clases públicas. Jornada de lucha el 10/4 en defensa de la ciencia. Jornadas de vinculación docente-alumno. Sala Noriega disponible para estudiar y conectarse. Clases públicas frente a empresas de tecnología. Campaña Sin Ley No Se Puede. Seguí las novedades por IG, Telegram, WhatsApp y mail.",
+      media: null,
+      source: "Reunión estudiantil FCEyN/DC",
+      cta: { label: "Escribinos", url: "mailto:comcom@dc.uba.ar" },
+    },
+    materias: {
+      category: "Info",
+      title: "¿Qué materias adhirieron?",
+      body: "La adhesión cubre todas las áreas del Departamento de Computación: desde materias de primer año hasta optativas avanzadas y seminarios. No es un paro parcial. Algoritmos, Teoría, Datos, Ingeniería, Sistemas y Optativas — todas las áreas están representadas.",
+      media: null,
+      source: "Departamento de Computación, FCEyN UBA",
+      cta: null,
+    },
+    "por-que": {
+      category: "Contexto",
+      title: "¿Por qué te afecta?",
+      body: "Estas materias son hoy altamente demandadas en el mercado. En FCEyN las dictan docentes con años de experiencia e investigación, no instructores de cursos express. Si se van, perdemos acceso a formación de nivel real en áreas clave de la industria: Redes Neuronales, Verificación formal, Programación Cuántica.",
+      media: null,
+      source: "Reunión estudiantil FCEyN/DC",
+      cta: null,
+    },
+    "que-podemos": {
+      category: "Acción",
+      title: "¿Qué podemos hacer?",
+      body: "La clave es mantenerse conectados: con los docentes y entre compañeros. Compartir información válida es una forma concreta de ayudar. En el GitHub de Rodrigo Quiroga hay gráficos y datos sobre la situación listos para difundir.",
+      media: null,
+      source: "Reunión estudiantil FCEyN/DC",
+      cta: { label: "Ver gráficos", url: "https://github.com/rquiroga7" },
+    },
+    "y-estudio": {
+      category: "Info",
+      title: "¿Y el estudio?",
+      body: "Podés aprovechar para repasar materias de cuatrimestres anteriores, pero no esperés ser evaluado por todo eso. No hay consenso todavía sobre cómo prepararse. Los temas no se van a recuperar a las corridas. El material estará disponible en Campus Virtual y CubaWiki. No hay fecha de vuelta hasta que se resuelva.",
+      media: null,
+      source: "Reunión estudiantil FCEyN/DC",
+      cta: { label: "CubaWiki", url: "https://cubawiki.com.ar" },
+    },
+    "habia-plata": {
+      category: "Contexto",
+      title: "Había plata. No la usaron.",
+      body: "En 2025 la SICyT tenía presupuestados 24.270 millones para ciencia y tecnología y devengó solamente 15.024 millones. Los 9.246 millones restantes existían — fue una decisión política no gastarlos. No es un problema de recursos: es un ataque ideológico. Se recorta incluso a sectores que generaban retorno económico, mientras los impuestos subsidian empresas privadas. Sin industrialización ni ruta de investigación a producción, el Estado eligió no financiar su propia ciencia.",
+      media:
+        "https://jorgealiaga.com.ar/wp-content/uploads/2026/02/SICyT_1-1024x566.jpg",
+      source: "Jorge Aliaga, jorgealiaga.com.ar (17/2/26)",
+      cta: null,
+    },
+    agencia: {
+      category: "Contexto",
+      title: "Agencia I+D+i: mínimo histórico",
+      body: "La Agencia I+D+i perdió el 79% de su presupuesto real desde 2023. De los 12.775 millones devengados en 2025, 7.150 millones fueron a becas ya otorgadas: apenas 5.625 millones financiaron el funcionamiento de grupos de investigación — el equivalente a unos 4 millones de dólares. Las nuevas convocatorias priorizan productos para empresas privadas, desfinanciando la investigación básica.",
+      media:
+        "https://jorgealiaga.com.ar/wp-content/uploads/2026/02/Agencia_3.jpg",
+      source: "Jorge Aliaga, jorgealiaga.com.ar (17/2/26)",
+      cta: null,
+    },
+    ley: {
+      category: "Contexto",
+      title: "2026: el gobierno incumple la ley",
+      body: "La Ley de Financiamiento Universitario exige recuperar los niveles presupuestarios reales de 2023 (~7,2 billones de pesos). El gobierno propone tres aumentos del 4%, llegando a ~5,9 billones — por debajo incluso del presupuesto universitario durante la pandemia (~6,5 billones). La brecha es de 1,3 billones de pesos. La ley fue aprobada, vetada, y el gobierno sigue sin cumplirla.",
+      media:
+        "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/proyeccion_historica_2017_2026_stacked.png",
+      source: "Dr. Rodrigo Quiroga, INFIQC-CONICET / UNC (13/2/26)",
+      cta: null,
+    },
+    conicet: {
+      category: "Contexto",
+      title: "CONICET: menos becas, menos futuro",
+      body: "En dos años el número de becarios del CONICET cayó de 11.079 a 9.710 personas (-12,4%). Las cohortes que terminan son más grandes que las que empiezan: se está achicando activamente la base de investigadores del país. El ajuste salarial y el congelamiento de estipendios desde febrero de 2024 profundizan la salida.",
+      media:
+        "https://jorgealiaga.com.ar/wp-content/uploads/2026/02/CONICET_3.jpg",
+      source: "Jorge Aliaga, jorgealiaga.com.ar (17/2/26)",
+      cta: null,
+    },
+    extension: {
+      category: "Contexto",
+      title: "Extensión universitaria: presupuesto cero",
+      body: "La extensión es una de las tres funciones sustantivas de las universidades públicas, junto a la docencia y la investigación. En 2024 el gobierno nacional asignó $0 para extensión universitaria. En 2025, $49 millones (prácticamente nada). En 2026, $0 nuevamente. Una función constitutiva de la universidad pública, borrada del presupuesto.",
+      media:
+        "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/presupuesto_anual_extension_2017-2026.png",
+      source: "Dr. Rodrigo Quiroga, INFIQC-CONICET / UNC (13/2/26)",
+      cta: null,
+    },
+    presupuesto: {
+      category: "Contexto",
+      title: "Presupuesto por estudiante: la mitad",
+      body: "Ajustando el presupuesto universitario por inflación y por la cantidad de estudiantes, tomando 2017 como base 100, en 2025 las universidades reciben $46 de cada $100 que recibían. No es que hay menos estudiantes — es que el Estado decidió financiar menos a cada uno. Con ese presupuesto, sostener la calidad académica es imposible.",
+      media:
+        "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/presupuesto_anual_porest_base100__2017-2025.png",
+      source: "Dr. Rodrigo Quiroga, INFIQC-CONICET / UNC (13/2/26)",
+      cta: {
+        label: "Ver repositorio",
+        url: "https://github.com/rquiroga7/presupuesto_Universitario",
+      },
+    },
+    salarios: {
+      category: "Contexto",
+      title: "Salarios docentes: décadas de caída",
+      body: "Desde 2023, los salarios universitarios docentes y no-docentes perdieron un 26% en términos reales. Tomando 2015 como base, los investigadores CONICET cobran hoy la mitad de lo que cobraban. Un profesor asistente con dedicación exclusiva necesitaría un aumento del +50% para que el Estado cumpla con la Ley de Financiamiento Universitario — exactamente lo que ganaba en noviembre de 2023. Las paritarias de 0–1% de fines de 2024 y 2025 profundizaron la caída. Muchos docentes consideran irse al sector privado.",
+      media:
+        "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/presupuesto_anual_salarial_2017-2026.png",
+      source: "Dr. Rodrigo Quiroga, INFIQC-CONICET / UNC (13/2/26)",
+      cta: null,
+    },
+    recibo: {
+      category: "Contexto",
+      title: "El recibo habla solo",
+      body: "Este es el recibo de sueldo real de un docente universitario de la UNC, mayo de 2025, categoría 115 con 8 años de antigüedad: $196.872 netos. No es una proyección ni un promedio — es lo que cobró. Con ese sueldo, se espera que forme profesionales, investigue, y no se vaya al sector privado.",
+      media: null,
+      source:
+        "Recibo de sueldo UNC, publicado en github.com/rquiroga7/salarios_CONICET (mayo 2025)",
+      cta: null,
+    },
+  };
+
+  // Register Alpine component
+  document.addEventListener("alpine:init", () => {
+    // @ts-ignore
+    Alpine.data("bentoModal", () => ({
+      open: false,
+      item: {} as (typeof ITEMS)[string],
+      openModal(id: string) {
+        this.item = ITEMS[id] || {};
+        this.open = true;
+        document.body.style.overflow = "hidden";
+        (window as any).lenis?.stop();
+      },
+      closeModal() {
+        this.open = false;
+        document.body.style.overflow = "";
+        (window as any).lenis?.start();
+      },
+    }));
+  });
+</script>
