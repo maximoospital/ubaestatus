@@ -16,8 +16,11 @@ const data = Astro.props;
   >
     <h1
       id="header-logo"
-      class="text-h3 md:text-h2 text-offwhite opacity-0 transition-opacity duration-300"
+      class="text-h3 md:text-h2 text-offwhite flex flex-row items-center gap-2 leading-none opacity-0 transition-opacity duration-300"
     >
+      <span
+        class="bg-teal block h-[0.8em] w-1 shrink-0 translate-y-[-0.05em] rounded-full"
+      ></span>
       {data.title}
     </h1>
     <nav class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
