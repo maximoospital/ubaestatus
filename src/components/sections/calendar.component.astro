@@ -1,0 +1,120 @@
+---
+export interface Props {
+    title?: string;
+    subtitle?: string;
+    url?: string;
+}
+
+const { title = "Agenda de Eventos", subtitle = "", url = "" } = Astro.props;
+const apiUrl = `${url}/api/events`;
+const jsUrl = `${url}/gancio-events.es.js`;
+
+let eventIds: number[] = [];
+
+if (url) {
+    try {
+        const res = await fetch(apiUrl);
+        if (res.ok) {
+            const events: { id: number }[] = await res.json();
+            eventIds = events.map((e) => e.id);
+        }
+    } catch (error) {
+        console.log("Error de calendario:" + error);
+    }
+}
+---
+
+<!-- Gancio web component loader -->
+<script is:inline define:vars={{ jsUrl }}>
+    if (jsUrl) {
+        const s = document.createElement("script");
+        s.src = jsUrl;
+        document.head.appendChild(s);
+    }
+</script>
+
+<div class="px-6 py-2 sm:px-8 lg:px-12">
+    <h2 class="text-display text-dark text-4xl md:text-5xl">{title}</h2>
+    <p class="font-body text-dark mt-2 text-base md:text-lg">{subtitle}</p>
+
+    <div class="swiper-area mt-8">
+        <!-- Arrows outside the clip so they don't overlap slides -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <div class="swiper-clip">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    {
+                        eventIds.map((id) => (
+                            <div class="swiper-slide">
+                                <gancio-event baseurl={url} id={String(id)} />
+                            </div>
+                        ))
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <p class="font-body text-dark mt-2 text-right text-base md:text-lg">
+        Agenda cortesia de: <a href={url} class="text-teal hover:underline"
+            ><b>Cartelera Inexactas</b></a
+        >
+    </p>
+</div>
+
+<script>
+    // inyectamos estilos al shadow dom de gancio event para customizarlo nt
+    customElements.whenDefined("gancio-event").then(() => {
+        const injectShadowStyle = (el: Element) => {
+            if (!(el instanceof HTMLElement) || !el.shadowRoot) return;
+            if (el.shadowRoot.querySelector("style[data-no-shadow]")) return;
+            const style = document.createElement("style");
+            style.dataset.noShadow = "";
+            style.textContent =
+                'a { box-shadow: none !important; font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif; background-color: #243347 !important; color: #f0ede6 !important; } .place { color: #2abcb4 !important; }';
+            el.shadowRoot.appendChild(style);
+        };
+
+        document.querySelectorAll("gancio-event").forEach(injectShadowStyle);
+
+        const observer = new MutationObserver((mutations) => {
+            for (const m of mutations)
+                m.addedNodes.forEach((n) => {
+                    if (n instanceof Element) {
+                        n.querySelectorAll("gancio-event").forEach(
+                            injectShadowStyle,
+                        );
+                        if (n.matches("gancio-event")) injectShadowStyle(n);
+                    }
+                });
+        });
+
+        observer.observe(document.querySelector(".swiper-wrapper")!, {
+            childList: true,
+            subtree: true,
+        });
+    });
+
+    import Swiper from "swiper/bundle";
+
+    new Swiper(".swiper", {
+        direction: "horizontal",
+        loop: true,
+        grabCursor: true,
+        keyboard: true,
+        spaceBetween: 16,
+        breakpoints: {
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+        },
+        pagination: { el: ".swiper-pagination", clickable: true },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>

@@ -18,15 +18,10 @@ const {
 
 <section
   id={id}
-  class:list={["w-full", !noPadding && "py-16 md:py-24", className]}
+  class:list={["w-full", !noPadding && "py-8 md:py-4", className]}
   {...rest}
 >
-  <div
-    class:list={[
-      "mx-auto h-full w-full",
-      fullWidth ? "" : "max-w-7xl px-4 sm:px-6 lg:px-8",
-    ]}
-  >
+  <div class:list={["mx-auto h-full w-full"]}>
     <slot />
   </div>
 </section>

@@ -1,101 +1,109 @@
-<div id="flip"></div>
+---
+interface Props {
+  timer?: "active" | "paused";
+  date?: string;
+}
+const { timer = "active", date } = Astro.props;
+---
+
+<div id="flip" data-timer={timer} data-date={date}></div>
 
 <style>
-    /* Flip board backgrounds → teal */
-    #flip :global(.flip-clock__piece),
-    #flip :global(.flip-clock__card),
-    #flip :global(.flip-clock-card .flip-clock-card-item-inner .top),
-    #flip :global(.flip-clock-card .flip-clock-card-item-inner .top::before),
-    #flip :global(.flip-clock-card .flip-clock-card-item-inner .top::after),
-    #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom),
-    #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom::before),
-    #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom::after) {
-        background-color: #f0ede6 !important;
-    }
+  /* Flip board backgrounds → teal */
+  #flip :global(.flip-clock__piece),
+  #flip :global(.flip-clock__card),
+  #flip :global(.flip-clock-card .flip-clock-card-item-inner .top),
+  #flip :global(.flip-clock-card .flip-clock-card-item-inner .top::before),
+  #flip :global(.flip-clock-card .flip-clock-card-item-inner .top::after),
+  #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom),
+  #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom::before),
+  #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom::after) {
+    background-color: #f0ede6 !important;
+  }
 
-    /* All text → offwhite */
-    #flip :global(*) {
-        color: black;
-    }
+  /* All text → offwhite */
+  #flip :global(*) {
+    color: black;
+  }
 
-    #flip :global(.flip-clock-divider .flip-clock-divider-inner) {
-        color: #f0ede6 !important;
-    }
+  #flip :global(.flip-clock-divider .flip-clock-divider-inner) {
+    color: #f0ede6 !important;
+  }
 
-    /* Dividers (the colon separators) */
-    #flip :global(.flip-clock__divider .flip-clock__dot) {
-        background-color: #f0ede6 !important;
-    }
+  /* Dividers (the colon separators) */
+  #flip :global(.flip-clock__divider .flip-clock__dot) {
+    background-color: #f0ede6 !important;
+  }
 
-    /* Align group row to top so dividers don't drift down with label text */
-    #flip :global(.flip-clock-group-items) {
-        align-items: flex-start !important;
-    }
+  /* Align group row to top so dividers don't drift down with label text */
+  #flip :global(.flip-clock-group-items) {
+    align-items: flex-start !important;
+  }
 
-    /* Re-center the divider dots relative to the card face only */
-    #flip :global(.flip-clock__divider) {
-        display: flex !important;
-        align-items: center !important;
-        align-self: auto !important;
-        padding-bottom: 2.25rem !important; /* roughly matches label height */
-    }
+  /* Re-center the divider dots relative to the card face only */
+  #flip :global(.flip-clock__divider) {
+    display: flex !important;
+    align-items: center !important;
+    align-self: auto !important;
+    padding-bottom: 2.25rem !important; /* roughly matches label height */
+  }
 
-    /* ── Responsive card sizing ── */
-    /* Divider text – shared label styles */
-    #flip
-        :global(
-            .flip-clock-group
-                .flip-clock-group-items
-                .flip-clock-group:nth-child(1)::after
-        ) {
-        content: "dias";
-        font-size: clamp(0.65rem, 1.2vw, 0.75rem);
-        margin-top: 0.5rem;
-        text-align: center;
-        text-transform: uppercase;
-        font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
-        color: #f0ede6;
-    }
-    #flip
-        :global(
-            .flip-clock-group
-                .flip-clock-group-items
-                .flip-clock-group:nth-child(3)::after
-        ) {
-        content: "horas";
-        font-size: clamp(0.65rem, 1.2vw, 0.75rem);
-        text-align: center;
-        margin-top: 0.5rem;
-        text-transform: uppercase;
-        font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
-        color: #f0ede6;
-    }
-    #flip
-        :global(
-            .flip-clock-group
-                .flip-clock-group-items
-                .flip-clock-group:nth-child(5)::after
-        ) {
-        content: "minutos";
-        font-size: clamp(0.65rem, 1.2vw, 0.75rem);
-        margin-top: 0.5rem;
-        text-align: center;
-        text-transform: uppercase;
-        font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
-        color: #f0ede6;
-    }
-    #flip
-        :global(
-            .flip-clock-group
-                .flip-clock-group-items
-                .flip-clock-group:nth-child(7)::after
-        ) {
-        content: "segundos";
-        text-transform: uppercase;
-        text-align: center;
-        margin-top: 0.5rem;
-        font-size: clamp(0.65rem, 1.2vw, 0.75rem);
-        font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
-        color: #f0ede6;
-    }
+  /* ── Responsive card sizing ── */
+  /* Divider text – shared label styles */
+  #flip
+    :global(
+      .flip-clock-group
+        .flip-clock-group-items
+        .flip-clock-group:nth-child(1)::after
+    ) {
+    content: "dias";
+    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    margin-top: 0.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+    color: #f0ede6;
+  }
+  #flip
+    :global(
+      .flip-clock-group
+        .flip-clock-group-items
+        .flip-clock-group:nth-child(3)::after
+    ) {
+    content: "horas";
+    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    text-align: center;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+    color: #f0ede6;
+  }
+  #flip
+    :global(
+      .flip-clock-group
+        .flip-clock-group-items
+        .flip-clock-group:nth-child(5)::after
+    ) {
+    content: "minutos";
+    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    margin-top: 0.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+    color: #f0ede6;
+  }
+  #flip
+    :global(
+      .flip-clock-group
+        .flip-clock-group-items
+        .flip-clock-group:nth-child(7)::after
+    ) {
+    content: "segundos";
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+    color: #f0ede6;
+  }
 </style>

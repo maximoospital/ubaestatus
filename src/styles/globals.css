@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Sora:wght@600;700;800;900&display=swap");
 @import "tailwindcss";
 @import "toastify-js/src/toastify.css";
-
+@import "swiper/css/bundle";
 
 @theme {
   /* Paleta basada en el sitio de DC */
@@ -205,7 +205,7 @@
       box-shadow 0.3s ease;
   }
 
-    .scroll-down-dude:before,
+  .scroll-down-dude:before,
   .scroll-down-dude:after {
     content: "";
     display: block;
@@ -246,7 +246,7 @@
       opacity: 1;
     }
   }
-  
+
   .instagram-card {
     border-color: var(--color-rule-dark);
   }
@@ -256,4 +256,68 @@
   .instagram-card:hover .hover-target {
     color: var(--hover-color) !important;
   }
+
+
+    .swiper-area {
+        position: relative;
+        --swiper-navigation-color: var(--color-teal);
+        --swiper-pagination-color: var(--color-teal);
+    }
+
+    /* Fade overlays on the inner edges of the clip margins */
+    .swiper-area::before,
+    .swiper-area::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 2.75rem; /* don't cover the pagination bar */
+        width: 4rem;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .swiper-clip {
+        overflow: hidden;
+        margin: 0 3.25rem;
+    }
+
+    .swiper {
+        width: 100%;
+        padding-bottom: 2.75rem !important;
+    }
+
+    .swiper-wrapper {
+        align-items: stretch;
+    }
+
+    .swiper-slide {
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .swiper-slide gancio-event {
+        width: 100%;
+        flex: 1;
+    }
+
+    /* Arrows anchored to .swiper-area, vertically centered over the slides */
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: calc(
+            50% - 1.375rem
+        ); /* half of swiper height minus half of pagination bar */
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+
+    .swiper-button-prev {
+        left: 0;
+    }
+
+    .swiper-button-next {
+        right: 0;
+    }
 }
