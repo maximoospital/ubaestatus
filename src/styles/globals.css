@@ -67,6 +67,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; /* Firefox */
     font-smoothing: antialiased; /* Standard property */
+    overflow-x: clip; /* prevent stray elements from causing horizontal scroll */
   }
 }
 
