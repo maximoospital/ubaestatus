@@ -90,6 +90,18 @@ if (header && inner && logo) {
     });
 }
 
+// Hero CTA smooth scroll
+const heroCta = document.getElementById("hero-cta");
+if (heroCta) {
+    heroCta.addEventListener("click", (e) => {
+        e.preventDefault();
+        const section = document.getElementById("bento");
+        if (section) {
+            lenis.scrollTo(section);
+        }
+    });
+}
+
 // modal Share Toast Notifications
 const copyButton = document.getElementById("copy-share-url");
 const shareInput = document.getElementById("share-url");
