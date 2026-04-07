@@ -24,7 +24,7 @@ if (url) {
 }
 ---
 
-<!-- Gancio web component loader -->
+<!-- Gancio -->
 <script is:inline define:vars={{ jsUrl }}>
     if (jsUrl) {
         const s = document.createElement("script");
@@ -38,7 +38,6 @@ if (url) {
     <p class="font-body text-dark mt-2 text-base md:text-lg">{subtitle}</p>
 
     <div class="swiper-area mt-8">
-        <!-- Arrows outside the clip so they don't overlap slides -->
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
 

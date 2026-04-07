@@ -22,11 +22,19 @@ const {
 };
 ---
 
-<div class="relative flex w-full flex-col items-start px-6 py-12 md:py-20 lg:py-32 lg:px-8">
+<div
+    class="relative flex w-full flex-col items-start px-6 py-12 md:py-20 lg:px-8 lg:py-32"
+>
     <div class="mb-12 text-left">
-        <h2 class="text-display text-2xl sm:text-3xl md:text-4xl text-offwhite">{title}</h2>
-        <h2 class="text-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-1 text-black">{subtitle}</h2>
-        <p class="text-h3 text-base sm:text-lg text-offwhite mt-2 font-normal">
+        <h2 class="text-display text-offwhite text-2xl sm:text-3xl md:text-4xl">
+            {title}
+        </h2>
+        <h2
+            class="text-display mt-1 text-4xl text-black sm:text-5xl md:text-6xl lg:text-7xl"
+        >
+            {subtitle}
+        </h2>
+        <p class="text-h3 text-offwhite mt-2 text-base font-normal sm:text-lg">
             {description}
         </p>
     </div>

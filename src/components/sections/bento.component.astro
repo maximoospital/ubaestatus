@@ -1,5 +1,4 @@
 ---
-// ─── Props ────────────────────────────────────────────────────────────────────
 import type { BentoCard } from "../../shared/bento.types";
 
 export interface Props {
@@ -8,7 +7,6 @@ export interface Props {
 
 const { cards } = Astro.props;
 
-// Build the ITEMS map for Alpine from card data
 const items = Object.fromEntries(
   cards.map((c) => [
     c.id,
@@ -233,7 +231,7 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
     }
   </div>
 
-  <!-- MODAL OVERLAY -->
+  <!-- MODAL -->
   <div
     x-show="open"
     @click.self="closeModal()"
@@ -320,7 +318,7 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
 <script define:vars={{ items }}>
   const ITEMS = items;
 
-  // Register Alpine component
+  // Alpine
   document.addEventListener("alpine:init", () => {
     // @ts-ignore
     Alpine.data("bentoModal", () => ({
