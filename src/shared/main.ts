@@ -6,6 +6,8 @@ import { scroll } from "motion";
 const lenis = new Lenis({
   autoRaf: true,
 });
+// Expose globally so Alpine components can pause/resume scroll
+(window as any).lenis = lenis;
 
 // Interacciones Header
 const header = document.getElementById("header-bar");
