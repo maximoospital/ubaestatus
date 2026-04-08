@@ -17,6 +17,7 @@ const items = Object.fromEntries(
       media: c.modal.media ?? null,
       source: c.modal.source ?? "",
       cta: c.modal.cta ?? null,
+      ctas: c.modal.ctas ?? null,
     },
   ]),
 );
@@ -306,8 +307,23 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
           target="_blank"
           rel="noopener"
           x-text="(item.cta?.label || '') + ' →'"
-          x-show="item.cta"
+          x-show="item.cta && !item.ctas"
           style="display:none"></a>
+        <div
+          class="modal-ctas"
+          x-show="item.ctas"
+          style="display:none"
+        >
+          <template x-for="link in (item.ctas || [])" :key="link.url">
+            <a
+              class="modal-cta"
+              :href="link.url"
+              target="_blank"
+              rel="noopener"
+              x-text="link.label + ' →'"
+            ></a>
+          </template>
+        </div>
       </div>
     </div>
   </div>

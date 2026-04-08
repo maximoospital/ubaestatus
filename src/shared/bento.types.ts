@@ -12,6 +12,7 @@ export interface Modal {
   source?: string;
   media?: string;
   cta?: { label: string; url: string };
+  ctas?: { label: string; url: string }[];
 }
 
 export interface BarDatum {

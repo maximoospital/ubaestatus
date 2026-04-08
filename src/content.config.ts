@@ -19,6 +19,14 @@ const modalSchema = z.object({
       url: z.string(),
     })
     .optional(),
+  ctas: z
+    .array(
+      z.object({
+        label: z.string(),
+        url: z.string(),
+      })
+    )
+    .optional(),
 });
 
 const bentoCardSchema = z.discriminatedUnion("type", [
