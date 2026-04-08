@@ -6,6 +6,8 @@ import icon from "astro-icon";
 
 import alpinejs from "@astrojs/alpinejs";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://ubaestatus.mospit.al",
@@ -14,5 +16,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [icon(), alpinejs()],
+  integrations: [icon(), alpinejs(), sitemap()],
 });
