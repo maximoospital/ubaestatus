@@ -1,13 +1,12 @@
 ---
-import { Icon } from "astro-icon/components";
-
 interface responsableProfile {
     name: string;
-    description: string;
+    description?: string;
     party: string;
     role: string;
     email: string;
     emailLabel?: string;
+    group: string;
 }
 
 const {
@@ -21,12 +20,25 @@ const {
     description?: string;
     responsableProfile?: responsableProfile[];
 };
+
+const profilesJson = JSON.stringify(responsableProfile);
+
+const filterGroups = [
+    { key: "all",       label: "Todos" },
+    { key: "LLA",       label: "La Libertad Avanza" },
+    { key: "PRO",       label: "PRO" },
+    { key: "UCR",       label: "UCR" },
+    { key: "UP",        label: "Oposición" },
+    { key: "Senado",    label: "Senado" },
+    { key: "Ejecutivo", label: "Ejecutivo" },
+];
 ---
 
 <div
     class="relative flex w-full flex-col items-start px-6 py-8 lg:px-8"
+    x-data="actionFilter()"
 >
-    <div class="mb-12 text-left">
+    <div class="mb-8 text-left">
         <h2 class="text-display text-offwhite text-2xl sm:text-3xl md:text-4xl">
             {title}
         </h2>
@@ -40,34 +52,71 @@ const {
         </p>
     </div>
 
+    <div class="mb-6 flex flex-wrap gap-2">
+        {filterGroups.map(({ key, label }) => (
+            <button
+                @click={`setFilter('${key}')`}
+                class="cursor-pointer border px-4 py-1.5 text-sm font-medium transition-colors"
+                :class={`filter === '${key}' ? 'bg-black text-offwhite border-black' : 'border-black/30 bg-transparent text-black hover:border-black'`}
+            >
+                {label} <span x-text={`'(' + count('${key}') + ')'`} class="opacity-60 text-xs"></span>
+            </button>
+        ))}
+    </div>
+
     <div class="grid w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {
-            responsableProfile.map((profile) => (
-                <a
-                    href={profile.email}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="instagram-card bg-offwhite group flex flex-col justify-between border px-8 py-6 transition-colors gap-4"
-                >
-                    <div class="flex flex-col items-start text-left gap-1">
-                        <span class="text-display text-2xl font-bold text-black leading-tight">
-                            {profile.name}
-                        </span>
-                        <span class="text-label text-xs tracking-widest text-black/50 uppercase">
-                            {profile.role} · {profile.party}
-                        </span>
-                    </div>
-                    <div class="flex items-center justify-between gap-2">
-                        <span class="hover-target text-h3 text-navy text-sm underline underline-offset-2 transition-colors break-all">
-                            {profile.emailLabel ?? profile.email.replace("mailto:", "")}
-                        </span>
-                        <Icon
-                            name="mdi:email"
-                            class="hover-target text-mid h-5 w-5 shrink-0 transition-colors"
-                        />
-                    </div>
-                </a>
-            ))
-        }
+        <template x-for="profile in filteredProfiles" :key="profile.email">
+            <a
+                :href="profile.email"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="instagram-card bg-offwhite group flex flex-col justify-between border px-8 py-6 transition-colors gap-4"
+            >
+                <div class="flex flex-col items-start text-left gap-1">
+                    <span
+                        class="text-display text-2xl font-bold text-black leading-tight"
+                        x-text="profile.name"
+                    ></span>
+                    <span
+                        class="text-label text-xs tracking-widest text-black/50 uppercase"
+                        x-text="profile.role + ' · ' + profile.party"
+                    ></span>
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                    <span
+                        class="hover-target text-h3 text-navy text-sm underline underline-offset-2 transition-colors break-all"
+                        x-text="profile.emailLabel || profile.email.replace('mailto:', '')"
+                    ></span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        class="hover-target text-mid h-5 w-5 shrink-0 fill-current transition-colors"
+                        aria-hidden="true"
+                    >
+                        <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
+                    </svg>
+                </div>
+            </a>
+        </template>
     </div>
 </div>
+
+<script define:vars={{ profilesJson }}>
+    document.addEventListener("alpine:init", () => {
+        Alpine.data("actionFilter", () => ({
+            filter: "LLA",
+            profiles: JSON.parse(profilesJson),
+            get filteredProfiles() {
+                if (this.filter === "all") return this.profiles;
+                return this.profiles.filter((p) => p.group === this.filter);
+            },
+            count(key) {
+                if (key === "all") return this.profiles.length;
+                return this.profiles.filter((p) => p.group === key).length;
+            },
+            setFilter(g) {
+                this.filter = g;
+            },
+        }));
+    });
+</script>
