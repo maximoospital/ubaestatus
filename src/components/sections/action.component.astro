@@ -7,6 +7,7 @@ interface responsableProfile {
     party: string;
     role: string;
     email: string;
+    emailLabel?: string;
 }
 
 const {
@@ -46,20 +47,25 @@ const {
                     href={profile.email}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="instagram-card bg-offwhite group flex items-center justify-between border px-8 py-6 transition-colors"
+                    class="instagram-card bg-offwhite group flex flex-col justify-between border px-8 py-6 transition-colors gap-4"
                 >
-                    <div class="flex flex-col items-start text-left">
-                        <span class="text-label mb-1 tracking-widest text-black">
+                    <div class="flex flex-col items-start text-left gap-1">
+                        <span class="text-display text-2xl font-bold text-black leading-tight">
                             {profile.name}
                         </span>
-                        <span class="hover-target text-h3 text-navy transition-colors">
-                            {profile.description}
+                        <span class="text-label text-xs tracking-widest text-black/50 uppercase">
+                            {profile.role} · {profile.party}
                         </span>
                     </div>
-                    <Icon
-                        name="mdi:email"
-                        class="hover-target text-mid h-6 w-6 transition-colors"
-                    />
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="hover-target text-h3 text-navy text-sm underline underline-offset-2 transition-colors break-all">
+                            {profile.emailLabel ?? profile.email.replace("mailto:", "")}
+                        </span>
+                        <Icon
+                            name="mdi:email"
+                            class="hover-target text-mid h-5 w-5 shrink-0 transition-colors"
+                        />
+                    </div>
                 </a>
             ))
         }

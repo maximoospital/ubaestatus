@@ -1096,6 +1096,11 @@
   .modal-cta:hover {
     background: rgba(42, 188, 180, 0.18);
   }
+  .modal-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 }
 
   
