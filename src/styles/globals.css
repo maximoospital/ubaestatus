@@ -540,7 +540,7 @@
       var(--color-coral) 100%
     );
     border-color: transparent;
-    padding: 28px 36px;
+    padding: 28px 20px;
     justify-content: flex-end;
     min-height: 180px;
   }
@@ -564,7 +564,7 @@
     margin-bottom: 12px;
   }
   .card-situacion .num {
-    font-size: clamp(56px, 8vw, 76px);
+    font-size: clamp(34px, 8vw, 76px);
     color: white;
     margin-bottom: 10px;
   }
@@ -717,7 +717,7 @@
   }
   .text-big {
     font-family: var(--font-display);
-    font-size: 24px;
+    font-size: clamp(16px, 2vw, 24px);
     font-weight: 700;
     color: var(--color-offwhite);
     line-height: 1.15;
@@ -839,7 +839,7 @@
     background: var(--color-dark);
   }
   .card-conicet .num {
-    font-size: 44px;
+    font-size: clamp(34px, 4.5vw, 44px);
     color: var(--color-coral);
     margin-bottom: 5px;
   }
