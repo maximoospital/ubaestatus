@@ -486,7 +486,6 @@
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
-    font-size: clamp(56px,8vw,76px);
   }
   .label {
     font-family: var(--font-body);
@@ -565,7 +564,7 @@
     margin-bottom: 12px;
   }
   .card-situacion .num {
-    font-size: clamp(56px, 8vw, 96px);
+    font-size: clamp(56px, 8vw, 76px);
     color: white;
     margin-bottom: 10px;
   }
