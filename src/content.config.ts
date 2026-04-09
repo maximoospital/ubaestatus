@@ -138,8 +138,7 @@ const bentoCardSchema = z.discriminatedUnion("type", [
         year: z.string(),
         value: z.number(),
         heightPx: z.number(),
-        gradientFrom: z.string(),
-        gradientTo: z.string(),
+        color: z.string(),
         opacity: z.number().optional(),
       })
     ),

@@ -200,50 +200,42 @@ bento:
         - year: "2017"
           value: 100
           heightPx: 120
-          gradientFrom: "#2abcb4"
-          gradientTo: "#1a8c86"
+          color: "#2abcb4"
           opacity: 1
         - year: "2018"
           value: 95
           heightPx: 114
-          gradientFrom: "#2abcb4"
-          gradientTo: "#1a8c86"
+          color: "#2abcb4"
           opacity: 0.8
         - year: "2019"
           value: 78
           heightPx: 93
-          gradientFrom: "#768090"
-          gradientTo: "#5a6472"
+          color: "#768090"
           opacity: 1
         - year: "2020"
           value: 66
           heightPx: 79
-          gradientFrom: "#d4624a"
-          gradientTo: "#a84836"
+          color: "#e8624a"
           opacity: 1
         - year: "2021"
           value: 62
           heightPx: 74
-          gradientFrom: "#e8624a"
-          gradientTo: "#c04a36"
+          color: "#e8624a"
           opacity: 1
         - year: "2022"
           value: 58
           heightPx: 70
-          gradientFrom: "#e8624a"
-          gradientTo: "#c04a36"
+          color: "#e8624a"
           opacity: 1
         - year: "2023"
           value: 55
           heightPx: 66
-          gradientFrom: "#e8624a"
-          gradientTo: "#b03a28"
+          color: "#e8624a"
           opacity: 1
         - year: "2025"
           value: 46
           heightPx: 55
-          gradientFrom: "#e8624a"
-          gradientTo: "#7f2a1a"
+          color: "#e8624a"
           opacity: 1
       modal:
         category: "Contexto"

@@ -474,11 +474,17 @@
   }
   /* Situacion card: chip always visible since it's big */
   .card-situacion .card-read-more {
-    opacity: 0.55;
+    opacity: 0.7;
     transform: translateY(0);
+    /* white chip — legible on solid coral bg */
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
   }
   .card-situacion:hover .card-read-more {
     opacity: 1;
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
   }
 
   .num {
@@ -533,31 +539,11 @@
   /* ===== 1. SITUACIÓN — coral hero ===== */
   .card-situacion {
     grid-area: situacion;
-    background: linear-gradient(
-      140deg,
-      var(--color-navy) 0%,
-      #8c2818 45%,
-      var(--color-coral) 100%
-    );
+    background: var(--color-coral);
     border-color: transparent;
     padding: 28px 20px;
     justify-content: flex-end;
     min-height: 180px;
-  }
-  .card-situacion::after {
-    content: "";
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(232, 98, 74, 0.18) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
   }
   .card-situacion .eyebrow {
     color: rgba(240, 237, 230, 0.6);
@@ -582,21 +568,6 @@
     background: var(--color-dark);
     min-height: 180px;
     justify-content: space-between;
-  }
-  .card-actividades::after {
-    content: "";
-    position: absolute;
-    bottom: -30px;
-    left: -30px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(42, 188, 180, 0.07) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
   }
   .date-big {
     font-family: var(--font-display);
@@ -627,21 +598,6 @@
     background: var(--color-navy);
     min-height: 180px;
     justify-content: space-between;
-  }
-  .card-materias::after {
-    content: "";
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(42, 188, 180, 0.06) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
   }
   .card-materias .num {
     font-size: clamp(44px, 4.5vw, 64px);
@@ -759,21 +715,6 @@
     min-height: 160px;
     justify-content: space-between;
   }
-  .card-agencia::after {
-    content: "";
-    position: absolute;
-    bottom: -30px;
-    right: -30px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(232, 98, 74, 0.07) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
-  }
   .card-agencia .num {
     font-size: clamp(48px, 5vw, 72px);
     color: var(--color-coral);
@@ -815,14 +756,7 @@
     line-height: 1.15;
   }
   .quote-big em {
-    background: linear-gradient(
-      90deg,
-      var(--color-coral) 0%,
-      rgba(240, 237, 230, 0.75) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-coral);
     font-style: normal;
   }
   .quote-sub {

@@ -216,7 +216,7 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
                     <div class="bar-val">{bar.value}</div>
                     <div
                       class="bar"
-                      style={`height:${bar.heightPx}px; background:linear-gradient(180deg,${bar.gradientFrom},${bar.gradientTo});${bar.opacity !== undefined && bar.opacity !== 1 ? ` opacity:${bar.opacity}` : ""}`}
+                      style={`height:${bar.heightPx}px; background:${bar.color};${bar.opacity !== undefined && bar.opacity !== 1 ? ` opacity:${bar.opacity}` : ""}`}
                     />
                     <div class="bar-lbl">{bar.year}</div>
                   </div>
