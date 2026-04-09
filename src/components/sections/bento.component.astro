@@ -49,18 +49,36 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
           "@keydown.space.prevent": `openModal('${card.id}')`,
         };
 
-        if (card.type === "hero-stat") {
+        if (card.type === "stat") {
           return (
             <div {...baseAttrs}>
-              {card.eyebrow && <div class="eyebrow">{card.eyebrow}</div>}
-              <div class="num">{card.num}</div>
-              <div class="label">{card.label}</div>
+              <div>
+                {card.eyebrow && <div class="eyebrow">{card.eyebrow}</div>}
+                {card.tag && (
+                  <div class={card.color === "coral" ? "red-tag" : "detail-tag"}>
+                    {card.tag}
+                  </div>
+                )}
+                <div class="num">{card.num}</div>
+                <div class="label">{card.label}</div>
+                {card.pills && (
+                  <div class="pills-wrap">
+                    {card.pills.map((p) => (
+                      <span
+                        class={`pill ${p.color === "teal" ? "pill-teal" : p.color === "coral" ? "pill-coral" : ""}`.trim()}
+                      >
+                        {p.text}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
               <span class={`card-read-more ${rm}`.trim()}>Leer más →</span>
             </div>
           );
         }
 
-        if (card.type === "date-event") {
+        if (card.type === "date") {
           return (
             <div {...baseAttrs}>
               <div>
@@ -74,74 +92,11 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
           );
         }
 
-        if (card.type === "stat-pills") {
-          return (
-            <div {...baseAttrs}>
-              <div>
-                {card.eyebrow && <div class="eyebrow">{card.eyebrow}</div>}
-                <div class="num">{card.num}</div>
-                <div class="label">{card.label}</div>
-                <div class="pills-wrap">
-                  {card.pills.map((p) => (
-                    <span
-                      class={`pill ${p.color === "teal" ? "pill-teal" : p.color === "coral" ? "pill-coral" : ""}`.trim()}
-                    >
-                      {p.text}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <span class={`card-read-more ${rm}`.trim()}>Leer más →</span>
-            </div>
-          );
-        }
-
-        if (card.type === "category-pills") {
-          return (
-            <div {...baseAttrs}>
-              <div class="category-name">{card.categoryName}</div>
-              {card.categoryFocus && (
-                <div class="category-focus">{card.categoryFocus}</div>
-              )}
-              <div class="pills-wrap">
-                {card.pills.map((p) => (
-                  <span
-                    class={`pill ${p.color === "teal" ? "pill-teal" : p.color === "coral" ? "pill-coral" : ""}`.trim()}
-                  >
-                    {p.text}
-                  </span>
-                ))}
-              </div>
-              <span class={`card-read-more ${rm}`.trim()}>Leer más →</span>
-            </div>
-          );
-        }
-
-        if (card.type === "icon-list") {
-          return (
-            <div {...baseAttrs}>
-              <div class="action-heading">{card.heading}</div>
-              <div class="icon-row">
-                {card.items.map((item) => (
-                  <div class="icon-item">
-                    <span>{item.icon}</span> {item.text}
-                  </div>
-                ))}
-              </div>
-              {card.subtext && <div class="action-sub">{card.subtext}</div>}
-              <span class={`card-read-more ${rm}`.trim()}>Leer más →</span>
-            </div>
-          );
-        }
-
-        if (card.type === "text-block") {
+        if (card.type === "text") {
           return (
             <div {...baseAttrs}>
               {card.tag && (
-                <div
-                  class={card.color === "coral" ? "money-tag" : "detail-tag"}
-                >
+                <div class={card.color === "coral" ? "money-tag" : "detail-tag"}>
                   {card.tag}
                 </div>
               )}
@@ -155,22 +110,7 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
           );
         }
 
-        if (card.type === "stat-tagged") {
-          return (
-            <div {...baseAttrs}>
-              <div>
-                <div class={card.color === "coral" ? "red-tag" : "detail-tag"}>
-                  {card.tag}
-                </div>
-                <div class="num">{card.num}</div>
-                <div class="label">{card.label}</div>
-              </div>
-              <span class={`card-read-more ${rm}`.trim()}>Leer más →</span>
-            </div>
-          );
-        }
-
-        if (card.type === "quote-block") {
+        if (card.type === "quote") {
           return (
             <div {...baseAttrs}>
               <div class="quote-big">
@@ -187,18 +127,24 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
           );
         }
 
-        if (card.type === "eyebrow-stat") {
+        if (card.type === "list") {
           return (
             <div {...baseAttrs}>
-              {card.eyebrow && <div class="eyebrow">{card.eyebrow}</div>}
-              <div class="num">{card.num}</div>
-              <div class="label">{card.label}</div>
+              <div class="action-heading">{card.heading}</div>
+              <div class="icon-row">
+                {card.items.map((item) => (
+                  <div class="icon-item">
+                    <span>{item.icon}</span> {item.text}
+                  </div>
+                ))}
+              </div>
+              {card.subtext && <div class="action-sub">{card.subtext}</div>}
               <span class={`card-read-more ${rm}`.trim()}>Leer más →</span>
             </div>
           );
         }
 
-        if (card.type === "bar-chart") {
+        if (card.type === "chart") {
           return (
             <div {...baseAttrs}>
               <div class="chart-header">

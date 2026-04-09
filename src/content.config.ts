@@ -30,20 +30,22 @@ const modalSchema = z.object({
 });
 
 const bentoCardSchema = z.discriminatedUnion("type", [
-  // 1. hero-stat  — full-width hero (situacion)
+  // 1. stat — number/value highlight, with optional eyebrow, tag, or pills
   z.object({
     id: z.string(),
-    type: z.literal("hero-stat"),
+    type: z.literal("stat"),
     color: z.enum(["teal", "coral", "none"]),
     eyebrow: z.string().optional(),
+    tag: z.string().optional(),
     num: z.string(),
     label: z.string(),
+    pills: z.array(pillSchema).optional(),
     modal: modalSchema,
   }),
-  // 2. date-event — upcoming event (actividades)
+  // 2. date — upcoming event with a prominent date
   z.object({
     id: z.string(),
-    type: z.literal("date-event"),
+    type: z.literal("date"),
     color: z.enum(["teal", "coral", "none"]),
     eyebrow: z.string().optional(),
     date: z.string(),
@@ -51,31 +53,29 @@ const bentoCardSchema = z.discriminatedUnion("type", [
     dateSub: z.string().optional(),
     modal: modalSchema,
   }),
-  // 3. stat-pills  — stat + pill tags (materias)
+  // 3. text — big text copy with optional tag and subtitle
   z.object({
     id: z.string(),
-    type: z.literal("stat-pills"),
+    type: z.literal("text"),
     color: z.enum(["teal", "coral", "none"]),
-    eyebrow: z.string().optional(),
-    num: z.string(),
-    label: z.string(),
-    pills: z.array(pillSchema),
+    tag: z.string().optional(),
+    textBig: z.string(),
+    textSub: z.string().optional(),
     modal: modalSchema,
   }),
-  // 4. category-pills — category name + focus + pills (por-que)
+  // 4. quote — italic quote lines with optional subtitle
   z.object({
     id: z.string(),
-    type: z.literal("category-pills"),
+    type: z.literal("quote"),
     color: z.enum(["teal", "coral", "none"]),
-    categoryName: z.string(),
-    categoryFocus: z.string().optional(),
-    pills: z.array(pillSchema),
+    quoteLines: z.array(z.string()),
+    quoteSub: z.string().optional(),
     modal: modalSchema,
   }),
-  // 5. icon-list — heading + icon rows + subtext (que-podemos)
+  // 5. list — heading + icon/text rows + optional subtext
   z.object({
     id: z.string(),
-    type: z.literal("icon-list"),
+    type: z.literal("list"),
     color: z.enum(["teal", "coral", "none"]),
     heading: z.string(),
     items: z.array(
@@ -87,49 +87,10 @@ const bentoCardSchema = z.discriminatedUnion("type", [
     subtext: z.string().optional(),
     modal: modalSchema,
   }),
-  // 6. text-block  — big text + sub (y-estudio, habia-plata)
+  // 6. chart — bar chart with title and optional badge
   z.object({
     id: z.string(),
-    type: z.literal("text-block"),
-    color: z.enum(["teal", "coral", "none"]),
-    tag: z.string().optional(),
-    textBig: z.string(),
-    textSub: z.string().optional(),
-    modal: modalSchema,
-  }),
-  // 7. stat-tagged — tag label + big num + label (agencia)
-  z.object({
-    id: z.string(),
-    type: z.literal("stat-tagged"),
-    color: z.enum(["teal", "coral", "none"]),
-    tag: z.string(),
-    num: z.string(),
-    label: z.string(),
-    modal: modalSchema,
-  }),
-  // 8. quote-block — italic quote lines + sub (ley)
-  z.object({
-    id: z.string(),
-    type: z.literal("quote-block"),
-    color: z.enum(["teal", "coral", "none"]),
-    quoteLines: z.array(z.string()),
-    quoteSub: z.string().optional(),
-    modal: modalSchema,
-  }),
-  // 9. eyebrow-stat — eyebrow + num + label (conicet, extension, salarios, recibo)
-  z.object({
-    id: z.string(),
-    type: z.literal("eyebrow-stat"),
-    color: z.enum(["teal", "coral", "none"]),
-    eyebrow: z.string().optional(),
-    num: z.string(),
-    label: z.string(),
-    modal: modalSchema,
-  }),
-  // 10. bar-chart  — bar chart (presupuesto)
-  z.object({
-    id: z.string(),
-    type: z.literal("bar-chart"),
+    type: z.literal("chart"),
     color: z.enum(["teal", "coral", "none"]),
     chartTitle: z.string(),
     chartBadge: z.string().optional(),

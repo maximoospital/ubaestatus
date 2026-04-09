@@ -25,19 +25,31 @@ export interface BarDatum {
 
 export type CardColor = "teal" | "coral" | "none";
 
-export interface HeroStatCard {
+export interface StatCard {
   id: string;
-  type: "hero-stat";
+  type: "stat";
   color: CardColor;
   eyebrow?: string;
+  tag?: string;
   num: string;
   label: string;
+  pills?: Pill[];
   modal: Modal;
 }
 
-export interface DateEventCard {
+export interface TextCard {
   id: string;
-  type: "date-event";
+  type: "text";
+  color: CardColor;
+  tag?: string;
+  textBig: string;
+  textSub?: string;
+  modal: Modal;
+}
+
+export interface DateCard {
+  id: string;
+  type: "date";
   color: CardColor;
   eyebrow?: string;
   date: string;
@@ -46,30 +58,18 @@ export interface DateEventCard {
   modal: Modal;
 }
 
-export interface StatPillsCard {
+export interface QuoteCard {
   id: string;
-  type: "stat-pills";
+  type: "quote";
   color: CardColor;
-  eyebrow?: string;
-  num: string;
-  label: string;
-  pills: Pill[];
+  quoteLines: string[];
+  quoteSub?: string;
   modal: Modal;
 }
 
-export interface CategoryPillsCard {
+export interface ListCard {
   id: string;
-  type: "category-pills";
-  color: CardColor;
-  categoryName: string;
-  categoryFocus?: string;
-  pills: Pill[];
-  modal: Modal;
-}
-
-export interface IconListCard {
-  id: string;
-  type: "icon-list";
+  type: "list";
   color: CardColor;
   heading: string;
   items: { icon: string; text: string }[];
@@ -77,48 +77,9 @@ export interface IconListCard {
   modal: Modal;
 }
 
-export interface TextBlockCard {
+export interface ChartCard {
   id: string;
-  type: "text-block";
-  color: CardColor;
-  tag?: string;
-  textBig: string;
-  textSub?: string;
-  modal: Modal;
-}
-
-export interface StatTaggedCard {
-  id: string;
-  type: "stat-tagged";
-  color: CardColor;
-  tag: string;
-  num: string;
-  label: string;
-  modal: Modal;
-}
-
-export interface QuoteBlockCard {
-  id: string;
-  type: "quote-block";
-  color: CardColor;
-  quoteLines: string[];
-  quoteSub?: string;
-  modal: Modal;
-}
-
-export interface EyebrowStatCard {
-  id: string;
-  type: "eyebrow-stat";
-  color: CardColor;
-  eyebrow?: string;
-  num: string;
-  label: string;
-  modal: Modal;
-}
-
-export interface BarChartCard {
-  id: string;
-  type: "bar-chart";
+  type: "chart";
   color: CardColor;
   chartTitle: string;
   chartBadge?: string;
@@ -127,13 +88,9 @@ export interface BarChartCard {
 }
 
 export type BentoCard =
-  | HeroStatCard
-  | DateEventCard
-  | StatPillsCard
-  | CategoryPillsCard
-  | IconListCard
-  | TextBlockCard
-  | StatTaggedCard
-  | QuoteBlockCard
-  | EyebrowStatCard
-  | BarChartCard;
+  | StatCard
+  | TextCard
+  | DateCard
+  | QuoteCard
+  | ListCard
+  | ChartCard;
