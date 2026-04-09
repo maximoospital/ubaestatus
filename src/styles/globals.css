@@ -615,22 +615,6 @@
     background: var(--color-dark);
     justify-content: space-between;
   }
-  .category-name {
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-teal);
-    margin-bottom: 5px;
-    letter-spacing: -0.01em;
-  }
-  .category-focus {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--color-mid);
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
 
   /* ===== 5. QUÉ PODEMOS HACER ===== */
   .card-que-podemos {

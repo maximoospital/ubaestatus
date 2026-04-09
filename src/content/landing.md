@@ -17,7 +17,7 @@ hero:
 bento:
   cards:
     - id: situacion
-      type: hero-stat
+      type: stat
       color: coral
       num: "UNA CRISIS DE PRESUPUESTO."
       label: "La ley existe. No se cumple."
@@ -28,7 +28,7 @@ bento:
         source: "Reunión estudiantil FCEyN/DC."
 
     - id: actividades
-      type: date-event
+      type: date
       color: teal
       eyebrow: "Próxima actividad"
       date: "10/4 a las 15:30"
@@ -44,7 +44,7 @@ bento:
           url: "https://www.instagram.com/comcom.exactas.uba"
 
     - id: materias
-      type: stat-pills
+      type: stat
       color: teal
       eyebrow: "Depto. de Computación"
       num: "+25"
@@ -69,7 +69,7 @@ bento:
         source: "Departamento de Computación, FCEyN UBA"
 
     - id: por-que
-      type: text-block
+      type: text
       color: teal
       textBig: "¿Por qué te afecta?"
       textSub: "Materias clave del mercado, enseñadas por expertos reales."
@@ -80,7 +80,7 @@ bento:
         source: "Reunión estudiantil FCEyN/DC"
 
     - id: que-podemos
-      type: icon-list
+      type: list
       color: teal
       heading: "¿Qué podemos hacer?"
       items:
@@ -99,7 +99,7 @@ bento:
           url: "https://github.com/rquiroga7"
 
     - id: y-estudio
-      type: text-block
+      type: text
       color: none
       textBig: "¿Y como<br />estudiamos?"
       textSub: "Ni clases virtuales ni parciales sorpresa. Un paro es un paro."
@@ -125,7 +125,7 @@ bento:
             url: "https://linktr.ee/identidadexactas"
 
     - id: habia-plata
-      type: text-block
+      type: text
       color: coral
       tag: "$9.246M sin ejecutar"
       textBig: "Había plata.<br />No la usaron."
@@ -138,7 +138,7 @@ bento:
         media: "https://jorgealiaga.com.ar/wp-content/uploads/2026/02/SICyT_1-1024x566.jpg"
 
     - id: agencia
-      type: stat-tagged
+      type: stat
       color: coral
       tag: "Agencia I+D+i"
       num: "↓79%"
@@ -151,7 +151,7 @@ bento:
         media: "https://jorgealiaga.com.ar/wp-content/uploads/2026/02/Agencia_3.jpg"
 
     - id: ley
-      type: quote-block
+      type: quote
       color: coral
       quoteLines:
         - "Aprobada."
@@ -166,7 +166,7 @@ bento:
         media: "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/proyeccion_historica_2017_2026_stacked.png"
 
     - id: conicet
-      type: eyebrow-stat
+      type: stat
       color: coral
       eyebrow: "CONICET · 2 años"
       num: "−1.369"
@@ -179,7 +179,7 @@ bento:
         media: "https://jorgealiaga.com.ar/wp-content/uploads/2026/02/CONICET_3.jpg"
 
     - id: extension
-      type: eyebrow-stat
+      type: stat
       color: coral
       eyebrow: "Extensión universitaria"
       num: "$0"
@@ -192,7 +192,7 @@ bento:
         media: "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/presupuesto_anual_extension_2017-2026.png"
 
     - id: presupuesto
-      type: bar-chart
+      type: chart
       color: coral
       chartTitle: "Presupuesto por estudiante\n(base 100 = 2017)"
       chartBadge: "↓54%"
@@ -248,7 +248,7 @@ bento:
           url: "https://github.com/rquiroga7/presupuesto_Universitario"
 
     - id: salarios
-      type: eyebrow-stat
+      type: stat
       color: coral
       eyebrow: "Salarios docentes · desde 2023"
       num: "−26%"
@@ -261,7 +261,7 @@ bento:
         media: "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/presupuesto_anual_salarial_2017-2026.png"
 
     - id: recibo
-      type: eyebrow-stat
+      type: stat
       color: coral
       eyebrow: "Recibo real · 5/2025 · UNC · cat. 115"
       num: "$196k"
