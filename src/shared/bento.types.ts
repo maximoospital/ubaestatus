@@ -19,8 +19,7 @@ export interface BarDatum {
   year: string;
   value: number;
   heightPx: number;
-  gradientFrom: string;
-  gradientTo: string;
+  color: string;
   opacity?: number;
 }
 
