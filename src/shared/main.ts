@@ -1,6 +1,6 @@
 import Lenis from "lenis";
 import Toastify from "toastify-js";
-import { scroll } from "motion";
+import { animate, inView, scroll, stagger } from "motion";
 
 // Initialize Lenis
 const lenis = new Lenis({
@@ -174,6 +174,48 @@ if (backToTopBtn) {
     lenis.scrollTo(0);
   });
 }
+
+// ── Scroll-triggered entrance animations ────────────────────────────────────
+
+// Hero: stagger children of the content wrapper on load
+const heroContent = document.querySelector("#hero .relative.z-10");
+if (heroContent) {
+  animate(
+    Array.from(heroContent.children) as HTMLElement[],
+    { opacity: [0, 1], y: [28, 0] },
+    { delay: stagger(0.12), duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+  );
+}
+
+// Bento: stagger cards as the grid scrolls into view
+const bentoGrid = document.querySelector(".bento-grid");
+if (bentoGrid) {
+  const cards = bentoGrid.querySelectorAll<HTMLElement>(".card");
+  animate(cards, { opacity: 0, y: 36 }, { duration: 0 });
+  inView(
+    bentoGrid as HTMLElement,
+    () => {
+      animate(cards, { opacity: 1, y: 0 }, { delay: stagger(0.06), duration: 0.55, ease: [0.16, 1, 0.3, 1] });
+    },
+    { amount: 0.05 },
+  );
+}
+
+// Calendar / Action / Contact: fade-up the section inner wrapper
+(["#calendar", "#action", "#contact"] as const).forEach((id) => {
+  const section = document.querySelector(id);
+  if (!section) return;
+  const inner = section.querySelector<HTMLElement>(":scope > div");
+  if (!inner) return;
+  animate(inner, { opacity: 0, y: 36 }, { duration: 0 });
+  inView(
+    section as HTMLElement,
+    () => {
+      animate(inner, { opacity: 1, y: 0 }, { duration: 0.7, ease: [0.16, 1, 0.3, 1] });
+    },
+    { amount: 0.1 },
+  );
+});
 
 // Reloj flipclock.js
 
