@@ -28,7 +28,7 @@ El proyecto comparte info resumida, links relevantes y herramientas de acción f
 
 ## Desarrollo Local
 
-Al ser un proyecto open source y un reclamo de la comunidad, invito a que cualquiera que quiera aportar mas info, o mejorar aspectos del sitio, lo haga. 
+Al ser un proyecto open source y un reclamo de la comunidad, invito a que cualquiera que quiera aportar más info, o mejorar aspectos del sitio, lo haga. 
 
 1.  **Clonar el repositorio**:
     ```bash
