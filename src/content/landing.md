@@ -573,6 +573,10 @@ contact:
       handle: "@fem.exactas"
       url: "https://instagram.com/fem.exactas"
       color: "#d33368"
+    - name: "Contragolpe"
+      handle: "@contragolpe.ar"
+      url: "https://instagram.com/contragolpe.ar"
+      color: "#000000"
   footer:
     leftText: "PROYECTO OPEN SOURCE"
     github:
