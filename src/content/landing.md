@@ -106,11 +106,13 @@ bento:
       modal:
         category: "Info"
         title: "¿Y el estudio?"
-        body: "Podés aprovechar para repasar materias de cuatrimestres anteriores, pero no esperés ser evaluado por todo eso. No hay consenso todavía sobre cómo prepararse. Los temas no se van a recuperar a las corridas. No habrá clases virtuales y todavía no se esperan fechas de parciales ni de clases. Conectate con tus compañeros: hay grupos de Telegram y Discord activos para organizarse y estudiar juntos. CubaWiki tiene material de cursadas anteriores. El Linktree de Identidad Exactas reúne muchos grupos de cursadas en un solo lugar."
+        body: "Podés aprovechar para repasar materias de cuatrimestres anteriores, pero no esperés ser evaluado por todo eso. No hay consenso todavía sobre cómo prepararse. Los temas no se van a recuperar a las corridas. No habrá clases virtuales y todavía no se esperan fechas de parciales ni de clases. Conectate con tus compañeros: hay grupos de Telegram y Discord activos para organizarse y estudiar juntos. CubaWiki y Machete Exactas tienen material de cursadas anteriores. El Linktree de Identidad Exactas reúne muchos grupos de cursadas en un solo lugar."
         source: "Reunión estudiantil FCEyN/DC"
         ctas:
           - label: "CubaWiki · Material de cursadas"
             url: "https://cubawiki.com.ar"
+          - label: "Machete Exactas · Menos material de cursadas"
+            url: "https://www.machete-exactas.com"
           - label: "Telegram · Comcom DC"
             url: "https://t.me/comcomdcuba"
           - label: "Telegram · Computación UBA"
