@@ -9,7 +9,7 @@ meta:
 header:
   title: "EXACTAS en LUCHA"
   shareUrl: "https://ubaestatus.mospit.al"
-  shareText: "UBA Exactas esta de paro. Enterate porque en este sitio."
+  shareText: "UBA Exactas está de paro. Enterate por qué en este sitio."
 hero:
   timer: active
   date: "2026-03-16T00:00:00"
@@ -33,11 +33,11 @@ bento:
       eyebrow: "Próxima actividad"
       date: "10/4 a las 15:30"
       dateLabel: "Jornada de Lucha por la Ciencia, Plaza de Mayo."
-      dateSub: "Tambien se hara un Stand en Pabellón 2 · Clases públicas frente a empresas tech · Sala Noriega disponible"
+      dateSub: "También se hará un Stand en Pabellón 2 · Clases públicas frente a empresas tech · Sala Noriega disponible"
       modal:
         category: "Acción"
         title: "Actividades"
-        body: "Se abrira un stand de ciencias en Pabellón 2 con clases públicas. Se hara una jornada de lucha el 10/4 en defensa de la ciencia. Habran mas jornadas de vinculación docente-alumno. Para los estudiantes que la necesiten, esta la Sala Noriega disponible para estudiar, trabajar y conectarse. Se llevaran a cabo clases públicas frente a empresas de tecnología. Seguí las novedades por IG y Telegram."
+        body: "Se abrirá un stand de ciencias en Pabellón 2 con clases públicas. Se hará una jornada de lucha el 10/4 en defensa de la ciencia. Habrán más jornadas de vinculación docente-alumno. Para los estudiantes que la necesiten, está la Sala Noriega disponible para estudiar, trabajar y conectarse. Se llevarán a cabo clases públicas frente a empresas de tecnología. Seguí las novedades por IG y Telegram."
         source: "Reunión estudiantil FCEyN/DC"
         cta:
           label: "Seguinos"
@@ -273,7 +273,7 @@ bento:
         source: "Recibo de sueldo UNC, publicado en github.com/rquiroga7/salarios_CONICET (mayo 2025)"
 calendar:
   title: "Agenda de Eventos"
-  subtitle: "Que haya un paro no significa que no haya movilizacion. Enterate y participa."
+  subtitle: "Que haya un paro no significa que no haya movilización. Enterate y participá."
   url: "https://cartelera.inexactas.ar"
 action:
   title: "NO TODO ES PALABRAS,"
