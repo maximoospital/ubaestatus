@@ -221,26 +221,26 @@ if (bentoGrid) {
 
 import { elapsedTime, css, flipClock, theme } from "flipclock";
 
-const parent = document.querySelector("#flip") as HTMLElement;
-
-if (parent) {
+document.querySelectorAll<HTMLElement>(".flip-clock-widget").forEach((parent) => {
   const timerStatus = parent.dataset.timer ?? "active";
   const timerDate = parent.dataset.date
     ? new Date(parent.dataset.date)
     : new Date("2026-03-16T00:00:00");
+  const timerMode = parent.dataset.mode ?? "countup";
+
+  const fontSize = parent.dataset.fontsize ?? "clamp(1.5rem, 5.5vw, 4.5vw)";
 
   const fc = flipClock({
     parent,
     autoStart: timerStatus === "active",
-    face: elapsedTime({
-      from: timerDate,
-      format: "[DD]:[hh]:[mm]:[ss]",
-    }),
+    face: elapsedTime(
+      timerMode === "countdown"
+        ? { to: timerDate, format: "[DD]:[hh]:[mm]:[ss]" }
+        : { from: timerDate, format: "[DD]:[hh]:[mm]:[ss]" }
+    ),
     theme: theme({
       dividers: ":",
-      css: css({
-        fontSize: "clamp(1.5rem, 5.5vw, 4.5vw)",
-      }),
+      css: css({ fontSize }),
     }),
   });
 
@@ -259,4 +259,4 @@ if (parent) {
     requestAnimationFrame(scaleToFit);
     window.addEventListener("resize", scaleToFit, { passive: true });
   }
-}
+});

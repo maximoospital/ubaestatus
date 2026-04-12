@@ -11,8 +11,18 @@ header:
   shareUrl: "https://ubaestatus.mospit.al"
   shareText: "UBA Exactas está de paro. Enterate por qué en este sitio."
 hero:
-  timer: active
-  date: "2026-03-16T00:00:00"
+  label1: "El paro ya lleva:"
+  timer1: active
+  date1: "2026-03-16T00:00:00"
+  mode1: countup
+  label2: "Días que la ley lleva sin ser cumplida:"
+  timer2: active
+  date2: "2025-10-21T00:00:00"
+  mode2: countup
+  label3: "Hasta que el gobierno entre en desacato quedan:"
+  timer3: active
+  date3: "2026-05-02T00:00:00"
+  mode3: countdown
   subtitle: "La Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires está de paro para luchar por su futuro."
 bento:
   cards:

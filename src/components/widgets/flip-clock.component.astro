@@ -2,90 +2,79 @@
 interface Props {
   timer?: "active" | "paused";
   date?: string;
+  mode?: "countup" | "countdown";
+  variant?: "filled" | "default";
+  fontSize?: string;
 }
-const { timer = "active", date } = Astro.props;
+const { timer = "active", date, mode = "countup", variant = "default", fontSize } = Astro.props;
 ---
 
-<div id="flip" data-timer={timer} data-date={date}></div>
+<div
+  class="flip-clock-widget"
+  data-timer={timer}
+  data-date={date}
+  data-mode={mode}
+  data-variant={variant}
+  data-fontsize={fontSize}
+></div>
 
 <style>
-  #flip :global(.flip-clock__piece),
-  #flip :global(.flip-clock__card),
-  #flip :global(.flip-clock-card .flip-clock-card-item-inner .top),
-  #flip :global(.flip-clock-card .flip-clock-card-item-inner .top::before),
-  #flip :global(.flip-clock-card .flip-clock-card-item-inner .top::after),
-  #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom),
-  #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom::before),
-  #flip :global(.flip-clock-card .flip-clock-card-item-inner .bottom::after) {
-    background-color: #f0ede6 !important;
-  }
-
-  #flip :global(*) {
-    color: black;
-  }
-
-  #flip :global(.flip-clock-divider .flip-clock-divider-inner) {
-    color: #f0ede6 !important;
-  }
-
-  #flip :global(.flip-clock__divider .flip-clock__dot) {
-    background-color: #f0ede6 !important;
-  }
-
-  #flip :global(.flip-clock-group-items) {
+  /* ── Layout fixes (all variants) ── */
+  .flip-clock-widget :global(.flip-clock-group-items) {
     align-items: flex-start !important;
   }
 
-  #flip :global(.flip-clock__divider) {
+  .flip-clock-widget :global(.flip-clock__divider) {
     display: flex !important;
     align-items: center !important;
     align-self: auto !important;
-    padding-bottom: 2.25rem !important; /* roughly matches label height */
+    padding-bottom: 2.25rem !important;
   }
 
-  #flip
+  /* ── Day/hour/minute/second labels (all variants) ── */
+  .flip-clock-widget
     :global(
       .flip-clock-group
         .flip-clock-group-items
         .flip-clock-group:nth-child(1)::after
     ) {
     content: "dias";
-    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    font-size: 0.3em;
     margin-top: 0.5rem;
     text-align: center;
     text-transform: uppercase;
     font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
     color: #f0ede6;
   }
-  #flip
+  .flip-clock-widget
     :global(
       .flip-clock-group
         .flip-clock-group-items
         .flip-clock-group:nth-child(3)::after
     ) {
     content: "horas";
-    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    font-size: 0.3em;
     text-align: center;
     margin-top: 0.5rem;
     text-transform: uppercase;
     font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
     color: #f0ede6;
   }
-  #flip
+  .flip-clock-widget
     :global(
       .flip-clock-group
         .flip-clock-group-items
         .flip-clock-group:nth-child(5)::after
     ) {
     content: "minutos";
-    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    font-size: 0.3em;
     margin-top: 0.5rem;
     text-align: center;
     text-transform: uppercase;
     font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
     color: #f0ede6;
   }
-  #flip
+  .flip-clock-widget
     :global(
       .flip-clock-group
         .flip-clock-group-items
@@ -95,8 +84,41 @@ const { timer = "active", date } = Astro.props;
     text-transform: uppercase;
     text-align: center;
     margin-top: 0.5rem;
-    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    font-size: 0.3em;
     font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
     color: #f0ede6;
+  }
+
+  /* ── FILLED variant (primary hero clock) ──
+     Overrides the library's dark defaults with the offwhite palette. */
+  .flip-clock-widget[data-variant="filled"] :global(.flip-clock__piece),
+  .flip-clock-widget[data-variant="filled"] :global(.flip-clock__card),
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock-card .flip-clock-card-item-inner .top),
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock-card .flip-clock-card-item-inner .top::before),
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock-card .flip-clock-card-item-inner .top::after),
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock-card .flip-clock-card-item-inner .bottom),
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock-card .flip-clock-card-item-inner .bottom::before),
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock-card .flip-clock-card-item-inner .bottom::after) {
+    background-color: #f0ede6 !important;
+  }
+
+  .flip-clock-widget[data-variant="filled"] :global(*) {
+    color: black;
+  }
+
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock-divider .flip-clock-divider-inner) {
+    color: #f0ede6 !important;
+  }
+
+  .flip-clock-widget[data-variant="filled"]
+    :global(.flip-clock__divider .flip-clock__dot) {
+    background-color: #f0ede6 !important;
   }
 </style>

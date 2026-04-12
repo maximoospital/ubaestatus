@@ -128,8 +128,18 @@ const content = defineCollection({
     }),
     hero: z.object({
       subtitle: z.string(),
-      timer: z.enum(["active", "paused"]).default("active"),
-      date: z.string().optional(),
+      timer1: z.enum(["active", "paused"]).default("active"),
+      date1: z.string().optional(),
+      label1: z.string().optional(),
+      mode1: z.enum(["countup", "countdown"]).default("countup"),
+      timer2: z.enum(["active", "paused"]).default("active"),
+      date2: z.string().optional(),
+      label2: z.string().optional(),
+      mode2: z.enum(["countup", "countdown"]).default("countup"),
+      timer3: z.enum(["active", "paused"]).default("active"),
+      date3: z.string().optional(),
+      label3: z.string().optional(),
+      mode3: z.enum(["countup", "countdown"]).default("countup"),
     }),
     bento: z
       .object({

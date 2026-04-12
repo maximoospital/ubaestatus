@@ -1,11 +1,35 @@
 ---
 export interface Props {
   subtitle?: string;
-  timer?: "active" | "paused";
-  date?: string;
+  timer1?: "active" | "paused";
+  date1?: string;
+  label1?: string;
+  mode1?: "countup" | "countdown";
+  timer2?: "active" | "paused";
+  date2?: string;
+  label2?: string;
+  mode2?: "countup" | "countdown";
+  timer3?: "active" | "paused";
+  date3?: string;
+  label3?: string;
+  mode3?: "countup" | "countdown";
 }
 
-const { subtitle = "Subtítulo.", timer = "active", date } = Astro.props;
+const {
+  subtitle = "Subtítulo.",
+  timer1 = "active",
+  date1,
+  label1 = "El paro ya lleva:",
+  mode1 = "countup",
+  timer2 = "active",
+  date2,
+  label2,
+  mode2 = "countup",
+  timer3 = "active",
+  date3,
+  label3,
+  mode3 = "countup",
+} = Astro.props;
 
 import FlipClock from "../widgets/flip-clock.component.astro";
 ---
@@ -15,34 +39,62 @@ import FlipClock from "../widgets/flip-clock.component.astro";
 >
   <div class="bg-dark absolute inset-0 opacity-80"></div>
   <div class="relative z-10 w-full max-w-7xl px-6 py-16 md:px-12 md:py-20">
-    <h1
-      class="text-display text-offwhite text-5xl sm:text-6xl md:text-7xl lg:text-7xl"
-    >
-      EXACTAS
-    </h1>
-    <h1
-      class="text-display text-offwhite text-5xl sm:text-6xl md:text-7xl lg:text-7xl"
-    >
-      EN
-    </h1>
-    <h1
-      class="text-display text-teal text-5xl sm:text-6xl md:text-7xl lg:text-7xl"
-    >
-      LUCHA.
-    </h1>
-    <p
-      class="text-offwhite font-body mt-3 text-base text-shadow-black/50 text-shadow-lg max-w-2xl"
-    >
+
+    <!-- Title -->
+    <h1 class="text-display text-offwhite text-5xl sm:text-6xl md:text-7xl lg:text-7xl">EXACTAS</h1>
+    <h1 class="text-display text-offwhite text-5xl sm:text-6xl md:text-7xl lg:text-7xl">EN</h1>
+    <h1 class="text-display text-teal text-5xl sm:text-6xl md:text-7xl lg:text-7xl">LUCHA.</h1>
+
+    <p class="text-offwhite font-body mt-3 text-base text-shadow-black/50 text-shadow-lg max-w-2xl">
       {subtitle}
     </p>
-    <div class="mt-6 overflow-hidden">
-      <p
-        class="text-offwhite font-body bold mb-2 text-sm tracking-[0.2em] uppercase text-shadow-black/50 text-shadow-md"
-      >
-        El paro ya lleva:
+
+    <!-- ── PRIMARY COUNTER ── -->
+    <div class="mt-8">
+      <p class="text-offwhite font-body mb-2 text-sm font-bold tracking-[0.2em] uppercase text-shadow-black/50 text-shadow-md">
+        {label1}
       </p>
-      <FlipClock timer={timer} date={date} />
+      <div class="hero-timer-primary">
+        <FlipClock timer={timer1} date={date1} mode={mode1} variant="filled" />
+      </div>
     </div>
+    
+    <!-- ── SECONDARY COUNTERS — outline, smaller, side-by-side ── -->
+    {(date2 || date3) && (
+      <div class="mt-5 flex flex-row flex-wrap gap-x-10 gap-y-5 items-start">
+        {date2 && (
+          <div class="flex flex-col gap-1">
+            {label2 && (
+              <p class="font-body text-[0.6rem] font-bold tracking-[0.15em] uppercase text-white">
+                {label2}
+              </p>
+            )}
+            <FlipClock
+              timer={timer2}
+              date={date2}
+              mode={mode2}
+              fontSize="clamp(0.9rem, 2vw, 2vw)"
+            />
+          </div>
+        )}
+        {date3 && (
+          <div class="flex flex-col gap-1">
+            {label3 && (
+              <p class="font-body text-[0.6rem] font-bold tracking-[0.15em] uppercase text-white">
+                {label3}
+              </p>
+            )}
+            <FlipClock
+              timer={timer3}
+              date={date3}
+              mode={mode3}
+              fontSize="clamp(0.9rem, 2vw, 2vw)"
+            />
+          </div>
+        )}
+      </div>
+    )}  
+    <!-- ── CTA — anchors the primary, sits above supporting counters ── -->
     <div class="mt-6">
       <a
         id="hero-cta"
@@ -52,10 +104,25 @@ import FlipClock from "../widgets/flip-clock.component.astro";
         Conoce la situación
       </a>
     </div>
+
+
+
   </div>
+
   <!-- scroll down indicator de https://codepen.io/mikewagz/pen/PGXqOg -->
-  <div
-    class="scroll-down-dude absolute bottom-8 left-1/2 -translate-x-1/2 opacity-80"
-  >
-  </div>
+  <div class="scroll-down-dude absolute bottom-8 left-1/2 -translate-x-1/2 opacity-80"></div>
 </div>
+
+<style>
+  /*
+   * zoom: 0.7 on the primary wrapper shrinks its layout footprint.
+   * main.ts reads wrapper.clientWidth for zoom-to-fit — because zoom
+   * affects clientWidth the wrapper stays wider than the clock's
+   * scrollWidth, so main.ts leaves the clock at zoom: 1.
+   * Secondary clocks use a smaller fontSize passed directly to the
+   * flipclock theme (via data-fontsize), so no wrapper zoom is needed.
+   */
+  .hero-timer-primary {
+    zoom: 0.7;
+  }
+</style>
