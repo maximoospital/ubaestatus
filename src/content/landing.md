@@ -27,22 +27,6 @@ bento:
         body: "El presupuesto anual real está demasiado bajo y no se cumple la ley de financiamiento universitario. El presupuesto para investigación cayó casi un 95%. Los docentes están al límite — algunos consideran irse al sector privado. Los fondos no son solo para sueldos: financian carreras y materiales. El Departamento de Computación es el más afectado."
         source: "Reunión estudiantil FCEyN/DC."
 
-    - id: actividades
-      type: date
-      color: teal
-      eyebrow: "Próxima actividad"
-      date: "10/4 a las 15:30"
-      dateLabel: "Jornada de Lucha por la Ciencia, Plaza de Mayo."
-      dateSub: "También se hará un Stand en Pabellón 2 · Clases públicas frente a empresas tech · Sala Noriega disponible"
-      modal:
-        category: "Acción"
-        title: "Actividades"
-        body: "Se abrirá un stand de ciencias en Pabellón 2 con clases públicas. Se hará una jornada de lucha el 10/4 en defensa de la ciencia. Habrán más jornadas de vinculación docente-alumno. Para los estudiantes que la necesiten, está la Sala Noriega disponible para estudiar, trabajar y conectarse. Se llevarán a cabo clases públicas frente a empresas de tecnología. Seguí las novedades por IG y Telegram."
-        source: "Reunión estudiantil FCEyN/DC"
-        cta:
-          label: "Seguinos"
-          url: "https://www.instagram.com/comcom.exactas.uba"
-
     - id: materias
       type: stat
       color: teal
@@ -158,12 +142,13 @@ bento:
       quoteLines:
         - "Aprobada."
         - "Vetada."
+        - "Insistida."
         - "Ignorada."
       quoteSub: "La Ley de Financiamiento Universitario exige recuperar los niveles de 2023. El gobierno propone un presupuesto 18% por debajo. La brecha es de 1,3 billones de pesos."
       modal:
         category: "Contexto"
         title: "2026: el gobierno incumple la ley"
-        body: "La Ley de Financiamiento Universitario exige recuperar los niveles presupuestarios reales de 2023 (~7,2 billones de pesos). El gobierno propone tres aumentos del 4%, llegando a ~5,9 billones — por debajo incluso del presupuesto universitario durante la pandemia (~6,5 billones). La brecha es de 1,3 billones de pesos. La ley fue aprobada, vetada, y el gobierno sigue sin cumplirla."
+        body: "La Ley de Financiamiento Universitario exige recuperar los niveles presupuestarios reales de 2023 (~7,2 billones de pesos). El gobierno propone tres aumentos del 4%, llegando a ~5,9 billones — por debajo incluso del presupuesto universitario durante la pandemia (~6,5 billones). La brecha es de 1,3 billones de pesos. La ley fue aprobada, vetada, e insistida por ambas cámaras del Congreso con una mayoría de 2/3, lo que le otorga plena vigencia actual. Sin embargo, el gobierno sigue sin cumplirla."
         source: "Dr. Rodrigo Quiroga, INFIQC-CONICET / UNC (13/2/26)"
         media: "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/proyeccion_historica_2017_2026_stacked.png"
 
@@ -252,13 +237,13 @@ bento:
     - id: salarios
       type: stat
       color: coral
-      eyebrow: "Salarios docentes · desde 2023"
-      num: "−26%"
+      eyebrow: "Salarios docentes · desde nov. 2023"
+      num: "−35%"
       label: "en términos reales. Destrucción salarial que atraviesa tres gobiernos."
       modal:
         category: "Contexto"
         title: "Salarios docentes: décadas de caída"
-        body: "Desde 2023, los salarios universitarios docentes y no-docentes perdieron un 26% en términos reales. Tomando 2015 como base, los investigadores CONICET cobran hoy la mitad de lo que cobraban. Un profesor asistente con dedicación exclusiva necesitaría un aumento del +50% para que el Estado cumpla con la Ley de Financiamiento Universitario — exactamente lo que ganaba en noviembre de 2023. Las paritarias de 0–1% de fines de 2024 y 2025 profundizaron la caída. Muchos docentes consideran irse al sector privado."
+        body: "Desde noviembre de 2023, sumando la enorme reducción causada por la devaluación de fines de ese año, los salarios universitarios docentes y no-docentes perdieron cerca de un 35% en términos reales. Tomando 2015 como base, los investigadores CONICET cobran hoy la mitad de lo que cobraban. Un profesor asistente con dedicación exclusiva necesitaría un aumento cercano al 50% para recuperar ese tercio de salario perdido y que el Estado cumpla con la Ley de Financiamiento Universitario — exactamente lo que ganaba en noviembre de 2023. Las paritarias de 0–1% de fines de 2024 y 2025 profundizaron la caída. Muchos docentes consideran irse al sector privado."
         source: "Dr. Rodrigo Quiroga, INFIQC-CONICET / UNC (13/2/26)"
         media: "https://raw.githubusercontent.com/rquiroga7/presupuesto_Universitario/main/plots/presupuesto_anual_salarial_2017-2026.png"
 
