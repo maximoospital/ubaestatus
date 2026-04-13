@@ -253,10 +253,14 @@
   .instagram-card {
     border-color: var(--color-rule-dark);
   }
-  .instagram-card:hover {
+  .instagram-card:hover,
+  .instagram-card:active,
+  .instagram-card:focus-visible {
     border-color: var(--hover-color) !important;
   }
-  .instagram-card:hover .hover-target {
+  .instagram-card:hover .hover-target,
+  .instagram-card:active .hover-target,
+  .instagram-card:focus-visible .hover-target {
     color: var(--hover-color) !important;
   }
 
