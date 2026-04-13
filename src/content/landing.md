@@ -1,6 +1,6 @@
 ---
 meta:
-  title: "EXACTAS en LUCHA · FCEyN UBA"
+  title: "Paro en EXACTAS | FCEyN UBA en Lucha"
   description: "La Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires está de paro para luchar por su futuro. Enterate más acá."
   url: "https://ubaestatus.mospit.al"
   author: "Maximo Andreas Ospital"
@@ -272,6 +272,16 @@ calendar:
   title: "Agenda de Eventos"
   subtitle: "Que haya un paro no significa que no haya movilización. Enterate y participá."
   url: "https://cartelera.inexactas.ar"
+faq:
+  title: "Preguntas frecuentes"
+  subtitle: "Respuestas rápidas basadas en la información publicada en este sitio."
+  items:
+    - question: "¿Por qué hay paro en Exactas?"
+      answer: "Porque no se está cumpliendo la ley de financiamiento universitario y el presupuesto real cayó fuertemente, afectando docencia, investigación y continuidad de materias clave."
+    - question: "¿Qué materias están adheridas en Computación?"
+      answer: "La adhesión alcanza a todas las áreas del Departamento de Computación, desde materias iniciales hasta optativas avanzadas y seminarios."
+    - question: "¿Cómo me organizo para estudiar durante el paro?"
+      answer: "Podés repasar material de cursadas anteriores y organizarte con compañeros en grupos de Telegram y Discord, usando recursos como CubaWiki, Machete Exactas y el Linktree de Identidad Exactas."
 action:
   title: "NO TODO ES PALABRAS,"
   subtitle: "AYUDANOS."

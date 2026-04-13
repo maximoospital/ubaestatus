@@ -17,19 +17,71 @@ const landing = await getEntry("content", "landing");
 if (!landing) throw new Error("No se pudo cargar el contenido de la página.");
 
 const data = landing.data;
+const updatedAt = new Date();
+const updatedAtLabel = new Intl.DateTimeFormat("es-AR", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+  timeZone: "America/Argentina/Buenos_Aires",
+}).format(updatedAt);
+
+const faqItems = data.faq?.items ?? [];
+const faqSchema = faqItems.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    }
+  : undefined;
+
 ---
 
-<BaseLayout {...data.meta}>
+<BaseLayout {...data.meta} structuredData={faqSchema}>
   <header>
     <HeaderComponent {...data.header} />
   </header>
   <main>
+    <div class="bg-dark/90">
+      <div class="mx-auto w-full pt-1 pb-1 text-center">
+        <p class="text-mono-ui text-offwhite/60 text-[0.56rem] leading-none tracking-[0.12em] uppercase">
+          Última actualización: <time datetime={updatedAt.toISOString()}>{updatedAtLabel} (AR)</time>
+        </p>
+      </div>
+    </div>
     <Section id="hero" noPadding key="hero">
       <HeroComponent {...data.hero} />
     </Section>
     <Section id="bento" noPadding class="bg-mid" key="bento">
       <BentoComponent cards={data.bento?.cards ?? []} />
     </Section>
+        {faqItems.length > 0 && (
+      <Section id="faq" class="bg-mid" key="faq">
+        <div class="mx-auto w-full px-6 py-4">
+          <h2 class="text-h3 text-teal uppercase">{data.faq?.title ?? "Preguntas frecuentes"}</h2>
+          {(data.faq?.subtitle || "").length > 0 && (
+            <p class="text-body text-offwhite mt-2 max-w-3xl">{data.faq?.subtitle}</p>
+          )}
+          <div class="mt-6 grid gap-3">
+            {faqItems.map((item) => (
+              <details class="border border-dark/20 bg-white/70 rounded-sm px-4 py-3">
+                <summary class="text-dark font-body text-sm font-bold cursor-pointer">{item.question}</summary>
+                <p class="text-dark/80 font-body mt-2 text-sm leading-relaxed">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </Section>
+    )}
     <Section id="calendar" class="bg-offwhite" key="calendar">
       <CalendarComponent {...data.calendar} />
     </Section>

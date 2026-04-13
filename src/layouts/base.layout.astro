@@ -2,6 +2,12 @@
 import "../styles/globals.css";
 
 const meta = Astro.props;
+const structuredDataInput = meta.structuredData;
+const structuredData = Array.isArray(structuredDataInput)
+  ? structuredDataInput
+  : structuredDataInput
+    ? [structuredDataInput]
+    : [];
 ---
 
 <!doctype html>
@@ -36,6 +42,10 @@ const meta = Astro.props;
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    {structuredData.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)}></script>
+    ))}
   </head>
   <body class="flex min-h-screen flex-col">
     <slot />

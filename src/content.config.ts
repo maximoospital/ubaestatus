@@ -148,6 +148,18 @@ const content = defineCollection({
       .optional(),
     accordion: z.any().optional(),
     calendar: z.any().optional(),
+    faq: z
+      .object({
+        title: z.string().optional(),
+        subtitle: z.string().optional(),
+        items: z.array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          })
+        ),
+      })
+      .optional(),
     action: z.any().optional(),
     contact: z.any().optional(),
   }),
