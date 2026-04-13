@@ -247,7 +247,7 @@ bento:
     - id: salarios
       type: stat
       color: coral
-      eyebrow: "Salarios docentes · desde nov. 2023"
+      eyebrow: "Salarios docentes y no-docentes · desde nov. 2023"
       num: "−35%"
       label: "en términos reales. Destrucción salarial que atraviesa tres gobiernos."
       modal:
@@ -282,6 +282,8 @@ faq:
       answer: "La adhesión alcanza a todas las áreas del Departamento de Computación, desde materias iniciales hasta optativas avanzadas y seminarios."
     - question: "¿Cómo me organizo para estudiar durante el paro?"
       answer: "Podés repasar material de cursadas anteriores y organizarte con compañeros en grupos de Telegram y Discord, usando recursos como CubaWiki, Machete Exactas y el Linktree de Identidad Exactas."
+    - question: "¿Los no-docentes también están afectados?"
+      answer: "Sí. Los salarios del personal no-docente (administrativos, técnicos, biblioteca) cayeron un 35% en términos reales desde noviembre de 2023, igual que los docentes. La crisis presupuestaria afecta a toda la comunidad universitaria."
 action:
   title: "NO TODO ES PALABRAS,"
   subtitle: "AYUDANOS."
@@ -584,6 +586,10 @@ contact:
       handle: "@contragolpe.ar"
       url: "https://instagram.com/contragolpe.ar"
       color: "#000000"
+    - name: "NODO · Trabajadores No-Docentes"
+      handle: "@nodo.trabajadores_exactasuba"
+      url: "https://instagram.com/nodo.trabajadores_exactasuba"
+      color: "#1a3a5c"
   footer:
     leftText: "PROYECTO OPEN SOURCE"
     github:
