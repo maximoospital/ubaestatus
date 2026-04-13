@@ -63,7 +63,7 @@ import FlipClock from "../widgets/flip-clock.component.astro";
     {(date2 || date3) && (
       <div class="mt-5 flex flex-row flex-wrap gap-x-10 gap-y-5 items-start">
         {date2 && (
-          <div class="flex flex-col gap-1">
+          <div class="flex flex-col gap-1 min-w-0 w-[calc(50%-1.25rem)] sm:w-auto">
             {label2 && (
               <p class="font-body text-[0.6rem] font-bold tracking-[0.15em] uppercase text-white">
                 {label2}
@@ -78,7 +78,7 @@ import FlipClock from "../widgets/flip-clock.component.astro";
           </div>
         )}
         {date3 && (
-          <div class="flex flex-col gap-1">
+          <div class="flex flex-col gap-1 min-w-0 w-[calc(50%-1.25rem)] sm:w-auto">
             {label3 && (
               <p class="font-body text-[0.6rem] font-bold tracking-[0.15em] uppercase text-white">
                 {label3}
