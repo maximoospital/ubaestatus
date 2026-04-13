@@ -59,11 +59,11 @@ import FlipClock from "../widgets/flip-clock.component.astro";
       </div>
     </div>
     
-    <!-- ── SECONDARY COUNTERS — outline, smaller, side-by-side ── -->
+    <!-- ── SECONDARY COUNTERS — stacked on mobile, side-by-side on sm+ ── -->
     {(date2 || date3) && (
-      <div class="mt-5 flex flex-row flex-wrap gap-x-10 gap-y-5 items-start">
+      <div class="mt-5 flex flex-col sm:flex-row sm:flex-wrap gap-x-10 gap-y-5 items-start">
         {date2 && (
-          <div class="flex flex-col gap-1 min-w-0 w-[calc(50%-1.25rem)] sm:w-auto">
+          <div class="flex flex-col gap-1 w-full sm:w-auto">
             {label2 && (
               <p class="font-body text-[0.6rem] font-bold tracking-[0.15em] uppercase text-white">
                 {label2}
@@ -73,12 +73,12 @@ import FlipClock from "../widgets/flip-clock.component.astro";
               timer={timer2}
               date={date2}
               mode={mode2}
-              fontSize="clamp(0.9rem, 2vw, 2vw)"
+              fontSize="clamp(1.4rem, 2vw, 2vw)"
             />
           </div>
         )}
         {date3 && (
-          <div class="flex flex-col gap-1 min-w-0 w-[calc(50%-1.25rem)] sm:w-auto">
+          <div class="flex flex-col gap-1 w-full sm:w-auto">
             {label3 && (
               <p class="font-body text-[0.6rem] font-bold tracking-[0.15em] uppercase text-white">
                 {label3}
@@ -88,7 +88,7 @@ import FlipClock from "../widgets/flip-clock.component.astro";
               timer={timer3}
               date={date3}
               mode={mode3}
-              fontSize="clamp(0.9rem, 2vw, 2vw)"
+              fontSize="clamp(1.4rem, 2vw, 2vw)"
             />
           </div>
         )}
