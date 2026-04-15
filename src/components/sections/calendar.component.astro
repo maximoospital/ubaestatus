@@ -3,9 +3,15 @@ export interface Props {
     title?: string;
     subtitle?: string;
     url?: string;
+    urlICS?: string;
 }
 
-const { title = "Agenda de Eventos", subtitle = "", url = "" } = Astro.props;
+const {
+    title = "Agenda de Eventos",
+    subtitle = "",
+    url = "",
+    urlICS = "",
+} = Astro.props;
 const apiUrl = `${url}/api/events`;
 const jsUrl = `${url}/gancio-events.es.js`;
 
@@ -56,12 +62,21 @@ if (url) {
             </div>
         </div>
     </div>
+    <div
+        class="font-body text-dark mt-2 flex justify-between text-base md:text-lg"
+    >
+        <span class="text-left">
+            <a href={urlICS} class="text-teal hover:underline"
+                ><b>Agregar a Google Calendar</b></a
+            >
+        </span>
 
-    <p class="font-body text-dark mt-2 text-right text-base md:text-lg">
-        Agenda cortesía de: <a href={url} class="text-teal hover:underline"
-            ><b>Cartelera Inexactas</b></a
-        >
-    </p>
+        <span class="text-right">
+            Agenda cortesía de: <a href={url} class="text-teal hover:underline"
+                ><b>Cartelera Inexactas</b></a
+            >
+        </span>
+    </div>
 </div>
 
 <script>

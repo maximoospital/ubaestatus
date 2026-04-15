@@ -272,6 +272,7 @@ calendar:
   title: "Agenda de Eventos"
   subtitle: "Que haya un paro no significa que no haya movilización. Enterate y participá."
   url: "https://cartelera.inexactas.ar"
+  urlICS: "https://calendar.google.com/calendar/?cid=M2NmYTZmNWMzNGZmZjQyYmZlMjRjMDU0MTYyMTE4MGMyMjZlZDVmODQ5NzI0MmQwMmUzMGIwYWYzMDA0MDBlNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
 faq:
   title: "Preguntas frecuentes"
   subtitle: "Respuestas rápidas basadas en la información publicada en este sitio."

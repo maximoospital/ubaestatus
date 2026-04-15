@@ -1,16 +1,5 @@
-import Lenis from "lenis";
 import Toastify from "toastify-js";
 import { animate, inView, scroll, stagger } from "motion";
-
-// Initialize Lenis with smoothWheel disabled — native trackpad/wheel scrolling stays
-// fully native (especially important on macOS where the OS already provides momentum).
-// Lenis is kept only for programmatic scrollTo() calls (anchor links, back-to-top).
-const lenis = new Lenis({
-  autoRaf: true,
-  smoothWheel: false,
-});
-// Expose globally so Alpine components can pause/resume scroll
-(window as any).lenis = lenis;
 
 // Interacciones Header
 const header = document.getElementById("header-bar");
@@ -81,7 +70,7 @@ if (header && inner && logo) {
     }
   });
 
-  // Smooth scroll for anchor links using Lenis
+  // Smooth scroll for anchor links
   links.forEach((link) => {
     const href = link.getAttribute("href");
     if (!href?.startsWith("#")) return;
@@ -95,7 +84,7 @@ if (header && inner && logo) {
           link.getAttribute("href") === "#share-modal";
         if (!isShareButton) {
           e.preventDefault();
-          lenis.scrollTo(section);
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
     }
@@ -109,7 +98,7 @@ if (heroCta) {
     e.preventDefault();
     const section = document.getElementById("bento");
     if (section) {
-      lenis.scrollTo(section);
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
 }
@@ -174,7 +163,7 @@ socialLinks.forEach((link) => {
 const backToTopBtn = document.getElementById("back-to-top");
 if (backToTopBtn) {
   backToTopBtn.addEventListener("click", () => {
-    lenis.scrollTo(0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
 

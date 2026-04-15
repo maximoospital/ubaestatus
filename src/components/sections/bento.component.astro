@@ -196,7 +196,6 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
     <div
       class="modal"
       @click.stop
-      data-lenis-prevent
       x-show="open"
       x-transition:enter="transition-[opacity,transform] duration-250 ease-[cubic-bezier(0.16,1,0.3,1)]"
       x-transition:enter-start="opacity-0 scale-95 translate-y-2"
@@ -290,12 +289,10 @@ function readMoreMod(color: "teal" | "coral" | "none"): string {
         this.item = ITEMS[id] || {};
         this.open = true;
         document.body.style.overflow = "hidden";
-        window.lenis?.stop();
       },
       closeModal() {
         this.open = false;
         document.body.style.overflow = "";
-        window.lenis?.start();
       },
     }));
   });
