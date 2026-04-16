@@ -342,7 +342,12 @@ const cardSubtitle = hero?.subtitle ?? "";
     },
   };
 
-  async function drawCard(format: Format) {
+  const fontReady = document.fonts?.ready;
+  if (fontReady) {
+    void fontReady.catch(() => undefined);
+  }
+
+  function drawCard(format: Format) {
     const panel = document.getElementById("sc-img-panel") as HTMLElement | null;
     if (!panel) return;
 
@@ -352,8 +357,6 @@ const cardSubtitle = hero?.subtitle ?? "";
     const label    = panel.dataset.label    ?? "El paro ya lleva:";
     const subtitle = panel.dataset.subtitle ?? "";
     const siteUrl  = panel.dataset.url      ?? "ubaestatus.mospit.al";
-
-    await document.fonts.ready;
 
     const { W, H, scale } = cfg;
     const canvas = document.createElement("canvas");
@@ -571,29 +574,42 @@ const cardSubtitle = hero?.subtitle ?? "";
     const link = document.createElement("a");
     link.download = cfg.filename;
     link.href = canvas.toDataURL("image/png");
+    link.style.display = "none";
+    document.body.appendChild(link);
     link.click();
+    link.remove();
   }
 
   // ── Button listeners ──────────────────────────────────────────────────────
-  const btns = document.querySelectorAll<HTMLButtonElement>(".btn-format-dl");
+  function initShareCardButtons() {
+    const btns = document.querySelectorAll<HTMLButtonElement>(".btn-format-dl");
 
-  btns.forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const format  = (btn.dataset.format ?? "square") as Format;
-      const ratioEl = btn.querySelector<HTMLElement>(".btn-ratio");
-      const orig    = ratioEl?.textContent ?? "";
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const format  = (btn.dataset.format ?? "square") as Format;
+        const ratioEl = btn.querySelector<HTMLElement>(".btn-ratio");
+        const orig    = ratioEl?.textContent ?? "";
 
-      btns.forEach((b) => (b.disabled = true));
-      if (ratioEl) ratioEl.textContent = "...";
+        btns.forEach((b) => (b.disabled = true));
+        if (ratioEl) ratioEl.textContent = "...";
 
-      try {
-        await drawCard(format);
-      } catch (err) {
-        console.error("Error al generar imagen:", err);
-      } finally {
-        btns.forEach((b) => (b.disabled = false));
-        if (ratioEl) ratioEl.textContent = orig;
-      }
+        try {
+          drawCard(format);
+        } catch (err) {
+          console.error("Error al generar imagen:", err);
+        } finally {
+          btns.forEach((b) => (b.disabled = false));
+          if (ratioEl) ratioEl.textContent = orig;
+        }
+      });
     });
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initShareCardButtons, {
+      once: true,
+    });
+  } else {
+    initShareCardButtons();
+  }
 </script>
