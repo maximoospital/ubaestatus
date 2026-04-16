@@ -1,0 +1,224 @@
+---
+interface Props {
+  date?: string;
+  label?: string;
+  mode?: "countup" | "countdown";
+  siteUrl?: string;
+}
+
+const {
+  date = "2026-03-16T00:00:00",
+  label = "El paro ya lleva:",
+  mode = "countup",
+  siteUrl = "ubaestatus.mospit.al",
+} = Astro.props;
+---
+
+<div
+  id="share-card"
+  aria-hidden="true"
+  style="position:fixed;left:-9999px;top:-9999px;width:600px;height:600px;overflow:hidden;pointer-events:none;"
+>
+  <div class="sc-inner">
+    <div class="sc-top">
+      <span class="sc-title">EXACTAS EN</span>
+      <span class="sc-title sc-teal">LUCHA.</span>
+    </div>
+
+    <div class="sc-middle">
+      <div id="sc-time" data-date={date} data-mode={mode} class="sc-digits">
+        <div class="sc-unit">
+          <span class="sc-num" id="sc-days">00</span>
+          <span class="sc-lbl">DÍAS</span>
+        </div>
+        <span class="sc-colon">:</span>
+        <div class="sc-unit">
+          <span class="sc-num" id="sc-hours">00</span>
+          <span class="sc-lbl">HORAS</span>
+        </div>
+        <span class="sc-colon">:</span>
+        <div class="sc-unit">
+          <span class="sc-num" id="sc-minutes">00</span>
+          <span class="sc-lbl">MIN</span>
+        </div>
+        <span class="sc-colon">:</span>
+        <div class="sc-unit">
+          <span class="sc-num" id="sc-seconds">00</span>
+          <span class="sc-lbl">SEG</span>
+        </div>
+      </div>
+      <p class="sc-label">{label}</p>
+    </div>
+
+    <div class="sc-footer">
+      <span class="sc-footer-cta">Seguí en tiempo real en</span>
+      <span class="sc-footer-url">{siteUrl}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  #share-card,
+  #share-card * {
+    font-family: "Sora", "Avenir Next", "Segoe UI", sans-serif;
+    box-sizing: border-box;
+  }
+
+  .sc-inner {
+    width: 600px;
+    height: 600px;
+    background: #0f1621;
+    border-left: 5px solid #2abcb4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 52px 52px 44px 47px;
+  }
+
+  /* ── ① Title ── */
+  .sc-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    line-height: 1;
+  }
+  .sc-title {
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    color: #f0ede6;
+    line-height: 0.95;
+  }
+  .sc-teal {
+    color: #2abcb4;
+  }
+
+  /* ── ② Clock + label ── */
+  .sc-middle {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* Digit row */
+  .sc-digits {
+    display: flex;
+    align-items: flex-start; /* colon nudged via padding-top */
+    gap: 5px;
+  }
+  .sc-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Digit box:  62px font + 13px pad top/bottom = 88px total height */
+  .sc-num {
+    display: block;
+    width: 96px;
+    font-size: 62px;
+    font-weight: 800;
+    color: #f0ede6;
+    background: rgba(240, 237, 230, 0.07);
+    border-radius: 8px;
+    padding: 13px 0;
+    text-align: center;
+    line-height: 1;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Unit label */
+  .sc-lbl {
+    font-size: 7px;
+    font-weight: 700;
+    color: rgba(240, 237, 230, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  /*
+    Colon alignment:
+    digit-box height = 88px  → center at 44px from top
+    colon font = 52px        → center at 26px from top (with flex-start)
+    → padding-top: 18px shifts colon center to 26+18 = 44px ✓
+  */
+  .sc-colon {
+    font-size: 52px;
+    font-weight: 800;
+    color: #2abcb4;
+    line-height: 1;
+    padding-top: 18px;
+  }
+
+  /* Counter label */
+  .sc-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(240, 237, 230, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    line-height: 1;
+  }
+
+  /* ── ③ Footer ── */
+  .sc-footer {
+    border-top: 1px solid rgba(42, 188, 180, 0.25);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .sc-footer-cta {
+    font-size: 9px;
+    color: rgba(240, 237, 230, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .sc-footer-url {
+    font-size: 11px;
+    color: #2abcb4;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+</style>
+
+<script>
+  const timeEl = document.getElementById("sc-time");
+
+  function updateShareCardTime() {
+    if (!timeEl) return;
+    const dateStr = (timeEl as HTMLElement).dataset.date;
+    const mode = (timeEl as HTMLElement).dataset.mode;
+    if (!dateStr) return;
+
+    const target = new Date(dateStr);
+    const now = new Date();
+    const diffMs =
+      mode === "countdown"
+        ? target.getTime() - now.getTime()
+        : now.getTime() - target.getTime();
+
+    if (diffMs < 0) return;
+
+    const total = Math.floor(diffMs / 1000);
+    const pad = (n: number) => String(n).padStart(2, "0");
+
+    const d = document.getElementById("sc-days");
+    const h = document.getElementById("sc-hours");
+    const m = document.getElementById("sc-minutes");
+    const s = document.getElementById("sc-seconds");
+
+    if (d) d.textContent = pad(Math.floor(total / 86400));
+    if (h) h.textContent = pad(Math.floor((total % 86400) / 3600));
+    if (m) m.textContent = pad(Math.floor((total % 3600) / 60));
+    if (s) s.textContent = pad(total % 60);
+  }
+
+  updateShareCardTime();
+  setInterval(updateShareCardTime, 1000);
+</script>

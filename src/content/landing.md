@@ -12,14 +12,17 @@ header:
   shareText: "UBA Exactas está de paro. Enterate por qué en este sitio."
 hero:
   label1: "El paro ya lleva:"
+  tabLabel1: "El paro"
   timer1: active
   date1: "2026-03-16T00:00:00"
   mode1: countup
   label2: "Días que la ley lleva sin ser cumplida:"
+  tabLabel2: "La ley"
   timer2: active
   date2: "2025-10-21T00:00:00"
   mode2: countup
   label3: "Hasta que el gobierno entre en desacato quedan:"
+  tabLabel3: "Desacato"
   timer3: active
   date3: "2026-05-02T00:00:00"
   mode3: countdown

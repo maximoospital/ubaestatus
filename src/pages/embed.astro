@@ -1,0 +1,35 @@
+---
+import "../styles/globals.css";
+import EmbedHero from "../components/sections/embedHero.component.astro";
+
+import { getEntry } from "astro:content";
+
+const landing = await getEntry("content", "landing");
+if (!landing) throw new Error("No se pudo cargar el contenido de la página.");
+
+const data = landing.data;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{data.meta.title}</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <EmbedHero {...data.hero} />
+    <script src="../shared/main.ts"></script>
+  </body>
+</html>

@@ -148,6 +148,28 @@ if (
   });
 }
 
+const copyEmbedButton = document.getElementById("copy-embed-code");
+const embedInput = document.getElementById("embed-code");
+
+if (
+  copyEmbedButton instanceof HTMLButtonElement &&
+  embedInput instanceof HTMLInputElement
+) {
+  copyEmbedButton.addEventListener("click", async () => {
+    const code = embedInput.value;
+    try {
+      await navigator.clipboard.writeText(code);
+      showToast("¡Código embed copiado!");
+    } catch {
+      embedInput.select();
+      const copied = document.execCommand("copy");
+      showToast(
+        copied ? "¡Código embed copiado!" : "Fallo al copiar manualmente.",
+      );
+    }
+  });
+}
+
 const socialLinks = document.querySelectorAll(
   "#share-modal a[target='_blank']",
 );

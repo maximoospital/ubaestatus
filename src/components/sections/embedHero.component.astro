@@ -1,0 +1,140 @@
+---
+export interface Props {
+  subtitle?: string;
+  timer1?: "active" | "paused";
+  date1?: string;
+  label1?: string;
+  tabLabel1?: string;
+  mode1?: "countup" | "countdown";
+  timer2?: "active" | "paused";
+  date2?: string;
+  label2?: string;
+  tabLabel2?: string;
+  mode2?: "countup" | "countdown";
+  timer3?: "active" | "paused";
+  date3?: string;
+  label3?: string;
+  tabLabel3?: string;
+  mode3?: "countup" | "countdown";
+}
+
+const {
+  subtitle = "Subtítulo.",
+  timer1 = "active", date1, label1 = "Contador 1", tabLabel1 = "Tab 1", mode1 = "countup",
+  timer2 = "active", date2, label2 = "Contador 2", tabLabel2 = "Tab 2", mode2 = "countup",
+  timer3 = "active", date3, label3 = "Contador 3", tabLabel3 = "Tab 3", mode3 = "countup",
+} = Astro.props;
+
+import FlipClock from "../widgets/flip-clock.component.astro";
+
+// Build only tabs that have a date configured
+const tabs = [
+  date1 ? { timer: timer1, date: date1, label: label1, tabLabel: tabLabel1 ?? label1, mode: mode1 } : null,
+  date2 ? { timer: timer2, date: date2, label: label2, tabLabel: tabLabel2 ?? label2, mode: mode2 } : null,
+  date3 ? { timer: timer3, date: date3, label: label3, tabLabel: tabLabel3 ?? label3, mode: mode3 } : null,
+].filter((t): t is NonNullable<typeof t> => t !== null);
+---
+
+<div class="embed-hero relative flex min-h-screen w-full flex-col justify-center bg-[url('/assets/bg.jpeg')] bg-cover bg-center bg-no-repeat">
+  <div class="bg-dark absolute inset-0 opacity-80"></div>
+
+  <div class="relative z-10 w-full px-6 py-10 md:px-10">
+
+    <!-- Title -->
+    <div class="mb-3">
+      <span class="text-display text-offwhite block text-4xl leading-none sm:text-5xl">EXACTAS EN</span>
+      <span class="text-display text-teal block text-4xl leading-none sm:text-5xl">LUCHA.</span>
+    </div>
+
+    <p class="font-body text-offwhite mb-6 max-w-xl text-sm text-shadow-black/50 text-shadow-md">
+      {subtitle}
+    </p>
+
+    <!-- ── TABS ── -->
+    {tabs.length > 0 && (
+      <div class="embed-tabs">
+
+        <!-- Tab bar (scrollable on narrow viewports) -->
+        {tabs.length > 1 && (
+          <div
+            class="tab-bar mb-5 flex overflow-x-auto border-b border-white/15"
+            role="tablist"
+            style="scrollbar-width: none;"
+          >
+            {tabs.map((tab, i) => (
+              <button
+                role="tab"
+                class="tab-btn flex-shrink-0 border-b-2 px-4 pb-2.5 pt-1 text-xs font-bold tracking-[0.15em] uppercase transition-colors"
+                data-tab={i}
+                aria-selected={i === 0 ? "true" : "false"}
+              >
+                {tab.tabLabel}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <!-- Panels — only one visible at a time, no overflow tricks needed -->
+        {tabs.map((tab, i) => (
+          <div
+            role="tabpanel"
+            class="tab-panel"
+            data-panel={i}
+            style={i !== 0 ? "display: none;" : ""}
+          >
+            <p class="font-body mb-2 text-xs font-bold tracking-[0.15em] text-white uppercase">
+              {tab.label}
+            </p>
+            <FlipClock
+              timer={tab.timer}
+              date={tab.date}
+              mode={tab.mode}
+              variant="filled"
+              fontSize="clamp(1.8rem, 6vw, 3.8rem)"
+            />
+          </div>
+        ))}
+
+      </div>
+    )}
+
+  </div>
+</div>
+
+<style>
+  /* Hide scrollbar on the tab bar across browsers */
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  /* Inactive tab */
+  .tab-btn {
+    color: rgba(255, 255, 255, 0.4);
+    border-bottom-color: transparent;
+  }
+  .tab-btn:hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* Active tab — set via JS on init, and toggled on click */
+  .tab-btn[aria-selected="true"] {
+    color: var(--color-teal, #2abcb4);
+    border-bottom-color: var(--color-teal, #2abcb4);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".embed-tabs").forEach((container) => {
+    const btns   = container.querySelectorAll<HTMLButtonElement>(".tab-btn");
+    const panels = container.querySelectorAll<HTMLElement>(".tab-panel");
+
+    function activate(index: number) {
+      btns.forEach((btn, i) => {
+        btn.setAttribute("aria-selected", i === index ? "true" : "false");
+      });
+      panels.forEach((panel, i) => {
+        panel.style.display = i === index ? "" : "none";
+      });
+    }
+
+    btns.forEach((btn, i) => btn.addEventListener("click", () => activate(i)));
+  });
+</script>

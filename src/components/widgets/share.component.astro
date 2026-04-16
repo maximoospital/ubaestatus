@@ -1,4 +1,7 @@
 ---
+import { Icon } from "astro-icon/components";
+import ShareCardComponent from "./share-card.component.astro";
+
 const data = Astro.props;
 
 const siteUrl =
@@ -10,17 +13,27 @@ const encodedUrl = encodeURIComponent(siteUrl);
 
 const whatsappShareUrl = `https://wa.me/?text=${shareText}%20${encodedUrl}`;
 const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-const twitterShareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodedUrl}`;
-const emailShareUrl = `mailto:?subject=${shareText}&body=${encodedUrl}`;
+const twitterShareUrl  = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodedUrl}`;
+const emailShareUrl    = `mailto:?subject=${shareText}&body=${encodedUrl}`;
 
-import { Icon } from "astro-icon/components";
+const embedCode = `<iframe src="${siteUrl}/embed" width="100%" height="500" style="border:none;border-radius:12px;" loading="lazy"></iframe>`;
+
+// Hero data for the share card (first counter)
+const hero = data.hero ?? {};
+const cardDate  = hero.date1  ?? "2026-03-16T00:00:00";
+const cardLabel = hero.label1 ?? "El paro ya lleva:";
+const cardMode  = hero.mode1  ?? "countup";
+
+// Strip protocol for display in the card
+const cardSiteUrl = siteUrl.replace(/^https?:\/\//, "");
+const cardSubtitle = hero?.subtitle ?? "";
 ---
 
 <aside
   id="share-modal"
-  x-data="{ open: false }"
+  x-data="{ open: false, tab: 'image' }"
   x-show="open"
-  @open-share.window="open = true"
+  @open-share.window="open = true; tab = 'image'"
   @keydown.escape.window="open = false"
   x-init="$watch('open')"
   class="share-modal fixed inset-0 z-50 pt-24 lg:pt-19"
@@ -123,26 +136,464 @@ import { Icon } from "astro-icon/components";
           <span class="text-offwhite/90 text-xs leading-[1.3]">Email</span>
         </a>
       </div>
-      <div
-        class="border-rule mt-3 flex items-center gap-3 rounded-md border bg-black/20 py-2 pr-2 pl-3"
-      >
-        <input
-          id="share-url"
-          type="text"
-          readonly
-          value={siteUrl}
-          class="text-mono-ui text-offwhite/90 w-full bg-transparent focus:outline-none"
-        />
-        <div class="bg-rule h-5 w-px shrink-0"></div>
-        <button
-          type="button"
-          id="copy-share-url"
-          class="text-offwhite/80 hover:bg-offwhite/10 hover:text-offwhite focus-visible:ring-teal relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md transition-colors focus-visible:ring-2 focus-visible:outline-none"
-          aria-label="Copiar enlace"
+
+      <!-- ── SHARE TABS ── -->
+      <div class="mt-5">
+
+        <!-- Tab bar -->
+        <div class="flex border-b border-white/10" role="tablist">
+          <button
+            role="tab"
+            @click="tab = 'image'"
+            :aria-selected="tab === 'image'"
+            class="share-tab-btn flex-shrink-0 border-b-2 px-3 pb-2 pt-1 text-[0.6rem] font-bold tracking-[0.12em] uppercase transition-colors"
+          >Generar Imagen</button>
+          <button
+            role="tab"
+            @click="tab = 'url'"
+            :aria-selected="tab === 'url'"
+            class="share-tab-btn flex-shrink-0 border-b-2 px-3 pb-2 pt-1 text-[0.6rem] font-bold tracking-[0.12em] uppercase transition-colors"
+          >URL</button>
+          <button
+            role="tab"
+            @click="tab = 'embed'"
+            :aria-selected="tab === 'embed'"
+            class="share-tab-btn flex-shrink-0 border-b-2 px-3 pb-2 pt-1 text-[0.6rem] font-bold tracking-[0.12em] uppercase transition-colors"
+          >Embed</button>
+        </div>
+
+        <!-- ── Generar Imagen panel ── -->
+        <div
+          id="sc-img-panel"
+          x-show="tab === 'image'"
+          role="tabpanel"
+          class="mt-3"
+          data-date={cardDate}
+          data-mode={cardMode}
+          data-label={cardLabel}
+          data-subtitle={cardSubtitle}
+          data-url={cardSiteUrl}
         >
-          <Icon name="mdi:content-copy" />
-        </button>
+          <p class="text-offwhite/40 mb-2 text-[0.6rem] leading-relaxed">Elegí el formato para descargar:</p>
+          <div class="grid grid-cols-3 gap-2">
+            <button
+              type="button"
+              class="btn-format-dl group flex flex-col w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-teal/30 bg-teal/5 py-3 transition-colors hover:border-teal hover:bg-teal disabled:cursor-not-allowed disabled:opacity-50"
+              data-format="twitter"
+            >
+              <span class="btn-ratio text-teal group-hover:text-navy text-sm font-black leading-none">16:9</span>
+              <span class="text-offwhite/60 group-hover:text-navy/70 text-[0.6rem] font-bold tracking-wide uppercase leading-none">Twitter</span>
+            </button>
+            <button
+              type="button"
+              class="btn-format-dl group flex flex-col w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-teal/30 bg-teal/5 py-3 transition-colors hover:border-teal hover:bg-teal disabled:cursor-not-allowed disabled:opacity-50"
+              data-format="square"
+            >
+              <span class="btn-ratio text-teal group-hover:text-navy text-sm font-black leading-none">1:1</span>
+              <span class="text-offwhite/60 group-hover:text-navy/70 text-[0.6rem] font-bold tracking-wide uppercase leading-none">Cuadrada</span>
+            </button>
+            <button
+              type="button"
+              class="btn-format-dl group flex flex-col w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-teal/30 bg-teal/5 py-3 transition-colors hover:border-teal hover:bg-teal disabled:cursor-not-allowed disabled:opacity-50"
+              data-format="story"
+            >
+              <span class="btn-ratio text-teal group-hover:text-navy text-sm font-black leading-none">9:16</span>
+              <span class="text-offwhite/60 group-hover:text-navy/70 text-[0.6rem] font-bold tracking-wide uppercase leading-none">Story</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── URL panel ── -->
+        <div x-show="tab === 'url'" role="tabpanel" class="mt-3" style="display: none;">
+          <div
+            class="border-rule flex items-center gap-3 rounded-md border bg-black/20 py-2 pr-2 pl-3"
+          >
+            <input
+              id="share-url"
+              type="text"
+              readonly
+              value={siteUrl}
+              class="text-mono-ui text-offwhite/90 w-full bg-transparent focus:outline-none"
+            />
+            <div class="bg-rule h-5 w-px shrink-0"></div>
+            <button
+              type="button"
+              id="copy-share-url"
+              class="text-offwhite/80 hover:bg-offwhite/10 hover:text-offwhite focus-visible:ring-teal relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md transition-colors focus-visible:ring-2 focus-visible:outline-none"
+              aria-label="Copiar enlace"
+            >
+              <Icon name="mdi:content-copy" />
+            </button>
+          </div>
+        </div>
+
+        <!-- ── Embed panel ── -->
+        <div x-show="tab === 'embed'" role="tabpanel" class="mt-3" style="display: none;">
+          <div
+            class="border-rule flex items-center gap-3 rounded-md border bg-black/20 py-2 pr-2 pl-3"
+          >
+            <input
+              id="embed-code"
+              type="text"
+              readonly
+              value={embedCode}
+              class="text-mono-ui text-offwhite/90 w-full bg-transparent focus:outline-none"
+            />
+            <div class="bg-rule h-5 w-px shrink-0"></div>
+            <button
+              type="button"
+              id="copy-embed-code"
+              class="text-offwhite/80 hover:bg-offwhite/10 hover:text-offwhite focus-visible:ring-teal relative inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md transition-colors focus-visible:ring-2 focus-visible:outline-none"
+              aria-label="Copiar código embed"
+            >
+              <Icon name="mdi:content-copy" />
+            </button>
+          </div>
+          <p class="text-offwhite/40 mt-2 text-[0.65rem] leading-relaxed">
+            Pegá este código en cualquier sitio web para mostrar el widget.
+          </p>
+        </div>
+
       </div>
     </div>
   </div>
 </aside>
+
+<ShareCardComponent
+  date={cardDate}
+  label={cardLabel}
+  mode={cardMode}
+  siteUrl={cardSiteUrl}
+/>
+
+<style>
+  .share-tab-btn {
+    color: rgba(240, 237, 230, 0.35);
+    border-bottom-color: transparent;
+  }
+  .share-tab-btn:hover {
+    color: rgba(240, 237, 230, 0.7);
+  }
+  .share-tab-btn[aria-selected="true"] {
+    color: var(--color-teal, #2abcb4);
+    border-bottom-color: var(--color-teal, #2abcb4);
+  }
+</style>
+
+<script>
+  // ── Canvas 2D share-card renderer ────────────────────────────────────────
+  // Three formats: twitter (16:9), square (1:1), story (9:16).
+  // All positions are in logical px; the canvas is scaled 2× for crisp output.
+
+  type Format = "twitter" | "square" | "story";
+
+  interface CardConfig {
+    W: number; H: number; scale: number; filename: string;
+    padL: number; padR: number; padT: number; padB: number;
+    titlePx: number; titleLeading: number;
+    subGapTop: number; subtitlePx: number; subtitleLeading: number; maxSubLines: number;
+    labelPx: number;
+    boxW: number; boxH: number; digitPx: number;
+    colonW: number; colonPx: number; gap: number;
+    ulabelPx: number; ulabelGap: number;
+    labelBoxGap: number; boxUlabelGap: number;
+    footerPx: number; footerCtaPx: number;
+  }
+
+  const CONFIGS: Record<Format, CardConfig> = {
+    // 1200 × 1200 — square / Instagram
+    square: {
+      W: 600, H: 600, scale: 2, filename: "exactas-cuadrado.png",
+      padL: 52, padR: 52, padT: 52, padB: 44,
+      titlePx: 44, titleLeading: 42,
+      subGapTop: 14, subtitlePx: 11, subtitleLeading: 16, maxSubLines: 2,
+      labelPx: 11,
+      boxW: 88, boxH: 88, digitPx: 56,
+      colonW: 28, colonPx: 50, gap: 5,
+      ulabelPx: 7, ulabelGap: 8,
+      labelBoxGap: 14, boxUlabelGap: 8,
+      footerPx: 11, footerCtaPx: 9,
+    },
+    // 1200 × 675 — Twitter / X
+    twitter: {
+      W: 600, H: 338, scale: 2, filename: "exactas-twitter.png",
+      padL: 44, padR: 44, padT: 28, padB: 24,
+      titlePx: 32, titleLeading: 30,
+      subGapTop: 10, subtitlePx: 9, subtitleLeading: 13, maxSubLines: 2,
+      labelPx: 9,
+      boxW: 68, boxH: 68, digitPx: 42,
+      colonW: 22, colonPx: 38, gap: 4,
+      ulabelPx: 6, ulabelGap: 5,
+      labelBoxGap: 10, boxUlabelGap: 5,
+      footerPx: 9, footerCtaPx: 7,
+    },
+    // 1080 × 1920 — Stories
+    story: {
+      W: 540, H: 960, scale: 2, filename: "exactas-story.png",
+      padL: 48, padR: 48, padT: 80, padB: 80,
+      titlePx: 48, titleLeading: 46,
+      subGapTop: 16, subtitlePx: 13, subtitleLeading: 20, maxSubLines: 3,
+      labelPx: 12,
+      boxW: 82, boxH: 82, digitPx: 52,
+      colonW: 24, colonPx: 46, gap: 4,
+      ulabelPx: 7, ulabelGap: 7,
+      labelBoxGap: 16, boxUlabelGap: 7,
+      footerPx: 12, footerCtaPx: 9,
+    },
+  };
+
+  async function drawCard(format: Format) {
+    const panel = document.getElementById("sc-img-panel") as HTMLElement | null;
+    if (!panel) return;
+
+    const cfg      = CONFIGS[format];
+    const dateStr  = panel.dataset.date     ?? "2026-03-16T00:00:00";
+    const mode     = panel.dataset.mode     ?? "countup";
+    const label    = panel.dataset.label    ?? "El paro ya lleva:";
+    const subtitle = panel.dataset.subtitle ?? "";
+    const siteUrl  = panel.dataset.url      ?? "ubaestatus.mospit.al";
+
+    await document.fonts.ready;
+
+    const { W, H, scale } = cfg;
+    const canvas = document.createElement("canvas");
+    canvas.width  = W * scale;
+    canvas.height = H * scale;
+    const ctx = canvas.getContext("2d")!;
+    // NOTE: ctx.scale() is applied *after* wrapText, because measureText ignores
+    // the current transform and returns CSS px. We compare those against innerW
+    // which is also in CSS px at 1× — so measuring must happen before scaling.
+
+    // ── Helpers ───────────────────────────────────────────────────
+    function ls(px: number) {
+      if ("letterSpacing" in ctx) (ctx as any).letterSpacing = `${px}px`;
+    }
+
+    function rr(x: number, y: number, w: number, h: number, r: number) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.arcTo(x + w, y,     x + w, y + r,     r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+      ctx.lineTo(x + r, y + h);
+      ctx.arcTo(x,     y + h, x,     y + h - r, r);
+      ctx.lineTo(x, y + r);
+      ctx.arcTo(x,     y,     x + r, y,         r);
+      ctx.closePath();
+    }
+
+    function wrapText(text: string, maxW: number, font: string, maxLines: number): string[] {
+      ctx.font = font;
+      ls(0); // measure with no letter-spacing so rendered width matches
+      const words = text.split(" ");
+      const lines: string[] = [];
+      let current = "";
+      for (const word of words) {
+        const test = current ? `${current} ${word}` : word;
+        if (ctx.measureText(test).width > maxW && current) {
+          lines.push(current);
+          if (lines.length >= maxLines) return lines;
+          current = word;
+        } else {
+          current = test;
+        }
+      }
+      if (current && lines.length < maxLines) lines.push(current);
+      return lines;
+    }
+
+    // ── Time ──────────────────────────────────────────────────────
+    const target = new Date(dateStr);
+    const diffMs = mode === "countdown"
+      ? target.getTime() - Date.now()
+      : Date.now() - target.getTime();
+    const total = diffMs > 0 ? Math.floor(diffMs / 1000) : 0;
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const units = [
+      { val: pad(Math.floor(total / 86400)),          lbl: "DÍAS"  },
+      { val: pad(Math.floor((total % 86400) / 3600)), lbl: "HORAS" },
+      { val: pad(Math.floor((total % 3600) / 60)),    lbl: "MIN"   },
+      { val: pad(total % 60),                         lbl: "SEG"   },
+    ];
+
+    // ── Layout ────────────────────────────────────────────────────
+    const {
+      padL, padR, padT, padB,
+      titlePx, titleLeading,
+      subGapTop, subtitlePx, subtitleLeading, maxSubLines,
+      labelPx,
+      boxW, boxH, digitPx, colonW, colonPx, gap,
+      ulabelPx, ulabelGap, labelBoxGap, boxUlabelGap,
+      footerPx, footerCtaPx,
+    } = cfg;
+
+    const xL     = padL;
+    const xR     = W - padR;
+    const innerW = xR - xL;
+
+    // Title baselines
+    const titleY1 = padT + titlePx;
+    const titleY2 = titleY1 + titleLeading;
+
+    // Subtitle lines (measured before drawing)
+    // Weight 600 — the lightest Sora weight loaded via Google Fonts (500 is not loaded;
+    // mixing a narrower measurement font with a wider rendered font causes overflow).
+    // A small safety margin (2× font-size) guards against subpixel/kerning discrepancies.
+    const subFont  = `600 ${subtitlePx}px "Sora","Avenir Next",sans-serif`;
+    const subLines = subtitle ? wrapText(subtitle, innerW - subtitlePx * 2, subFont, maxSubLines) : [];
+    const subBlockH = subLines.length > 0
+      ? subGapTop + subLines.length * subtitleLeading
+      : 0;
+    const titleEnd = titleY2 + subBlockH + 10;
+
+    // Footer positions (anchored to bottom)
+    const footSepY  = H - padB - footerPx - 18;
+    const footTextY = footSepY + 16 + footerPx;
+
+    // Middle block: vertically centered between titleEnd and footer separator
+    const middleH    = labelPx + labelBoxGap + boxH + boxUlabelGap + ulabelPx;
+    const midTop     = titleEnd + (footSepY - titleEnd - middleH) / 2;
+    const labelBaseY = midTop + labelPx;
+    const boxTop     = labelBaseY + labelBoxGap;
+    const boxCenterY = boxTop + boxH / 2;
+    const ulabelTop  = boxTop + boxH + boxUlabelGap;
+
+    // Clock row: centered horizontally
+    const clockRowW   = 4 * boxW + 3 * colonW + 6 * gap;
+    const clockStartX = xL + (innerW - clockRowW) / 2;
+
+    // ── Draw ─────────────────────────────────────────────────────
+    ctx.scale(scale, scale);
+    // Background
+    ctx.fillStyle = "#0f1621";
+    ctx.fillRect(0, 0, W, H);
+
+    // Left teal border
+    ctx.fillStyle = "#2abcb4";
+    ctx.fillRect(0, 0, 5, H);
+
+    // Title
+    ctx.textBaseline = "alphabetic";
+    ctx.textAlign    = "left";
+    ctx.font = `900 ${titlePx}px "Sora","Avenir Next",sans-serif`;
+    ls(-2);
+    ctx.fillStyle = "#f0ede6";
+    ctx.fillText("EXACTAS EN", xL, titleY1);
+    ctx.fillStyle = "#2abcb4";
+    ctx.fillText("LUCHA.", xL, titleY2);
+    ls(0);
+
+    // Subtitle
+    if (subLines.length > 0) {
+      ctx.font      = subFont;
+      ctx.fillStyle = "rgba(240,237,230,0.5)";
+      ctx.textAlign = "left";
+      // ls(0) already set — render at same spacing used for measurement
+      subLines.forEach((line, i) => {
+        ctx.fillText(line, xL, titleY2 + subGapTop + subtitlePx + i * subtitleLeading);
+      });
+    }
+
+    // Counter label (above clock)
+    ctx.font      = `700 ${labelPx}px "Sora","Avenir Next",sans-serif`;
+    ctx.fillStyle = "rgba(240,237,230,0.5)";
+    ctx.textAlign = "left";
+    ls(2);
+    ctx.fillText(label.toUpperCase(), xL, labelBaseY);
+    ls(0);
+
+    // Digit boxes + colons
+    let cx = clockStartX;
+    for (let i = 0; i < 4; i++) {
+      // Digit box
+      ctx.fillStyle = "rgba(240,237,230,0.07)";
+      rr(cx, boxTop, boxW, boxH, 8);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.06)";
+      ctx.lineWidth = 1;
+      rr(cx, boxTop, boxW, boxH, 8);
+      ctx.stroke();
+
+      // Digit
+      ctx.font = `800 ${digitPx}px "Sora","Avenir Next",sans-serif`;
+      ctx.fillStyle    = "#f0ede6";
+      ctx.textBaseline = "middle";
+      ctx.textAlign    = "center";
+      ls(-1);
+      ctx.fillText(units[i].val, cx + boxW / 2, boxCenterY);
+      ls(0);
+
+      // Unit label
+      ctx.font = `700 ${ulabelPx}px "Sora","Avenir Next",sans-serif`;
+      ctx.fillStyle    = "rgba(240,237,230,0.4)";
+      ctx.textBaseline = "top";
+      ls(2);
+      ctx.fillText(units[i].lbl, cx + boxW / 2, ulabelTop);
+      ls(0);
+
+      cx += boxW + gap;
+
+      if (i < 3) {
+        ctx.font = `800 ${colonPx}px "Sora","Avenir Next",sans-serif`;
+        ctx.fillStyle    = "#2abcb4";
+        ctx.textBaseline = "middle";
+        ctx.textAlign    = "center";
+        ctx.fillText(":", cx + colonW / 2, boxCenterY);
+        cx += colonW + gap;
+      }
+    }
+
+    // Footer separator
+    ctx.strokeStyle = "rgba(42,188,180,0.25)";
+    ctx.lineWidth   = 1;
+    ctx.beginPath();
+    ctx.moveTo(xL, footSepY);
+    ctx.lineTo(xR, footSepY);
+    ctx.stroke();
+
+    // Footer text
+    ctx.textBaseline = "alphabetic";
+    ctx.font      = `600 ${footerCtaPx}px "Sora","Avenir Next",sans-serif`;
+    ctx.fillStyle = "rgba(240,237,230,0.35)";
+    ctx.textAlign = "left";
+    ls(1.5);
+    ctx.fillText("SEGUÍ EN TIEMPO REAL EN", xL, footTextY);
+
+    ctx.font      = `700 ${footerPx}px "Sora","Avenir Next",sans-serif`;
+    ctx.fillStyle = "#2abcb4";
+    ctx.textAlign = "right";
+    ls(0.5);
+    ctx.fillText(siteUrl, xR, footTextY);
+    ls(0);
+
+    // Download
+    const link = document.createElement("a");
+    link.download = cfg.filename;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  }
+
+  // ── Button listeners ──────────────────────────────────────────────────────
+  const btns = document.querySelectorAll<HTMLButtonElement>(".btn-format-dl");
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const format  = (btn.dataset.format ?? "square") as Format;
+      const ratioEl = btn.querySelector<HTMLElement>(".btn-ratio");
+      const orig    = ratioEl?.textContent ?? "";
+
+      btns.forEach((b) => (b.disabled = true));
+      if (ratioEl) ratioEl.textContent = "...";
+
+      try {
+        await drawCard(format);
+      } catch (err) {
+        console.error("Error al generar imagen:", err);
+      } finally {
+        btns.forEach((b) => (b.disabled = false));
+        if (ratioEl) ratioEl.textContent = orig;
+      }
+    });
+  });
+</script>

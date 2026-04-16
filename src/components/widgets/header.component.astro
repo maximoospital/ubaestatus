@@ -2,7 +2,7 @@
 import ShareComponent from "./share.component.astro";
 import { Icon } from "astro-icon/components";
 
-const data = Astro.props;
+const { title, shareUrl, shareText, hero } = Astro.props;
 ---
 
 <header
@@ -21,7 +21,7 @@ const data = Astro.props;
       <span
         class="bg-teal block h-[0.8em] w-1 shrink-0 translate-y-[-0.05em] rounded-full"
       ></span>
-      {data.title}
+      {title}
     </h1>
     <nav class="flex items-center gap-2 md:gap-6">
       <ul class="flex flex-wrap items-center justify-end gap-x-2 gap-y-1 sm:gap-x-3 md:gap-4">
@@ -75,4 +75,4 @@ const data = Astro.props;
   </div>
 </header>
 
-<ShareComponent shareText={data.shareText} shareUrl={data.shareUrl} />
+<ShareComponent shareText={shareText} shareUrl={shareUrl} hero={hero} />
