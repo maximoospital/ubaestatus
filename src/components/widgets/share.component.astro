@@ -342,11 +342,6 @@ const cardSubtitle = hero?.subtitle ?? "";
     },
   };
 
-  const fontReady = document.fonts?.ready;
-  if (fontReady) {
-    void fontReady.catch(() => undefined);
-  }
-
   function drawCard(format: Format) {
     const panel = document.getElementById("sc-img-panel") as HTMLElement | null;
     if (!panel) return;
@@ -570,14 +565,30 @@ const cardSubtitle = hero?.subtitle ?? "";
     ctx.fillText(siteUrl, xR, footTextY);
     ls(0);
 
-    // Download
-    const link = document.createElement("a");
-    link.download = cfg.filename;
-    link.href = canvas.toDataURL("image/png");
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    // Download — use Blob URL so the browser treats it as a same-origin file
+    // download and avoids data: URL size limits / security restrictions.
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.download = cfg.filename;
+      link.href = url;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }, "image/png");
+  }
+
+  // ── Pre-load fonts eagerly so they are ready before any click ────────────
+  // Do NOT await inside the click handler — awaiting breaks the browser's
+  // user-gesture chain and causes the programmatic download to be silently
+  // blocked (especially on Safari and mobile Chrome).
+  if (document.fonts) {
+    ["600", "700", "800", "900"].forEach((w) => {
+      document.fonts.load(`${w} 16px "Sora"`).catch(() => {});
+    });
   }
 
   // ── Button listeners ──────────────────────────────────────────────────────
