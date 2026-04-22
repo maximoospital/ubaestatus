@@ -10,7 +10,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ubaestatus.mospit.al",
+  site: "https://cumplanlaley27795.info",
 
   vite: {
     plugins: [tailwindcss()],
