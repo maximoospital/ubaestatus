@@ -298,6 +298,7 @@ const cardSubtitle = hero?.subtitle ?? "";
     ulabelPx: number; ulabelGap: number;
     labelBoxGap: number; boxUlabelGap: number;
     footerPx: number; footerCtaPx: number;
+    qrSize: number; qrVPad: number;
   }
 
   const CONFIGS: Record<Format, CardConfig> = {
@@ -313,6 +314,7 @@ const cardSubtitle = hero?.subtitle ?? "";
       ulabelPx: 7, ulabelGap: 8,
       labelBoxGap: 14, boxUlabelGap: 8,
       footerPx: 11, footerCtaPx: 9,
+      qrSize: 52, qrVPad: 8,
     },
     // 1200 × 675 — Twitter / X
     twitter: {
@@ -326,6 +328,7 @@ const cardSubtitle = hero?.subtitle ?? "";
       ulabelPx: 6, ulabelGap: 5,
       labelBoxGap: 10, boxUlabelGap: 5,
       footerPx: 9, footerCtaPx: 7,
+      qrSize: 36, qrVPad: 6,
     },
     // 1080 × 1920 — Stories
     story: {
@@ -339,6 +342,7 @@ const cardSubtitle = hero?.subtitle ?? "";
       ulabelPx: 7, ulabelGap: 7,
       labelBoxGap: 16, boxUlabelGap: 7,
       footerPx: 12, footerCtaPx: 9,
+      qrSize: 56, qrVPad: 8,
     },
   };
 
@@ -424,6 +428,7 @@ const cardSubtitle = hero?.subtitle ?? "";
       boxW, boxH, digitPx, colonW, colonPx, gap,
       ulabelPx, ulabelGap, labelBoxGap, boxUlabelGap,
       footerPx, footerCtaPx,
+      qrSize, qrVPad,
     } = cfg;
 
     const xL     = padL;
@@ -445,9 +450,9 @@ const cardSubtitle = hero?.subtitle ?? "";
       : 0;
     const titleEnd = titleY2 + subBlockH + 10;
 
-    // Footer positions (anchored to bottom)
-    const footSepY  = H - padB - footerPx - 18;
-    const footTextY = footSepY + 16 + footerPx;
+    // Footer positions (anchored to bottom, sized to fit QR)
+    const footSepY  = H - padB - qrVPad - qrSize - qrVPad;
+    const footMidY  = footSepY + qrVPad + qrSize / 2;
 
     // Middle block: vertically centered between titleEnd and footer separator
     const middleH    = labelPx + labelBoxGap + boxH + boxUlabelGap + ulabelPx;
@@ -550,19 +555,30 @@ const cardSubtitle = hero?.subtitle ?? "";
     ctx.lineTo(xR, footSepY);
     ctx.stroke();
 
-    // Footer text
-    ctx.textBaseline = "alphabetic";
+    // QR code — right-aligned, vertically centered in footer zone, rounded clip
+    const qrX = xR - qrSize;
+    const qrY = footSepY + qrVPad;
+    if (qrImg.complete && qrImg.naturalWidth > 0) {
+      ctx.save();
+      rr(qrX, qrY, qrSize, qrSize, 4);
+      ctx.clip();
+      ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+      ctx.restore();
+    }
+
+    // Footer text — vertically centered in footer zone
+    ctx.textBaseline = "middle";
     ctx.font      = `600 ${footerCtaPx}px "Sora","Avenir Next",sans-serif`;
     ctx.fillStyle = "rgba(240,237,230,0.35)";
     ctx.textAlign = "left";
     ls(1.5);
-    ctx.fillText("SEGUÍ EN TIEMPO REAL EN", xL, footTextY);
+    ctx.fillText("SEGUÍ EN TIEMPO REAL EN", xL, footMidY);
 
     ctx.font      = `700 ${footerPx}px "Sora","Avenir Next",sans-serif`;
     ctx.fillStyle = "#2abcb4";
     ctx.textAlign = "right";
     ls(0.5);
-    ctx.fillText(siteUrl, xR, footTextY);
+    ctx.fillText(siteUrl, qrX - 10, footMidY);
     ls(0);
 
     // Download — use Blob URL so the browser treats it as a same-origin file
@@ -581,10 +597,13 @@ const cardSubtitle = hero?.subtitle ?? "";
     }, "image/png");
   }
 
-  // ── Pre-load fonts eagerly so they are ready before any click ────────────
+  // ── Pre-load QR image and fonts eagerly so they are ready before any click ─
   // Do NOT await inside the click handler — awaiting breaks the browser's
   // user-gesture chain and causes the programmatic download to be silently
   // blocked (especially on Safari and mobile Chrome).
+  const qrImg = new Image();
+  qrImg.src = "/assets/QR.svg";
+
   if (document.fonts) {
     ["600", "700", "800", "900"].forEach((w) => {
       document.fonts.load(`${w} 16px "Sora"`).catch(() => {});
