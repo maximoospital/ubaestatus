@@ -2,13 +2,13 @@
 meta:
   title: "Paro en EXACTAS | FCEyN UBA en Lucha"
   description: "La Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires está de paro para luchar por su futuro. Enterate más acá."
-  url: "https://cumplanlaley27795.info"
+  url: "https://ubaestatus.mospit.al"
   author: "Maximo Andreas Ospital"
   copyright: "© 2026 mospit.al. Licenciado bajo Creative Commons BY 4.0."
-  image: "https://cumplanlaley27795.info/assets/meta.png"
+  image: "https://ubaestatus.mospit.al/assets/meta.png"
 header:
   title: "EXACTAS en LUCHA"
-  shareUrl: "https://cumplanlaley27795.info"
+  shareUrl: "https://ubaestatus.mospit.al"
   shareText: "UBA Exactas está de paro. Enterate por qué en este sitio."
 hero:
   label1: "El paro ya lleva:"
