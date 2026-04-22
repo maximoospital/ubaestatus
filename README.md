@@ -1,4 +1,4 @@
-# [UbaEstatus](https://ubaestatus.mospit.al)
+# [UbaEstatus](https://cumplanlaley27795.info)
 
 Una landing page construida con **Astro** para visibilizar la situación actual de la UBA y su paro.
 
